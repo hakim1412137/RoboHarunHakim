@@ -150,8 +150,7 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        paddingHorizontal: 16, // Optional: Add horizontal padding if needed
     },
     submenuItem: {
         fontSize: 16,
@@ -168,7 +167,10 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
+/*
+   justifyContent: 'center',
+        alignItems: 'center',
+ */
 
 
 /*

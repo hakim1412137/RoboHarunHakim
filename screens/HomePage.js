@@ -155,3 +155,33 @@ const styles = StyleSheet.create({
 
 export default HomePage;*/
 
+/*
+import { Image } from 'react-native';
+import styles from '../components/HomePageStyles'; // Import the styles
+import HomePageImages from '../components/HomePageImages';
+
+// Function to load images
+const loadImages = async () => {
+    const exampleImage = await import('../assets/robot1.jpg');
+    const exampleImageUri = Image.resolveAssetSource(exampleImage).uri;
+
+    // Define your robot images array
+    const robotImages = [
+        { id: '1', uri: exampleImageUri, name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
+        { id: '3', uri: 'https://tse4.mm.bing.net/th?id=OIP.hTK5qXnJjWk5jIWfEFJJOwHaHa&pid=Api', name: 'Robot 3', description: 'A humanoid robot designed for friendly interaction.' },
+    ];
+
+    // Return or use robotImages as needed
+    return robotImages;
+};
+
+// Example usage of loadImages
+const initialize = async () => {
+    const images = await loadImages();
+    console.log(images); // Use or set state with images
+};
+
+// Call the initialize function to load images
+initialize();
+ */
+

@@ -25,6 +25,7 @@ const Menu = ({ setCurrentPage }) => {
             <TouchableOpacity onPress={() => setCurrentPage('contactUs')} style={styles.menuItem}>
                 <Text>Contact Us</Text>
             </TouchableOpacity>
+
         </View>
     );
 };
@@ -33,7 +34,7 @@ const Menu = ({ setCurrentPage }) => {
 const styles = StyleSheet.create({
     menuContainer: {
         flexDirection: 'row',
-        paddingVertical: 20,
+        paddingVertical: 8,
         backgroundColor: '#ffffff',
         shadowColor: '#000',
         shadowOffset: {

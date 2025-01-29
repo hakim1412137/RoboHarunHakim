@@ -1,6 +1,6 @@
 // screens/CourseDetailsScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {View, Text, Button, StyleSheet, ScrollView} from 'react-native';
 import Loader from '../components/Loader'; // Make sure this component exists
 import { getCourseById } from '../utils/api'; // Ensure this function is defined properly
 
@@ -28,7 +28,8 @@ const CourseDetailsScreen = ({ route }) => {
     if (loading) return <Loader />;
 
     return (
-        <View style={styles.container}>
+
+            <View style={styles.container}>
             {course ? (
                 <>
                     <Text style={styles.title}>{course.title}</Text>
@@ -39,6 +40,7 @@ const CourseDetailsScreen = ({ route }) => {
                 <Text>No course found.</Text>
             )}
         </View>
+
     );
 };
 
