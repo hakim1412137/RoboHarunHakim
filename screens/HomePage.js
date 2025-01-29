@@ -1,8 +1,10 @@
 // src/pages/HomePage.js
 import React from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+// import { Image } from 'expo-image';
+import {View, Text, FlatList, Image, ImageBackground} from 'react-native';
 import styles from '../components/HomePageStyles'; // Import the styles
 import HomePageImages from '../components/HomePageImages';
+const EnjoyAIImage = require('../assets/EnjoyAI.jpg'); // Adjust the path according to your file structure
 
 const robotImages = [
     { id: '1', uri: 'https://tse1.mm.bing.net/th?id=OIP.TVOEkx2eJmtKjIQjuFO4CwHaHa&pid=Api', name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
@@ -12,7 +14,10 @@ const robotImages = [
     { id: '1', uri: '../assets/robot1.jpg', name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
     { id: '3', uri: '../assets/robot2.jpg', name: 'Robot 2', description: 'A humanoid robot designed for friendly interaction.' },
 ];*/
-
+/*const robotImages = [
+    { id: '1', uri: require('../assets/robot1.jpg'), name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
+    { id: '3', uri: require('../assets/robot2.jpg'), name: 'Robot 2', description: 'A humanoid robot designed for friendly interaction.' },
+];*/
 /*
 const exampleImage =  require('../assets/robot1.jpg');
 const exampleImageUri = Image.resolveAssetSource(exampleImage).uri;
@@ -27,7 +32,13 @@ const HomePage = () => {
     ];
 
     return (
+        <ImageBackground
+            source={EnjoyAIImage}
+            style={styles.container}
+            imageStyle={{ opacity: 0.5 }} // Optional: change the opacity of the image
+        >
         <View style={styles.mainContainer}>
+
             <View style={styles.textContent}>
                 <View>
                     <Text style={styles.title}>Welcome to the Robotics Education Shopping Center!</Text>
@@ -58,6 +69,7 @@ const HomePage = () => {
                 />
             </View>
         </View>
+        </ImageBackground>
     );
 };
 

@@ -62,7 +62,7 @@ const ProductsScreen = ({ navigation }) => {
     };
 
     return (
-        // <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContentContainer}>
 
         <View style={styles.container}>
             {loading ? (
@@ -85,7 +85,7 @@ const ProductsScreen = ({ navigation }) => {
                 />
             )}
         </View>
-        // </ScrollView>
+        </ScrollView>
 
     );
 };

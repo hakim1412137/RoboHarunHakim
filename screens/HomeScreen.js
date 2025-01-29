@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Button, Easing } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, Button, Easing,ImageBackground  } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Menu from '../components/Menu';
@@ -89,6 +89,7 @@ const HomeScreen = () => {
     };
 
     return (
+
         <View style={styles.container}>
             <Header setCurrentPage={setCurrentPage} />
             <Menu setCurrentPage={setCurrentPage} toggleExpanded={toggleExpanded} setPosition={setPosition} expanded={expanded} />
@@ -97,6 +98,7 @@ const HomeScreen = () => {
                 {renderContent()}
             </View>
             <Footer />
+
         </View>
     );
 };
