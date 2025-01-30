@@ -26,18 +26,22 @@ const CoursesScreen = ({ navigation }) => {
     }, []);
 
     if (loading) return <Loader />;
-
+    const navigateToCourseDetails1 = (courseId) => {
+        console.log('Navigation object:', navigation); // Check if navigation is defined
+        navigation.navigate('CourseDetails1', { courseId });
+    };
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Available Courses</Text>
             <View style={styles.content}>
                 <FlatList
                     data={courses}
-                    keyExtractor={item => item.id.toString()}
+                    // keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => (
                         <CourseCard
                             course={item}
-                            onViewDetails={() => navigation.navigate('CourseDetails', { id: item.id })} // Adjust according to your navigation setup
+                            // onViewDetails={() => navigation.navigate('CourseDetails1', { id: item.id })} // Make sure this matches
+                             onViewDetails={() => navigateToCourseDetails1(item.id)} // Make sure this matches
                         />
                     )}
                     showsVerticalScrollIndicator={false} // Optional: hides the scroll indicator

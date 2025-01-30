@@ -71,7 +71,7 @@ const HomeScreen = () => {
                 return <ProductDetailScreen />;
               case 'Courses':
                  return <CoursesScreen />;
-              case 'CourseDetails':
+              case 'CourseDetails1':
                  return <CourseDetailsScreen />;
               case 'EditProduct':
                    return <EditProductScreen />;
@@ -97,7 +97,7 @@ const HomeScreen = () => {
             <View style={styles.content}>
                 {renderContent()}
             </View>
-            <Footer />
+            {/*<Footer />*/}
 
         </View>
     );

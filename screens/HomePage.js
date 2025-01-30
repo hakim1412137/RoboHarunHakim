@@ -14,10 +14,10 @@ const robotImages = [
     { id: '1', uri: '../assets/robot1.jpg', name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
     { id: '3', uri: '../assets/robot2.jpg', name: 'Robot 2', description: 'A humanoid robot designed for friendly interaction.' },
 ];*/
-/*const robotImages = [
+const robotImages1 = [
     { id: '1', uri: require('../assets/robot1.jpg'), name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
     { id: '3', uri: require('../assets/robot2.jpg'), name: 'Robot 2', description: 'A humanoid robot designed for friendly interaction.' },
-];*/
+];
 /*
 const exampleImage =  require('../assets/robot1.jpg');
 const exampleImageUri = Image.resolveAssetSource(exampleImage).uri;
@@ -32,16 +32,17 @@ const HomePage = () => {
     ];
 
     return (
-        <ImageBackground
-            source={EnjoyAIImage}
-            style={styles.container}
-            imageStyle={{ opacity: 0.5 }} // Optional: change the opacity of the image
-        >
-        <View style={styles.mainContainer}>
 
+
+        <View style={styles.mainContainer}>
+            <ImageBackground
+                source={EnjoyAIImage}
+                style={styles.container}
+                imageStyle={{ opacity: 0.5 }} // Optional: change the opacity of the image
+            >
             <View style={styles.textContent}>
                 <View>
-                    <Text style={styles.title}>Welcome to the Robotics Education Shopping Center!</Text>
+                    <Text style={styles.title}>Welcome to the Robotics Education & Shopping Center!</Text>
                     <Text style={styles.subtitle}>Explore a wide range of educational robots and accessories.</Text>
                     <FlatList
                         data={dataList}
@@ -54,10 +55,26 @@ const HomePage = () => {
                             </View>
                         )}
                     />
+
+
                 </View>
             </View>
-
-            <View style={styles.imageContent}>
+            </ImageBackground>  <View style={styles.imageContent}>
+              <FlatList
+                        data={robotImages1}
+                        horizontal
+                        style={{ alignSelf: 'center', overflow: 'visible' }}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) => (
+                            <View>
+                                <Image source={item.uri} style={{ width: 200, height: 200 }} />
+                                <Text>{item.name}</Text>
+                                <Text>{item.description}</Text>
+                            </View>
+                        )}
+                    />
+                  </View>
+         {/*   <View style={styles.imageContent}>
                 <FlatList
                     data={robotImages}
                     horizontal
@@ -67,9 +84,9 @@ const HomePage = () => {
                         <HomePageImages item={item} index={index} />
                     )}
                 />
-            </View>
-        </View>
-        </ImageBackground>
+            </View>*/}
+             </View>
+
     );
 };
 

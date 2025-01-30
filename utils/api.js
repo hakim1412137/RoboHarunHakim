@@ -40,11 +40,13 @@ const deleteService = (serviceId) => api.delete(`/services/${serviceId}`);
 ''
 // Course CRUD Operations
 export const getAllCourses = () => api.get('/courses');
-export const getCourseById =  (competitionId) => api.get(`/courses/${courseId}`)
-const getCoursesByUserId= (userId) => api.get(`/courses/${userId}`);
+export const getCourseById =  (courseId) => api.get(`/courses/${courseId}`)
+
+const getCoursesByUserId= (userId) => api.get(`/courses/user/${userId}`);
 const createCourse = (courseData) => api.post('/courses', courseData);
 const updateCourse = (courseId, courseData) => api.put(`/courses/${courseId}`, courseData);
 const deleteCourse = (courseId) => api.delete(`/courses/${courseId}`);
+const enrollInCourse =  (courseId) =>  api.post('/courses/enroll', { courseId });
 
 // Event CRUD Operations
 const getEvents = () => api.get('/events');
@@ -114,7 +116,7 @@ export {
     login, signup, getUserDetails, updateUserDetails,
     getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
     getServices, createService, updateService, deleteService,
-     createCourse, updateCourse, deleteCourse, getCoursesById,
+     createCourse, updateCourse, deleteCourse, getCoursesById,enrollInCourse,
     getEvents, createEvent, updateEvent, deleteEvent,registerFortEvents,getEventById,
     getResources, createResource, updateResource, deleteResource,
     getFeedbackByCourseId, submitFeedback,

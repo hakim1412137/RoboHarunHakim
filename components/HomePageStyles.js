@@ -9,6 +9,11 @@ const homePageStyles = StyleSheet.create({
         height: '100%',
         backgroundColor: '#ffebbf'
     },
+/*    container: {
+        width: 400, // Container width
+        height: 400, // Container height
+        overflow: 'visible',
+    },*/
     textContent: {
         flex: 1,
         flexShrink: 0,

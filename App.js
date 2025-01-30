@@ -40,7 +40,7 @@ const Stack = createStackNavigator();
                                  <Stack.Screen name="Signup" component={SignUpScreen} />
                                  <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                  <Stack.Screen name="Courses" component={CoursesScreen} />
-                                 <Stack.Screen name="CourseDetails" component={CourseDetailsScreen} />
+                                 <Stack.Screen name="CourseDetails1" component={CourseDetailsScreen} />
                                  <Stack.Screen name="Events" component={EventListScreen} />
                                  <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
                                  <Stack.Screen name="Resources" component={ResourcesListScreen} />
