@@ -18,12 +18,16 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );*/
-const getTimelineEvents = () => api.get('/timeline');
-// User Authentication
-const login = (username, password) => api.post('/auth/login', { username, password });
-const signup = (username, password) => api.post('/auth/signup', { username, password });
-const getUserDetails = (userId) => api.get(`/users/${userId}`);
-const updateUserDetails = (userId, userData) => api.put(`/users/${userId}`, userData);
+
+/*export const getAllVexRobotics = async () => {
+    const response = await axios.get(`${BASE_URL}/vex-robotics`);
+    return response.data; // Assumes your backend returns an array of platforms
+};*/
+
+ const getAllVexRobotics = () => api.get('/vex-robotics');
+const createVexRobotics = (VexRobotData) => api.post('/vex-robotics', VexRobotData);
+const deleteVexRoboticsById = (vexRobotId) => api.delete(`/vex-robotics/${vexRobotId}`);
+const VexRoboticsById = (vexRobotId) => api.get(`/vex-robotics/${vexRobotId}`);
 
 // Product CRUD Operations
 const getProducts = () => api.get('/products');
@@ -32,6 +36,14 @@ const updateProduct = (productId, productData) => api.put(`/products/${productId
 const deleteProduct = (productId) => api.delete(`/products/${productId}`);
 const getProductDetails = (productId) => api.get(`/products/${productId}`);
 
+const getTimelineEvents = () => api.get('/timeline');
+// User Authentication
+const login = (username, password) => api.post('/auth/login', { username, password });
+const signup = (username, password) => api.post('/auth/signup', { username, password });
+const getUserDetails = (userId) => api.get(`/users/${userId}`);
+const updateUserDetails = (userId, userData) => api.put(`/users/${userId}`, userData);
+
+
 // Services CRUD Operations
 const getServices = () => api.get('/services');
 const createService = (serviceData) => api.post('/services', serviceData);
@@ -39,8 +51,9 @@ const updateService = (serviceId, serviceData) => api.put(`/services/${serviceId
 const deleteService = (serviceId) => api.delete(`/services/${serviceId}`);
 ''
 // Course CRUD Operations
-export const getAllCourses = () => api.get('/courses');
-export const getCourseById =  (courseId) => api.get(`/courses/${courseId}`)
+ const getAllCourses = () => api.get('/courses');
+ // const getCourseById =  (courseId) => api.get(`/courses/${courseId}`);
+const getCourseById = (courseId) => api.get(`${BASE_URL}/courses/${courseId}`);
 
 const getCoursesByUserId= (userId) => api.get(`/courses/user/${userId}`);
 const createCourse = (courseData) => api.post('/courses', courseData);
@@ -106,17 +119,17 @@ const createMeetingRequest = (requestData) =>  api.post(`${BASE_URL}/meeting-req
 const getAllMeetingRequests = () => api.get(`${BASE_URL}/meeting-requests`);
 
 // Course CRUD Operations
-const getCoursesById = (courseId) => api.get(`${BASE_URL}/courses/${courseId}`);
 
 // Export all methods for use in your components
 export {
+    deleteVexRoboticsById,VexRoboticsById,createVexRobotics,getAllVexRobotics,
     createMeetingRequest, getAllMeetingRequests, getTimelineEvents,
     getAllCommunityPosts, createCommunityPost, getCommentsByPostId, postComment,
     getAllCompetitions, getCompetitionById, registerForCompetition, createCompetition,updateCompetition,deleteCompetition,
     login, signup, getUserDetails, updateUserDetails,
     getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
     getServices, createService, updateService, deleteService,
-     createCourse, updateCourse, deleteCourse, getCoursesById,enrollInCourse,
+    getAllCourses,createCourse, updateCourse, deleteCourse, getCourseById,enrollInCourse,getCoursesByUserId,
     getEvents, createEvent, updateEvent, deleteEvent,registerFortEvents,getEventById,
     getResources, createResource, updateResource, deleteResource,
     getFeedbackByCourseId, submitFeedback,
@@ -126,6 +139,28 @@ export {
     initiatePayment, verifyPayment,
     getNotifications, createNotification
 };
+
+/*
+export const fetchVexRobotics = async () => {
+    const response = await axios.get(BASE_URL);
+    return response.data;
+};
+
+export const fetchVexRoboticsById = async (id) => {
+    const response = await axios.get(`${BASE_URL}/${id}`);
+    return response.data;
+};
+
+export const createVexRobotics = async (data) => {
+    const response = await axios.post(BASE_URL, data);
+    return response.data;
+};
+
+export const deleteVexRoboticsById = async (id) => {
+    await axios.delete(`${BASE_URL}/${id}`);
+};
+
+*/
 /*
 
 Choosing between using the Fetch API and Axios d

@@ -24,7 +24,10 @@ import PartnerScreen from "./screens/PartnerScreen";
 import {Text} from "react-native";
 import ProductDetail from "./screens/ProductDetailScreen";
 import {CartProvider} from "./context/CartContext";
-import EditProductScreen from "./screens/EditProductScreen"; // New About Screen
+import EditProductScreen from "./screens/EditProductScreen";
+import VexRoboticsDetail from "./screens/VexRoboticsDetail";
+import AddVexRobotics from "./screens/AddVexRobotics";
+import VexRoboticsList from "./screens/VexRoboticsList"; // New About Screen
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -51,7 +54,9 @@ const Stack = createStackNavigator();
                     <Stack.Screen name="EditProduct" component={EditProductScreen} />
                     <Stack.Screen name="Competitions" component={CompetitionsScreen} />
                                  <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
-
+                    <Stack.Screen name="VexRobotics" component={VexRoboticsList} />
+                    <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
+                    <Stack.Screen name="AddVexRobot" component={AddVexRobotics} />
                                  <Stack.Screen name="Careers" component={CareersScreen} />
 
                                  <Stack.Screen name="Partners" component={PartnerScreen} />

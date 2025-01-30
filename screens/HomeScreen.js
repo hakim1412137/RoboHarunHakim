@@ -27,6 +27,9 @@ import ServicesScreen from "./ServicesScreen";
 import SupportScreen from "./SupportScreen";
 import WebsiteDevelopmentPage from "./WebsiteDevelopmentPage";
 import RoboticsTrainingPage from "./RoboticsTrainingPage";
+import AddVexRobotics from "./AddVexRobotics";
+import VexRoboticsDetail from "./VexRoboticsDetail";
+import VexRoboticsList from "./VexRoboticsList";
 
 const HomeScreen = () => {
     const [currentPage, setCurrentPage] = useState('home');
@@ -83,6 +86,14 @@ const HomeScreen = () => {
               return <EventDetailsScreen />;
               case 'Events':
               return <EventListScreen />;
+            case 'AddVexRobot':
+                return <AddVexRobotics />;
+            case 'VexRobotDetail':
+                return <VexRoboticsDetail />;
+            case 'VexRobotics':
+                return <VexRoboticsList />;
+
+
             default:
                 return <Text style={styles.title}>Welcome to the Educational Robotics Center!</Text>;
         }

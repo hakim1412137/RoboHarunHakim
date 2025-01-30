@@ -16,6 +16,9 @@ const Menu = ({ setCurrentPage }) => {
               <TouchableOpacity onPress={() =>  setCurrentPage('Courses')}  style={styles.menuItem}>
                   <Text>Courses</Text>
               </TouchableOpacity>
+            <TouchableOpacity onPress={() =>  setCurrentPage('VexRobotics')}  style={styles.menuItem}>
+                <Text>VexRobotics</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => setCurrentPage('Competitions')} style={styles.menuItem}>
                 <Text>Competitions</Text>
             </TouchableOpacity>
