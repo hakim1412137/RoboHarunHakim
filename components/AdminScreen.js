@@ -4,8 +4,8 @@ import ProductCard from './ProductCard';
 import CompetitionCard from './CompetitionCard';
 import ModalForm from './ModalForm';
 import ConfirmDialog from './ConfirmDialog';
-import getProducts from '../utils/api';
-import getAllCompetitions from '../utils/api';
+import {getProducts} from '../utils/api';
+import {getAllCompetitions} from '../utils/api';
 import Loader from './Loader';
 
 const AdminScreen = () => {

@@ -1,18 +1,25 @@
 import React from 'react';
 import { View, Text, FlatList, Image, ImageBackground, StyleSheet } from 'react-native';
-import VEXkitsImage from '../assets/123classroombundles.jpg'; // Path to VEX Kits Image
+import VEXkitsImage from '../assets/VEXkits.jpg'; // Path to VEX Kits Image
 import vexcodeImage from '../assets/vexcode.jpg'; // Path to VEX Code Image
 
 const robotImages1 = [
-    { id: '1', uri: require('../assets/robot1.jpg'), name: 'Robot 1', description: 'This is an educational robot used in many classrooms.' },
-    { id: '2', uri: require('../assets/robot2.jpg'), name: 'Robot 2', description: 'A humanoid robot designed for friendly interaction.' },
+    { id: '1', uri: require('../assets/VEX5.jpg') , description: 'VEX5 educational robots'},
+    { id: '2', uri: require('../assets/VXECTE.jpg'),  description: 'VXECTE educational robots.'},
+    { id: '3', uri: require('../assets/123classroombundles.jpg'), description: '123classroombundles educational robots.' },
+    { id: '4', uri: require('../assets/VEXIQ.jpg'), description: 'VEXIQ educational robots.' },
+
 ];
+/*const robotImages1 = [
+    { id: '1', uri: require('../assets/robot1.jpg'), description: 'This is an educational robot used in many classrooms.' },
+    { id: '2', uri: require('../assets/robot2.jpg'), description: 'A humanoid robot designed for friendly interaction.' },
+];*/
 
 const HomePage = () => {
     const dataList = [
-        { id: '1', title: 'LEGO Mindstorms EV3', description: 'A versatile robotics kit for building, programming, and controlling robots.' },
+        { id: '1', title: 'VEX V5', description: 'Offers a powerful robotics platform with more advanced mechanical, electrical, and programming capabilities.' },
         { id: '2', title: 'VEX Robotics Kit', description: 'An educational kit for building programmable robots and enhancing STEM skills.' },
-        { id: '3', title: 'Ozobot Bit', description: 'A small robot that follows color codes and enhances creative programming.' },
+        { id: '3', title: 'VEX CTE', description: 'Provides students with hands-on experience in engineering design and robotics.' },
         { id: '4', title: 'Sphero Mini', description: 'A robotic ball that you can control using your smartphone or tablet.' },
         { id: '5', title: 'Arduino Starter Kit', description: 'Includes an Arduino board and components to create interactive projects.' },
     ];
@@ -22,10 +29,10 @@ const HomePage = () => {
             <ImageBackground
                 source={vexcodeImage}
                 style={styles.backgroundImage}
-                imageStyle={{ opacity: 0.3 }} // Adjust opacity for brightness effect
+                imageStyle={{ opacity: 0.5 }} // Adjust opacity for brightness effect
             >
                 <View style={styles.textContent}>
-                    <Text style={styles.title}>Welcome to Ethio Robo Robotics Center!</Text>
+                    <Text style={styles.title}>Welcome to Ethio Robotics Center!</Text>
                     <Text style={styles.subtitle}>Explore a wide range of educational robots and accessories.</Text>
                     <FlatList
                         data={dataList}
@@ -33,7 +40,6 @@ const HomePage = () => {
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
                             <View style={styles.listItemContainer}>
-                                {/* Align title and description items to the left */}
                                 <Text style={styles.listItem}>{item.title}</Text>
                                 <Text style={styles.listDescription}>{item.description}</Text>
                             </View>
@@ -59,7 +65,7 @@ const HomePage = () => {
                 />
             </View>
 
-            {/* New Section for VEX Kits Image */}
+
             <View style={styles.newImagesContainer}>
                 <Text style={styles.title}>VEX Kits</Text>
                 <Image source={VEXkitsImage} style={styles.vexKitsImage} />
@@ -78,7 +84,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 20,
+        backgroundColor: '#FFFAFA', // Light color (e.g., Snow)
     },
+
     textContent: {
         marginBottom: 20,
     },
@@ -89,7 +97,8 @@ const styles = StyleSheet.create({
         textAlign: 'left', // Align title to the left
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: 'bold',
         color: '#0000FF', // Bright blue color for visibility
         textAlign: 'left',
         marginBottom: 10,
@@ -101,12 +110,12 @@ const styles = StyleSheet.create({
     listItem: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#0000FF', // Bright blue color for list items
+        color: '#000000', // Use '#000000' for black color
     },
 
 listDescription: {
     fontSize: 14,
-        color: '#0000FF', // Color for the description text to make it visible against the VEX Code image
+    color: '#000000', // Use '#000000' for black color
         marginLeft: 0,    // No margin needed to align the description properly under the title
         paddingTop: 5,    // Add some space above the description for better readability
 },
@@ -144,10 +153,10 @@ newImagesContainer: {
         marginTop: 20,
 },
 vexKitsImage: {
-    width: 150, // Set the width of the VEX Kits image to make it smaller
-        height: 150, // Set a specific height for the kits image
-        borderRadius: 8,
-        marginTop: 10, // Space above the image
+    width: 200, // Set the width of the VEX Kits image to make it smaller
+        height: 200, // Set a specific height for the kits image
+        borderRadius: 14,
+        marginTop: 12, // Space above the image
 },
 });
 
