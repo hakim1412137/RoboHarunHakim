@@ -72,18 +72,22 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} />
 
-                                <Stack.Screen name="login" component={LoginScreen} />
-                                <Stack.Screen name="signup" component={SignUpScreen} />
-                                <Stack.Screen name="MyAccount" component={MyAccountScreen} />
-                                <Stack.Screen name="CourseDetails1" component={CourseDetailsScreen} />
+                                {/*Details*/}
+                                <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
                                 <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
-                                <Stack.Screen name="Resources" component={ResourcesListScreen} />
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
                                 <Stack.Screen name="ProductDetails" component={ProductDetail} />
+                                <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
+                                <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
+
+                                {/*Auth*/}
+                                <Stack.Screen name="login" component={LoginScreen} />
+                                <Stack.Screen name="signup" component={SignUpScreen} />
+
+                                <Stack.Screen name="MyAccount" component={MyAccountScreen} />
+                                <Stack.Screen name="Resources" component={ResourcesListScreen} />
                                 <Stack.Screen name="Cart" component={CartScreen} />
                                 <Stack.Screen name="EditProduct" component={EditProductScreen} />
-                                <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
-                                <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
                                 <Stack.Screen name="AddVexRobot" component={AddVexRobotics} />
 
                                 <Stack.Screen name="Partners" component={PartnerScreen} />

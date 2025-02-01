@@ -5,9 +5,7 @@ import Loader from '../components/Loader'; // Ensure this component exists
 import { getCourseById, enrollInCourse } from '../utils/api'; // Add enrollInCourse function
 
 const CourseDetailsScreen = ({ route, navigation }) => {
-    console.log(navigation); // Add this line to log the navigation prop
-
-    const { id: courseId } = route.params; // Correctly retrieve course ID from params
+    const courseId = route.params.courseId; // Correctly retrieve course ID from params
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
 

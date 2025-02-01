@@ -27,9 +27,9 @@ const CoursesScreen = ({ navigation }) => {
 
     if (loading) return <Loader />;
     const navigateToCourseDetails1 = (courseId) => {
-        console.log('Navigation object:', navigation); // Check if navigation is defined
-        navigation.navigate('CourseDetails1', { courseId });
+        navigation.navigate('courseDetails', { courseId });
     };
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Available Courses</Text>

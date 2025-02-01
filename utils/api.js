@@ -48,7 +48,7 @@ const deleteService = (serviceId) => api.delete(`/services/${serviceId}`);
 // Course CRUD Operations
  const getAllCourses = () => api.get('/courses');
  // const getCourseById =  (courseId) => api.get(`/courses/${courseId}`);
-const getCourseById = (courseId) => api.get(`${BASE_URL}/courses/${courseId}`);
+const getCourseById = (courseId) => api.get(`/courses/${courseId}`);
 
 const getCoursesByUserId= (userId) => api.get(`/courses/user/${userId}`);
 const createCourse = (courseData) => api.post('/courses', courseData);
