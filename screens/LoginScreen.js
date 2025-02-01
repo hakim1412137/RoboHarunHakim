@@ -23,14 +23,14 @@ const LoginScreen = ({ navigation }) => {
             const token = response.data; // Expecting the JWT token back from the response
             console.log('Received token:', token); // Log the received token
 
-            console.log(saveToken);
-
             await saveToken(token); // Save the token using AsyncStorage
             setUser(username); // Optionally store the username in UserContext
 
-            navigation.navigate('Home');
+            console.log(navigation)
+            navigation.navigate('home');
         } catch (err) {
             console.error('Login error:', error.response ? error.response.data : error.message);
+            console.log(err)
 
             setError('Login failed. Please check your credentials.');
         }

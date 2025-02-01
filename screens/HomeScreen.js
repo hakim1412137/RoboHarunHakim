@@ -32,7 +32,7 @@ import VexRoboticsDetail from "./VexRoboticsDetail";
 import VexRoboticsList from "./VexRoboticsList";
 import LoginScreen from "./LoginScreen";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const [currentPage, setCurrentPage] = useState('homepage');
     const [expanded, setExpanded] = useState(false);
     const [position, setPosition] = useState({ x: 100, y: 100 });
@@ -103,7 +103,7 @@ const HomeScreen = () => {
     return (
 
         <View style={styles.container}>
-            <Header setCurrentPage={setCurrentPage} />
+            <Header navigation={navigation} />
             <Menu setCurrentPage={setCurrentPage} toggleExpanded={toggleExpanded} setPosition={setPosition} expanded={expanded} />
             {expanded && <AboutUsPopup position={position} setCurrentPage={setCurrentPage} />}
             <View style={styles.content}>

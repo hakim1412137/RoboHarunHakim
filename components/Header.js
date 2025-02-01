@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const Header = ({ setCurrentPage }) => {
+const Header = ({ navigation }) => {
     const handleEmailPress = () => {
         Linking.openURL('mailto:contact@roboticsapp.com');
     };
@@ -59,10 +59,10 @@ const Header = ({ setCurrentPage }) => {
                 </View>
 
                 <View style={styles.loginContainer}>
-                    <TouchableOpacity style={styles.signinpButton} onPress={() => setCurrentPage('signin')}>
+                    <TouchableOpacity style={styles.signinpButton} onPress={() => navigation.navigate('login')}>
                         <Text style={styles.signText}>Sign In</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.signupButton} onPress={() => setCurrentPage("signup")}>
+                    <TouchableOpacity style={styles.signupButton} onPress={() => navigation.navigate("signup")}>
                         <Text style={styles.signText}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>

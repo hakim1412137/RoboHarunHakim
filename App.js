@@ -41,12 +41,12 @@ const Stack = createStackNavigator();
 
             <CartProvider>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Home">
-                    <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Navigator initialRouteName="home">
+                    <Stack.Screen name="home" component={HomeScreen}  options={{ headerShown: false }}/>
                                 {/*<Stack.Screen name="About" component={AboutScreen} />*/}
                                  <Stack.Screen name="Shop" component={ShopScreen} />
                     <Stack.Screen name="AboutUs" component={AboutScreen} />
-                    <Stack.Screen name="signin" component={LoginScreen} />
+                    <Stack.Screen name="login" component={LoginScreen} />
                                  <Stack.Screen name="signup" component={SignUpScreen} />
                                  <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                  <Stack.Screen name="Courses" component={CoursesScreen} />

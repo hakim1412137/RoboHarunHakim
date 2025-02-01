@@ -38,6 +38,7 @@ const CompetitionsScreen = () => {
         }
     };
     const fetchCompetitionById = async (searchId) => {
+        console.log(searchId); // Log the response to verify it
       if (!searchId) {
             Alert.alert("Error", "Please enter a competition ID");
             return;
@@ -53,7 +54,7 @@ const CompetitionsScreen = () => {
             const response = await getCompetitionById(searchId);
             if (response) {
                 console.log(response); // Log the response to verify it
-                setCompetitions([response]); // Set the single competition into the competitions array
+                setCompetitions([response.data]); // Set the single competition into the competitions array
             } else {
                 Alert.alert("Error", "Competition not found");
             }
@@ -139,7 +140,7 @@ const CompetitionsScreen = () => {
                 value={searchId}
                 onChangeText={setSearchId}
             />
-            <Button title="Search" onPress={fetchCompetitionById} />
+            <Button title="Search" onPress={() => fetchCompetitionById(searchId)} />
 {/*
             <SearchComponent onSearch={fetchCompetitionById} />
 */}
