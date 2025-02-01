@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { signup } from "../utils/api";
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -49,7 +49,12 @@ const SignupScreen = ({navigation}) => {
             <TouchableOpacity style={styles.button} onPress={handleSignup}>
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
-            <Text style={styles.footerText}>Already have an account? <Text style={styles.link}>Log In</Text></Text>
+            <View style={styles.footerText}>
+                <Text style={{ fontSize: 20 }}>Already have an account?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <Text style={{ color: '#007BFF', fontSize: 20 }}>Log in</Text>
+                </TouchableOpacity>
+            </View>
             {/*<Button title="Already have an account?" onPress={() => navigation.navigate('signin')} />*/}
 
         </SafeAreaView>
@@ -98,9 +103,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     footerText: {
-        textAlign: 'center',
+        width: '100%',
         marginTop: 20,
-        fontSize: 16,
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        gap: 5
     },
     link: {
         color: '#007BFF', // Link color
