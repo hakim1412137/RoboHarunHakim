@@ -77,6 +77,8 @@ const CompetitionsScreen = () => {
             dueDate,
         };
 
+        console.log(competitionData, editingId)
+
         try {
             if (editingId) {
                 await updateCompetition(editingId, competitionData);

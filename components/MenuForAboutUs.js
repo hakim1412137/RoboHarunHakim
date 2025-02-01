@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import Entypo from '@expo/vector-icons/Entypo';
 
 const MenuForAboutUs = ({ navigation }) => {
     const [expanded, setExpanded] = useState(false);
@@ -10,7 +12,8 @@ const MenuForAboutUs = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={toggleMenu} style={styles.menuItem}>
-                <Text style={styles.menuText}>About Us {expanded ? '-' : '+'}</Text>
+                <Text style={styles.menuText}>About Us</Text>
+                <Entypo name="triangle-down" size={18} style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)' }} color="black" />
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>
@@ -41,16 +44,16 @@ const styles = StyleSheet.create({
         position: 'relative', // Make sure it’s positioned relative for absolute children
     },
     menuItem: {
-
         fontSize: 18,
         padding: 15,
         backgroundColor: '#f0f0f0',
         borderRadius: 10,
         marginVertical: 5,
         marginHorizontal: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 5,
         alignItems: 'center',
-        justifyContent: 'center',
-        // elevation: 2, // Shadow effect for each menu item
     },
     submenu: {
         position: 'absolute', // Crucial for making the submenu pop out

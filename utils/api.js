@@ -5,7 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
 });
-/*// Interceptor to include the token in the headers
+
+// Interceptor to include the token in the headers
 api.interceptors.request.use(async (config) => {
     const token = await AsyncStorage.getItem('token'); // Get the token from storage
     if (token) {
@@ -14,7 +15,8 @@ api.interceptors.request.use(async (config) => {
     return config;
 }, (error) => {
     return Promise.reject(error);
-});*/
+});
+
 const login = (username, password) => api.post('/auth/login', { username, password },
     {headers: { 'Content-Type': 'application/json'} });
 

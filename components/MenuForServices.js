@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import SupportScreen from "../screens/SupportScreen";
+import Entypo from "@expo/vector-icons/Entypo";
 const MenuForServices = ({ navigation }) => {
     const [expanded, setExpanded] = useState(false);
 
@@ -9,7 +10,8 @@ const MenuForServices = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={toggleMenu} style={styles.menuItem}>
-                <Text style={styles.menuText}>Services {expanded ? '-' : '+'}</Text>
+                <Text style={styles.menuText}>Services </Text>
+                <Entypo name="triangle-down" size={18} color="black" style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)' }} />
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>
@@ -49,15 +51,16 @@ const styles = StyleSheet.create({
 
     },
     menuItem: {
-
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 5,
+        alignItems: 'center',
         fontSize: 18,
         padding: 15,
         backgroundColor: '#f0f0f0',
         borderRadius: 10,
         marginVertical: 5,
         marginHorizontal: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
         // elevation: 2, // Shadow effect for each menu item
     },
     menuText: {
