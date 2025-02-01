@@ -10,19 +10,19 @@ const Menu = ({ navigation }) => {
         <View style={styles.menuContainer}>
             <MenuForAboutUs navigation={navigation}  />
             <MenuForServices navigation={navigation} />
-            <TouchableOpacity onPress={() => navigation.navigate('Products')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('products')} style={styles.menuItem}>
                 <Text>Products</Text>
             </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  navigation.navigate('Courses')}  style={styles.menuItem}>
+              <TouchableOpacity onPress={() =>  navigation.navigate('courses')}  style={styles.menuItem}>
                   <Text>Courses</Text>
               </TouchableOpacity>
-            <TouchableOpacity onPress={() =>  navigation.navigate('VexRobotics')}  style={styles.menuItem}>
+            <TouchableOpacity onPress={() =>  navigation.navigate('vexRobotics')}  style={styles.menuItem}>
                 <Text>VexRobotics</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Competitions')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('competitions')} style={styles.menuItem}>
                 <Text>Competitions</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Events')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('events')} style={styles.menuItem}>
                 <Text>Events</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
