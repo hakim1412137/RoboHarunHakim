@@ -1,8 +1,236 @@
-
 import React, { useEffect, useState } from 'react';
+import { View, Text, Button, FlatList, StyleSheet, Alert, TextInput, ActivityIndicator } from 'react-native';
+import CompetitionCard from '../components/CompetitionCard';
+import {
+    createCompetition,
+    getAllCompetitions,
+    updateCompetition,
+    deleteCompetition,
+    registerForCompetition,getCompetitionById
+} from "../utils/api";
+import SearchCompetition from "../components/SearchCompetition";
+import SearchComponent from "../components/CompetitionCard"; // Ensure these API methods exist
+
+const CompetitionsScreen = () => {
+    const [competitions, setCompetitions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [dueDate, setDueDate] = useState('');
+    const [editingId, setEditingId] = useState(null);
+    const [searchId, setSearchId] = useState(''); // State for search input
+
+    useEffect(() => {
+        fetchCompetitions();
+    }, []);
+
+    const fetchCompetitions = async () => {
+        setLoading(true);
+        try {
+            const response = await getAllCompetitions();
+            setCompetitions(response.data);
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Error", "Failed to fetch competitions");
+        } finally {
+            setLoading(false);
+        }
+    };
+    const fetchCompetitionById = async (searchId) => {
+      if (!searchId) {
+            Alert.alert("Error", "Please enter a competition ID");
+            return;
+        }
+        const competitionId = parseInt(searchId); // Convert to an integer if necessary
+        if (isNaN(competitionId)) {
+            Alert.alert("Error", "Please enter a valid numerical ID");
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await getCompetitionById(searchId);
+            if (response) {
+                console.log(response); // Log the response to verify it
+                setCompetitions([response]); // Set the single competition into the competitions array
+            } else {
+                Alert.alert("Error", "Competition not found");
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Error", "Failed to fetch competition");
+        } finally {
+            setLoading(false);
+        }
+    };
+    const handleSearchComplete = (competition) => {
+        setCompetitions([competition]); // Replace the competition list with the found competition
+    };
+
+    const handleSubmission = async () => {
+        const competitionData = {
+            name,
+            description,
+            price: price ? parseFloat(price) : null,
+            dueDate,
+        };
+
+        try {
+            if (editingId) {
+                await updateCompetition(editingId, competitionData);
+                Alert.alert('Success', 'Competition updated successfully!');
+            } else {
+                await createCompetition(competitionData);
+                Alert.alert('Success', 'Competition created successfully!');
+            }
+            clearForm();
+            fetchCompetitions();
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Error saving competition!');
+        }
+    };
+
+    const handleDelete = async (competitionId) => {
+        try {
+            await deleteCompetition(competitionId);
+            Alert.alert('Success', 'Competition deleted successfully!');
+            fetchCompetitions();
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Error deleting competition!');
+        }
+    };
+
+    const handleEdit = (competition) => {
+        setEditingId(competition.id);
+        setName(competition.name);
+        setDescription(competition.description);
+        setPrice(competition.price ? competition.price.toString() : '');
+        setDueDate(competition.dueDate); // Ensure use proper field
+    };
+
+    const handleRegister = async (competitionId) => {
+        try {
+            await registerForCompetition(competitionId);
+            Alert.alert('Success', 'You have registered for the competition!');
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Error registering for competition!');
+        }
+    };
+
+    const clearForm = () => {
+        setEditingId(null);
+        setName('');
+        setDescription('');
+        setPrice('');
+        setDueDate('');
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Competitions</Text>
+            {/* Search input for competition ID */}
+            <TextInput
+                style={styles.input}
+                placeholder="Search Competition by ID"
+                value={searchId}
+                onChangeText={setSearchId}
+            />
+            <Button title="Search" onPress={fetchCompetitionById} />
+{/*
+            <SearchComponent onSearch={fetchCompetitionById} />
+*/}
+
+            {/* Search input for competition ID */}
+            {/*<SearchCompetition onSearchComplete={handleSearchComplete} />*/}
+
+            {/* Input fields for new competition data */}
+            <TextInput
+                style={styles.input}
+                placeholder="Competition Name"
+                value={name}
+                onChangeText={setName}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Description"
+                value={description}
+                onChangeText={setDescription}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Price (Leave empty for 'Call for price')"
+                value={price}
+                onChangeText={setPrice}
+                keyboardType="numeric" // Numerical input for price
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Due Date (YYYY-MM-DD)"
+                value={dueDate}
+                onChangeText={setDueDate}
+            />
+
+            <Button title={editingId ? "Update Competition" : "Create Competition"} onPress={handleSubmission} />
+
+            {loading ? (
+                <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+                <FlatList
+                    data={competitions}
+                    renderItem={({ item }) => (
+                        <CompetitionCard
+                            competition={item}
+                            onEdit={() => handleEdit(item)}
+                            onDelete={() => handleDelete(item.id)}
+                            onRegister={() => handleRegister(item.id)} // Register for the competition
+                            // onRegister={() => navigation.navigate('CompetitionDetails', { competitionId: item.id })} // Replace or implement a registration function
+                        />
+                    )}
+                    keyExtractor={(item) => item.id ? item.id.toString() : Math.random().toString()} // Fallback if id is undefined
+
+                    // keyExtractor={(item) => item.id.toString()}
+                />
+            )}
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#fff',
+    },
+    title: {
+        fontSize: 24,
+        marginBottom: 10,
+        textAlign: 'center',
+    },
+    input: {
+        height: 40,
+        borderColor: '#ddd',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingHorizontal: 8,
+        borderRadius: 5,
+    },
+});
+
+export default CompetitionsScreen;
+/*import React, { useEffect, useState } from 'react';
 import {View, Text, Button, FlatList, StyleSheet, Alert, TextInput, ActivityIndicator} from 'react-native';
 import CompetitionCard from '../components/CompetitionCard';
-import { registerForCompetition, createCompetition, getAllCompetitions, getCompetitionById } from "../utils/api"; // Service to manage competition data
+import {
+    registerForCompetition,
+    createCompetition,
+    getAllCompetitions,
+    getCompetitionById,
+    updateCompetition, deleteCompetition
+} from "../utils/api"; // Service to manage competition data
 const CompetitionsScreen = () => {
     const [competitions, setCompetitions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -88,7 +316,7 @@ const CompetitionsScreen = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Competitions</Text>
 
-            {/* Input fields for new competition data */}
+            {/!* Input fields for new competition data *!/}
             <TextInput
                 style={styles.input}
                 placeholder="Competition Name"
@@ -161,7 +389,7 @@ paddingHorizontal: 8,
 },
 });
 
-export default CompetitionsScreen;
+export default CompetitionsScreen;*/
 /*
 
 import React, { useEffect, useState } from 'react';

@@ -27,11 +27,18 @@ import {CartProvider} from "./context/CartContext";
 import EditProductScreen from "./screens/EditProductScreen";
 import VexRoboticsDetail from "./screens/VexRoboticsDetail";
 import AddVexRobotics from "./screens/AddVexRobotics";
-import VexRoboticsList from "./screens/VexRoboticsList"; // New About Screen
+import VexRoboticsList from "./screens/VexRoboticsList";
+import SignInScreen from "./screens/SignInScreen";
+import {AuthProvider} from "./context/AuthContext";
+import {UserProvider} from "./context/UserContext"; // New About Screen
 
 const Stack = createStackNavigator();
   const App = () => {
         return (
+                 <AuthProvider>
+            <UserProvider>
+
+
             <CartProvider>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Home">
@@ -39,8 +46,8 @@ const Stack = createStackNavigator();
                                 {/*<Stack.Screen name="About" component={AboutScreen} />*/}
                                  <Stack.Screen name="Shop" component={ShopScreen} />
                     <Stack.Screen name="AboutUs" component={AboutScreen} />
-                    <Stack.Screen name="Login" component={LoginScreen} />
-                                 <Stack.Screen name="Signup" component={SignUpScreen} />
+                    <Stack.Screen name="signin" component={LoginScreen} />
+                                 <Stack.Screen name="signup" component={SignUpScreen} />
                                  <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                  <Stack.Screen name="Courses" component={CoursesScreen} />
                                  <Stack.Screen name="CourseDetails1" component={CourseDetailsScreen} />
@@ -65,10 +72,24 @@ const Stack = createStackNavigator();
             </NavigationContainer>
             </CartProvider>
 
+                </UserProvider>
+            </AuthProvider>
         );
     };
 
 export default App;
+
+/*<Stack.Screen name="Login" component={LoginScreen} />
+<Stack.Screen
+    name="Home"
+    options={{ headerShown: false }}>
+    {(props) => (
+        <ProtectedRoute navigation={props.navigation}>
+            <HomeScreen />
+        </ProtectedRoute>
+    )}
+</Stack.Screen>*/
+
 /*const App = () => {
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">

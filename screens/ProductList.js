@@ -5,7 +5,7 @@ import { View, Text, FlatList, ActivityIndicator, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AddProduct from './AddProduct';
 import SearchComponent from "../components/SearchComponent";
-import {getProductById} from "../utils/api";
+import {getProductDetails} from "../utils/api";
 /*
 import SearchComponent from './SearchComponent'; // Import SearchComponent
 */
@@ -21,7 +21,7 @@ const ProductList = ({ robotId }) => {
     useEffect(() => {
         const loadProducts = async () => {
             try {
-                const data = await getProductById(robotId); // Fetch all products
+                const data = await getProductDetails(robotId); // Fetch all products
                 setProducts(data); // Set all products
                 setFilteredProducts(data); // Initialize filtered products to all products
             } catch (err) {

@@ -14,7 +14,7 @@ const MyAccountScreen = () => {
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`http://your-backend-url/api/users/${user.id}`, { username }, {
+            await axios.put(`http://localhost:8083/api/auth/${user.id}`, { username }, {
                 headers: {
                     Authorization: `Bearer ${user.token}` // Attach the JWT token in the header
                 }

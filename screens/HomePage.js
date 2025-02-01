@@ -19,7 +19,7 @@ const HomePage = () => {
     const dataList = [
         { id: '1', title: 'VEX V5', description: 'Offers a powerful robotics platform with more advanced mechanical, electrical, and programming capabilities.' },
         { id: '2', title: 'VEX Robotics Kit', description: 'An educational kit for building programmable robots and enhancing STEM skills.' },
-        { id: '3', title: 'VEX CTE', description: 'Provides students with hands-on experience in engineering design and robotics.' },
+        { id: '3', title: 'VEX IQ', description: 'VEXcode IQ to program the robot. It can be programmed with block-based coding or Python.' },
         { id: '4', title: 'Sphero Mini', description: 'A robotic ball that you can control using your smartphone or tablet.' },
         { id: '5', title: 'Arduino Starter Kit', description: 'Includes an Arduino board and components to create interactive projects.' },
     ];

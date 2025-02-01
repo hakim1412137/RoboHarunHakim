@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import login from '../utils/api'; // Import your API functions
+import {login} from '../utils/api'; // Import your API functions
 
 const AuthScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -43,7 +43,7 @@ const AuthScreen = ({ navigation }) => {
                 onChangeText={setPassword}
             />
             <Button title="Login" onPress={handleLogin} />
-            <Button title="Create Account" onPress={() => navigation.navigate('Register')} />
+            <Button title="Create Account" onPress={() => navigation.navigate('SignUp')} />
         </View>
     );
 };

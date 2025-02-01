@@ -6,12 +6,13 @@ import { login } from "../utils/api";
 
 const SignInScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleSignIn = async () => {
         try {
-            const user = await login(email, password); // API call
+            const user = await login(username, password); // API call
             console.log('Sign in successful:', user);
             navigation.navigate('Home'); // Navigate to Home screen
         } catch (error) {
@@ -33,10 +34,9 @@ const SignInScreen = ({ navigation }) => {
             <Text style={styles.title}>Welcome Back!</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
+                placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
             />
             <TextInput
                 style={styles.input}
@@ -49,7 +49,7 @@ const SignInScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.button} onPress={handleSignIn}>
                 <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUp')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup')}>
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { /* Handle password reset */ }}>

@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { signup } from "../utils/api";
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
     const handleSignup = async () => {
         try {
-            await signup(username, password);
+            await signup(username,password,email);
             // Optional: Redirect on successful signup
         } catch (err) {
             setError('Signup failed. Please try again.');
@@ -28,6 +29,7 @@ const SignupScreen = () => {
                 onChangeText={(text) => setUsername(text)}
                 placeholderTextColor="#aaa" // Lighter color for placeholders
             />
+
             <TextInput
                 style={styles.input}
                 placeholder="Password"
@@ -36,10 +38,20 @@ const SignupScreen = () => {
                 secureTextEntry
                 placeholderTextColor="#aaa" // Lighter color for placeholders
             />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+                placeholderTextColor="#aaa" // Lighter color for placeholders
+            />
             <TouchableOpacity style={styles.button} onPress={handleSignup}>
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
             <Text style={styles.footerText}>Already have an account? <Text style={styles.link}>Log In</Text></Text>
+            {/*<Button title="Already have an account?" onPress={() => navigation.navigate('signin')} />*/}
+
         </SafeAreaView>
     );
 };

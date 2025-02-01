@@ -30,9 +30,10 @@ import RoboticsTrainingPage from "./RoboticsTrainingPage";
 import AddVexRobotics from "./AddVexRobotics";
 import VexRoboticsDetail from "./VexRoboticsDetail";
 import VexRoboticsList from "./VexRoboticsList";
+import LoginScreen from "./LoginScreen";
 
 const HomeScreen = () => {
-    const [currentPage, setCurrentPage] = useState('home');
+    const [currentPage, setCurrentPage] = useState('homepage');
     const [expanded, setExpanded] = useState(false);
     const [position, setPosition] = useState({ x: 100, y: 100 });
 
@@ -40,7 +41,7 @@ const HomeScreen = () => {
 
     const renderContent = () => {
         switch (currentPage) {
-            case 'home':
+            case 'homepage':
                 return <HomePage />;
             case 'aboutUs':
                 return <AboutScreen />;
@@ -65,7 +66,7 @@ const HomeScreen = () => {
             case 'JoinUsScreen':
                 return <JoinUsScreen />;
             case 'signin':
-                return <SignInScreen />;
+                return <LoginScreen />;
             case 'signup':
                 return <SignUpScreen />;
             case 'Products':

@@ -7,6 +7,65 @@ const SearchComponent = ({ onSearch }) => {
 
     const handleSearch = () => {
         if (searchQuery.trim()) {
+            onSearch(parseInt(searchQuery)); // Call the parent function to perform the search action with integer
+            setSearchQuery(''); // Clear the input after search
+        }
+    };
+
+    return (
+        <View style={styles.container}>
+            <TextInput
+                style={styles.input}
+                placeholder="Search by ID..."
+                placeholderTextColor="gray"
+                value={searchQuery}
+                onChangeText={text => setSearchQuery(text)}
+                // keyboardType="numeric" // Restrict mobile keyboard to numeric layout
+            />
+            <TouchableOpacity onPress={handleSearch} style={styles.button}>
+                <FontAwesome name="search" size={20} color="white" />
+            </TouchableOpacity>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    input: {
+        flex: 1,
+        height: 40,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginRight: 5,
+        color: '#000',
+    },
+    button: {
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default SearchComponent;
+
+/*
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons'; // Ensure you have this package installed
+
+const SearchComponent = ({ onSearch }) => {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = () => {
+        if (searchQuery.trim()) {
             onSearch(searchQuery); // Call the parent function to perform the search action
             setSearchQuery(''); // Clear the input after search
         }
@@ -53,7 +112,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SearchComponent;
+export default SearchComponent;*/
 
 /*// src/components/SearchComponent.js
 import React, { useState } from 'react';

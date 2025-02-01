@@ -1,28 +1,27 @@
 import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Create an instance of Axios
 const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
 });
-
-/*// Interceptors for adding JWT to headers
-api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token'); // Adjust based on where you store your token
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`; // Add the token to the Authorization header
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+/*// Interceptor to include the token in the headers
+api.interceptors.request.use(async (config) => {
+    const token = await AsyncStorage.getItem('token'); // Get the token from storage
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`; // Set the Authorization header
     }
-);*/
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});*/
+const login = (username, password) => api.post('/auth/login', { username, password },
+    {headers: { 'Content-Type': 'application/json'} });
 
-/*export const getAllVexRobotics = async () => {
-    const response = await axios.get(`${BASE_URL}/vex-robotics`);
-    return response.data; // Assumes your backend returns an array of platforms
-};*/
+const signup = (username, password, email) => api.post('/auth/register', { username, password, email });
+const getUserDetails = (userId) => api.get(`/auth/${userId}`);
+const updateUserDetails = (userId, userData) => api.put(`/users/${userId}`, userData);
+
 
  const getAllVexRobotics = () => api.get('/vex-robotics');
 const createVexRobotics = (VexRobotData) => api.post('/vex-robotics', VexRobotData);
@@ -37,11 +36,7 @@ const deleteProduct = (productId) => api.delete(`/products/${productId}`);
 const getProductDetails = (productId) => api.get(`/products/${productId}`);
 
 const getTimelineEvents = () => api.get('/timeline');
-// User Authentication
-const login = (username, password) => api.post('/auth/login', { username, password });
-const signup = (username, password) => api.post('/auth/signup', { username, password });
-const getUserDetails = (userId) => api.get(`/users/${userId}`);
-const updateUserDetails = (userId, userData) => api.put(`/users/${userId}`, userData);
+
 
 
 // Services CRUD Operations
@@ -139,6 +134,13 @@ export {
     initiatePayment, verifyPayment,
     getNotifications, createNotification
 };
+// const login = async (username,password) => {
+//     const response = await axios.post('http://localhost:8083/api/auth/login',{username, password}, {
+//         headers: { 'Content-Type': 'application/json' }
+//     });
+//     return response; // Returning the whole response in case you want additional info later
+// };
+
 
 /*
 export const fetchVexRobotics = async () => {
@@ -280,3 +282,71 @@ export {
     initiatePayment,verifyPayment
 };
 */
+
+/*// Add a request interceptor to conditionally attach tokens for authenticated requests.
+api.interceptors.request.use(
+    request => {
+        // Check if the request URL does NOT match the authentication endpoints for signin and signup
+        if (!/\/auth\/(login|register)$/.test(request.url)) {
+            // If a token exists in local storage, attach it to the Authorization header
+            const token = localStorage.getItem('token');
+            if (token) {
+                request.headers.Authorization = `Bearer ${token}`;
+                // This allows the server to authenticate the user for protected routes
+            }
+        }
+
+        // Return the modified request object to proceed with the request
+        return request;
+    },
+    error => {
+        // Handle request errors if any
+        console.error('Request error:', error);
+        return Promise.reject(error); // Reject the promise for any request error
+    }
+);*/
+
+// export default axiosInstance; // Export the configured Axios instance for use in other parts of the application
+// Create an instance of Axios
+/*const api = axios.create({
+    baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
+});*/
+
+/*// Interceptors for adding JWT to headers
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token'); // Adjust based on where you store your token
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`; // Add the token to the Authorization header
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);*/
+
+/*// Interceptors for adding JWT to headers
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token'); // Adjust based on where you store your token
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`; // Add the token to the Authorization header
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);*/
+
+/*// User Authentication
+const login = (username, password) => {
+const headers = {
+    'Content-Type': 'application/json', // This header is usually needed
+    // Add other headers if necessary, for example:
+    // 'Authorization': 'Bearer SOME_TOKEN', // If you need to pass an auth token
+};
+    return api.post('/auth/login', { username, password }, { headers });
+};*/
+
