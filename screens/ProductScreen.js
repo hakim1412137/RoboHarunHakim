@@ -63,28 +63,27 @@ const ProductsScreen = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+            <View style={styles.container}>
+                {loading ? (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                ) : (
+                    <FlatList
+                        data={products}
+                        renderItem={({ item }) => (
+                            <ProductCard
+                                product={item}
+                                onAddToCart={handleAddToCart}
+                                onPress={() => navigateToProductDetail(item.id)}
+                                onEdit={() => handleEditProduct(item)}
+                                onDelete={() => handleDeleteProduct(item.id)} // Pass delete functionality
+                            />
+                        )}
+                        keyExtractor={(item) => item.id.toString()}
+                        numColumns={3}
 
-        <View style={styles.container}>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <FlatList
-                    data={products}
-                    renderItem={({ item }) => (
-                        <ProductCard
-                            product={item}
-                            onAddToCart={handleAddToCart}
-                            onPress={() => navigateToProductDetail(item.id)}
-                            onEdit={() => handleEditProduct(item)}
-                            onDelete={() => handleDeleteProduct(item.id)} // Pass delete functionality
-                        />
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
-                    numColumns={3}
-
-                />
-            )}
-        </View>
+                    />
+                )}
+            </View>
         </ScrollView>
 
     );
@@ -92,10 +91,10 @@ const ProductsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 10,
     },
     scrollContentContainer: {
+        height: '40rem',
         alignItems: 'center',
         paddingBottom: 60,
     },

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, StyleSheet, Alert, TextInput, ActivityIndicator } from 'react-native';
+import {View, Text, Button, FlatList, StyleSheet, Alert, TextInput, ActivityIndicator, ScrollView} from 'react-native';
 import CompetitionCard from '../components/CompetitionCard';
 import {
     createCompetition,
@@ -133,7 +133,7 @@ const CompetitionsScreen = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Competitions</Text>
             {/* Search input for competition ID */}
             <TextInput
@@ -198,13 +198,13 @@ const CompetitionsScreen = () => {
                     // keyExtractor={(item) => item.id.toString()}
                 />
             )}
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
         padding: 20,
         backgroundColor: '#fff',
     },

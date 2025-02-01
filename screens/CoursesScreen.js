@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert } from 'react-native';
+import {View, Text, FlatList, StyleSheet, Alert, ScrollView} from 'react-native';
 import Loader from '../components/Loader'; // Ensure this component exists
 import { getAllCourses } from '../utils/api';
 import CourseCard from '../components/CourseCard'; // Ensure this path is correct
@@ -31,7 +31,7 @@ const CoursesScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.header}>Available Courses</Text>
             <View style={styles.content}>
                 <FlatList
@@ -47,13 +47,13 @@ const CoursesScreen = ({ navigation }) => {
                     showsVerticalScrollIndicator={false} // Optional: hides the scroll indicator
                 />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
         padding: 20,
         backgroundColor: '#fff',
     },

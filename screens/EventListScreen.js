@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import {View, FlatList, Text, StyleSheet, ScrollView} from 'react-native';
 import EventCard from '../components/EventCard'; // Create a component to show event details
 import Loader from '../components/Loader';
 import {getEvents} from "../utils/api";
@@ -24,7 +24,7 @@ const EventListScreen = () => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Upcoming Events</Text>
             {loading ? (
                 <Loader />
@@ -41,13 +41,13 @@ const EventListScreen = () => {
                     keyExtractor={(item) => item.id.toString()}
                 />
             )}
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
         padding: 16,
     },
     title: {

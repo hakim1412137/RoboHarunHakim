@@ -10,7 +10,7 @@ import MyAccountScreen from './screens/MyAccountScreen';
 import AboutScreen from './screens/AboutScreen';
 import CoursesScreen from "./screens/CoursesScreen";
 import CourseDetailsScreen from "./screens/CourseDetailsScreen";
-import ProductsScreen from "./screens/ProductScreen";
+import ProductScreen from "./screens/ProductScreen";
 import CompetitionsScreen from "./screens/CompetitionsScreen";
 import CompetitionDetailsScreen from "./screens/CompetitionDetailsScreen";
 import CartScreen from "./screens/CartScreen";
@@ -52,7 +52,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="Shop" component={ShopScreen} />
 
                                 {/*Menu*/}
-                                <Stack.Screen name="products" component={ProductsScreen} />
+                                <Stack.Screen name="products" component={ProductScreen} />
                                 <Stack.Screen name="courses" component={CoursesScreen} />
                                 <Stack.Screen name="vexRobotics" component={VexRoboticsList} />
                                 <Stack.Screen name="competitions" component={CompetitionsScreen} />

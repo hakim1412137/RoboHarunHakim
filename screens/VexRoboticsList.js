@@ -1,6 +1,6 @@
 // src/components/VexRoboticsList.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import {View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView} from 'react-native';
 import { getAllVexRobotics } from "../utils/api"; // Ensure this path is correct
 import VexRoboticsCard from "../components/VexRoboticsCard";
 
@@ -39,20 +39,20 @@ const VexRoboticsList = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>VEX Robotics Platforms</Text>
             <FlatList
                 data={platforms}
                 keyExtractor={(item) => item.id.toString()} // Key extractor function
                 renderItem={renderItem} // renderItem uses a separate function
             />
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
         padding: 20,
     },
     title: {
