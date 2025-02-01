@@ -104,7 +104,7 @@ const HomeScreen = ({ navigation }) => {
 
         <View style={styles.container}>
             <Header navigation={navigation} />
-            <Menu setCurrentPage={setCurrentPage} toggleExpanded={toggleExpanded} setPosition={setPosition} expanded={expanded} />
+            <Menu navigation={navigation} />
             {expanded && <AboutUsPopup position={position} setCurrentPage={setCurrentPage} />}
             <View style={styles.content}>
                 {renderContent()}

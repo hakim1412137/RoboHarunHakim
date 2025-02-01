@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import SupportScreen from "../screens/SupportScreen";
-const MenuForServices = ({ setCurrentPage }) => {
+const MenuForServices = ({ navigation }) => {
     const [expanded, setExpanded] = useState(false);
 
     const toggleMenu = () => setExpanded(prev => !prev);
@@ -13,22 +13,27 @@ const MenuForServices = ({ setCurrentPage }) => {
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>
-                    <TouchableOpacity onPress={() => setCurrentPage('ServicesScreen')}>
-                        <Text style={styles.submenuItem}>community_services</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('servicesScreen')}>
+                        <Text style={styles.submenuItem}>Services</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCurrentPage('SupportScreen')}>
+                    <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('supportScreen')}>
                         <Text style={styles.submenuItem}>Supports</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCurrentPage('RoboticsTrainingPage')}>
+                    <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('roboticsTraining')}>
                         <Text style={styles.submenuItem}>Robotics Training</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCurrentPage('WebsiteDevelopmentPage')}>
+                    <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('websiteDevelopment')}>
                         <Text style={styles.submenuItem}>Website Development</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCurrentPage('AndroidDevelopmentPage')}>
+                    <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('androidDevelopment')}>
                         <Text style={styles.submenuItem}>Android Development</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCurrentPage('RoboticsTrainingPage')}>
+                    <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('roboticsTraining')}>
                         <Text style={styles.submenuItem}>Robotics Training</Text>
                     </TouchableOpacity>
                 </View>
@@ -63,9 +68,10 @@ const styles = StyleSheet.create({
         position: 'absolute', // Crucial for making the submenu pop out
         top: '100%',         // Places it directly below the menu item
         left: 0,             // Align to the left
-        paddingLeft: 20,
+        padding: 10,
         marginTop: 5,
         zIndex: 1000,       // Ensures it appears above other components
+        gap: '0.2rem',
         backgroundColor: '#ffffff', // Background color to separate from underlying components
         borderRadius: 5,
         shadowColor: '#000',
@@ -77,13 +83,18 @@ const styles = StyleSheet.create({
     submenuItem: {
         fontSize: 16,
         color: '#555',
-        backgroundColor: '#eaeaea',
+        // backgroundColor: '#eaeaea',
         borderRadius: 5,
         padding: 10,
         marginVertical: 2,
 
     },
-
+    divider: {
+        width: '100%',
+        height: 1,
+        backgroundColor: '#ccc',
+        marginVertical: 5,
+    }
 });
 
 export default MenuForServices;

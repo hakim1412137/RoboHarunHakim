@@ -5,30 +5,29 @@ import MenuForServices from "./MenuForServices";
 
 
 // Main Menu Component
-const Menu = ({ setCurrentPage }) => {
+const Menu = ({ navigation }) => {
     return (
         <View style={styles.menuContainer}>
-            <MenuForAboutUs setCurrentPage={setCurrentPage}  />
-            <MenuForServices setCurrentPage={setCurrentPage} />
-            <TouchableOpacity onPress={() => setCurrentPage('Products')} style={styles.menuItem}>
+            <MenuForAboutUs navigation={navigation}  />
+            <MenuForServices navigation={navigation} />
+            <TouchableOpacity onPress={() => navigation.navigate('Products')} style={styles.menuItem}>
                 <Text>Products</Text>
             </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  setCurrentPage('Courses')}  style={styles.menuItem}>
+              <TouchableOpacity onPress={() =>  navigation.navigate('Courses')}  style={styles.menuItem}>
                   <Text>Courses</Text>
               </TouchableOpacity>
-            <TouchableOpacity onPress={() =>  setCurrentPage('VexRobotics')}  style={styles.menuItem}>
+            <TouchableOpacity onPress={() =>  navigation.navigate('VexRobotics')}  style={styles.menuItem}>
                 <Text>VexRobotics</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCurrentPage('Competitions')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('Competitions')} style={styles.menuItem}>
                 <Text>Competitions</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCurrentPage('Events')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('Events')} style={styles.menuItem}>
                 <Text>Events</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCurrentPage('contactUs')} style={styles.menuItem}>
+            <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
                 <Text>Contact Us</Text>
             </TouchableOpacity>
-
         </View>
     );
 };

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const MenuForAboutUs = ({ setCurrentPage }) => {
+const MenuForAboutUs = ({ navigation }) => {
     const [expanded, setExpanded] = useState(false);
 
     const toggleMenu = () => setExpanded(prev => !prev);
@@ -14,19 +14,19 @@ const MenuForAboutUs = ({ setCurrentPage }) => {
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>
-                    <TouchableOpacity onPress={() => setCurrentPage('aboutUs')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('aboutUs')}>
                         <Text style={styles.submenuItem}>About Us</Text>
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity onPress={() => setCurrentPage('careers')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('careers')}>
                         <Text style={styles.submenuItem}>Careers</Text>
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity onPress={() => setCurrentPage('ourTeam')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ourTeam')}>
                         <Text style={styles.submenuItem}>Our Team</Text>
                     </TouchableOpacity>
                     <View style={styles.divider} />
-                    <TouchableOpacity onPress={() => setCurrentPage('ourClients')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ourClients')}>
                         <Text style={styles.submenuItem}>Our Clients</Text>
                     </TouchableOpacity>
                 </View>
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
         position: 'absolute', // Crucial for making the submenu pop out
         top: '100%',         // Places it directly below the menu item
         left: 0,             // Align to the left
-        paddingLeft: 20,
+        padding: 10,
         marginTop: 5,
         zIndex: 1000,       // Ensures it appears above other components
+        gap: '0.2rem',
         backgroundColor: '#ffffff', // Background color to separate from underlying components
         borderRadius: 5,
         shadowColor: '#000',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     submenuItem: {
         fontSize: 16,
         color: '#555',
-        backgroundColor: '#eaeaea',
+        // backgroundColor: '#eaeaea',
         borderRadius: 5,
         padding: 10,
         marginVertical: 2,
