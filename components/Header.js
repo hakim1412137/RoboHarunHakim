@@ -57,15 +57,6 @@ const Header = ({ navigation }) => {
                         <FontAwesome name="linkedin" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
-
-                <View style={styles.loginContainer}>
-                    <TouchableOpacity style={styles.signinpButton} onPress={() => navigation.navigate('login')}>
-                        <Text style={styles.signText}>Sign In</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.signupButton} onPress={() => navigation.navigate("signup")}>
-                        <Text style={styles.signText}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
         </View>
     );
@@ -85,24 +76,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 }, // Shadow offset
         shadowOpacity: 0.3,           // Shadow opacity (iOS)
         shadowRadius: 4,              // Shadow radius (iOS)
-    },
-
-    signinpButton: {
-        backgroundColor: '#B771E5',  // Changed color for better visibility
-        paddingHorizontal: 20,        // Increased horizontal padding
-        paddingVertical: 12,          // Increased vertical padding
-        borderRadius: 50,
-        elevation: 3,                 // Added shadow effect (Android)
-        shadowColor: '#000',          // Shadow color for iOS
-        shadowOffset: { width: 0, height: 2 }, // Shadow offset
-        shadowOpacity: 0.3,           // Shadow opacity (iOS)
-        shadowRadius: 4,              // Shadow radius (iOS)
-    },
-    signText: {
-        color: '#000',                // Text color
-        fontSize: 18,                 // Increased font size
-        fontWeight: 'bold',           // Made the text bold
-        textAlign: 'center',           // Centered the text
     },
     contactContainer: {
         flexDirection: 'row',
@@ -134,7 +107,7 @@ const styles = StyleSheet.create({
     socialContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 20,
+        gap: 40,
         padding: 15,
     },
     title: {

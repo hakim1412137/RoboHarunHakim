@@ -7,70 +7,73 @@ import MenuForServices from "./MenuForServices";
 // Main Menu Component
 const Menu = ({ navigation }) => {
     return (
-        <View style={styles.menuContainer}>
-            <MenuForAboutUs navigation={navigation}  />
-            <MenuForServices navigation={navigation} />
-            <TouchableOpacity onPress={() => navigation.navigate('products')} style={styles.menuItem}>
-                <Text>Products</Text>
-            </TouchableOpacity>
-              <TouchableOpacity onPress={() =>  navigation.navigate('courses')}  style={styles.menuItem}>
-                  <Text>Courses</Text>
-              </TouchableOpacity>
-            <TouchableOpacity onPress={() =>  navigation.navigate('vexRobotics')}  style={styles.menuItem}>
-                <Text>VexRobotics</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('competitions')} style={styles.menuItem}>
-                <Text>Competitions</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('events')} style={styles.menuItem}>
-                <Text>Events</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
-                <Text>Contact Us</Text>
-            </TouchableOpacity>
+        <View style={styles.mainContainer}>
+            <View style={styles.menuContainer}>
+                <MenuForAboutUs navigation={navigation}  />
+                <MenuForServices navigation={navigation} />
+                <TouchableOpacity onPress={() => navigation.navigate('products')} style={styles.menuItem}>
+                    <Text>Products</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() =>  navigation.navigate('courses')}  style={styles.menuItem}>
+                    <Text>Courses</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() =>  navigation.navigate('vexRobotics')}  style={styles.menuItem}>
+                    <Text>VexRobotics</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('competitions')} style={styles.menuItem}>
+                    <Text>Competitions</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('events')} style={styles.menuItem}>
+                    <Text>Events</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
+                    <Text>Contact Us</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.authContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <Text style={{ color: '#4CAF50', fontWeight: 'bold', fontSize: 20 }}>Log in</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ backgroundColor: '#4CAF50', padding: 10, paddingHorizontal: 30,borderRadius: 20 }} onPress={() => navigation.navigate("signup")}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#FFFFFF' }}>Sign Up</Text>
+                </TouchableOpacity>
+            </View>
         </View>
+
     );
 };
 
 // Styles
 const styles = StyleSheet.create({
+    mainContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      paddingVertical: 8,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      backgroundColor: '#ffffff',
+      shadowOpacity: 0.3,
+      shadowRadius: 5,
+      elevation: 5,
+      zIndex: 1
+    },
     menuContainer: {
         flexDirection: 'row',
-        paddingVertical: 8,
-        backgroundColor: '#ffffff',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 5, // For Android shadow
-        zIndex: 1, // Ensure the menu is above other content
-
-        /*  flexDirection: 'row',
-        paddingVertical: 10,
-        backgroundColor: '#f8f8f8',
-        flexWrap: 'wrap', // Allow items to wrap to the next line if needed*/
     },
     menuItem: {
         fontSize: 22,
         padding: 15,
         backgroundColor: '#91AC8F',
-        // backgroundColor: '#f0f0f0',
         borderRadius: 10,
         marginVertical: 5,
         marginHorizontal: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        // elevation: 2, // Shadow effect for each menu item
-
-        /*fontSize: 20,
-        padding: 10,
-        color: '#000',
-        borderBottomWidth: 1,
-        marginHorizontal: 5,
-        paddingBottom: 15, // Provide spacing between menu item and submenu*/
     },
     menuText: {
         color: '#FFFFFF', // Changed text color to white
@@ -78,8 +81,6 @@ const styles = StyleSheet.create({
         fontSize: 26, // Increased font size for added emphasis
     },
     activeMenuItem: {
-        // backgroundColor: '#e0e0e0', // Active state background
-        // backgroundColor: '#dcdcdc', // Active state background
         backgroundColor: '#5A995C', // Slightly lighter shade for active menu items
 
     },
@@ -106,6 +107,13 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 2,
     },
+    authContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 32,
+        marginRight: 30
+    }
 });
 
 export default Menu;
