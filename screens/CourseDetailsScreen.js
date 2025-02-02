@@ -52,7 +52,7 @@ const CourseDetailsScreen = ({ route, navigation }) => {
                     <Text>Level: <Text style={{ fontWeight: 'bold' }}>{course.level}</Text></Text>
                     <View style={{ marginBottom: 10, marginTop: 10,  display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text style={{fontSize: 15 }}>{course.description}</Text>
-                        <Text>Duration: <Text style={{ fontWeight: 'bold' }}>{course.duration} hr</Text></Text>
+                        <Text>Duration: <Text style={{ fontWeight: 'bold' }}>{course.duration}</Text></Text>
                     </View>
                     <Button title="Enroll Now" onPress={handleEnroll} />
                 </>

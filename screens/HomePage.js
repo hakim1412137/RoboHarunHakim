@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, FlatList, Image, ImageBackground, StyleSheet } from 'react-native';
+import {View, Text, FlatList, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import VEXkitsImage from '../assets/VEXkits.jpg'; // Path to VEX Kits Image
-import vexcodeImage from '../assets/vexcode.jpg'; // Path to VEX Code Image
 
 const robotImages1 = [
-    { id: '1', uri: require('../assets/VEX5.jpg') , description: 'VEX5 educational robots'},
-    { id: '2', uri: require('../assets/VXECTE.jpg'),  description: 'VXECTE educational robots.'},
-    { id: '3', uri: require('../assets/123classroombundles.jpg'), description: '123classroombundles educational robots.' },
-    { id: '4', uri: require('../assets/VEXIQ.jpg'), description: 'VEXIQ educational robots.' },
-
-];
+    { id: '1', uri: require('../assets/VEX5.jpg') , description: 'VEX5 5'},
+    { id: '2', uri: require('../assets/VXECTE.jpg'),  description: 'VEX CTE'},
+    { id: '4', uri: require('../assets/VEXIQ.jpg'), description: 'VEX IQ' },
+    { id: '3', uri: require('../assets/123classroombundles.jpg'), description: '123 Classroom Bundles' },
+    { id: '5', uri: require('../assets/blocks-switch-text-tile.jpg'), description: 'Code Blocks' },
+    { id: '6', uri: require('../assets/VEXkits.jpg'), description: 'VEX Kits' },
+ ];
 /*const robotImages1 = [
     { id: '1', uri: require('../assets/robot1.jpg'), description: 'This is an educational robot used in many classrooms.' },
     { id: '2', uri: require('../assets/robot2.jpg'), description: 'A humanoid robot designed for friendly interaction.' },
@@ -25,35 +25,29 @@ const HomePage = () => {
     ];
 
     return (
-        <View style={styles.mainContainer}>
-            <ImageBackground
-                source={vexcodeImage}
-                style={styles.backgroundImage}
-                imageStyle={{ opacity: 0.5 }} // Adjust opacity for brightness effect
-            >
-                <View style={styles.textContent}>
-                    <Text style={styles.title}>Welcome to Ethio Robotics Center!</Text>
-                    <Text style={styles.subtitle}>Explore a wide range of educational robots and accessories.</Text>
-                    <FlatList
-                        data={dataList}
-                        style={styles.list}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => (
-                            <View style={styles.listItemContainer}>
-                                <Text style={styles.listItem}>{item.title}</Text>
-                                <Text style={styles.listDescription}>{item.description}</Text>
-                            </View>
-                        )}
-                    />
-                </View>
-            </ImageBackground>
+        <ScrollView style={styles.mainContainer}>
+            <View style={styles.textContent}>
+                <Text style={styles.title}>Welcome to Ethio Robotics Center!</Text>
+                <Text style={styles.subtitle}>Explore a wide range of educational robots and accessories.</Text>
+                <FlatList
+                    data={dataList}
+                    contentContainerStyle={styles.list}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.listItemContainer}>
+                            <Text style={styles.listItem}>{item.title}</Text>
+                            <Text style={styles.listDescription}>{item.description}</Text>
+                        </View>
+                    )}
+                />
+            </View>
 
+            <Text style={styles.title}>VEX Kits</Text>
             <View style={styles.imageContent}>
-                <Text style={styles.title}>Featured Robots</Text>
                 <FlatList
                     data={robotImages1}
                     horizontal
-                    style={{ alignSelf: 'center', overflow: 'visible' }}
+                    contentContainerStyle={{ display: 'flex', justifyContent: 'center', overflow: 'visible', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: 15 }}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <View style={styles.robotCard}>
@@ -64,13 +58,7 @@ const HomePage = () => {
                     )}
                 />
             </View>
-
-
-            <View style={styles.newImagesContainer}>
-                <Text style={styles.title}>VEX Kits</Text>
-                <Image source={VEXkitsImage} style={styles.vexKitsImage} />
-            </View>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -78,7 +66,8 @@ const HomePage = () => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1,
+        height: '40rem',
+        padding: 35
     },
     backgroundImage: {
         flex: 1,
@@ -86,22 +75,30 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#FFFAFA', // Light color (e.g., Snow)
     },
-
     textContent: {
         marginBottom: 20,
     },
     title: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: 'bold',
-        color: '#0000FF', // Bright blue color for visibility
-        textAlign: 'left', // Align title to the left
+        color: '#4CAF50', // Bright blue color for visibility
+        textAlign: 'center', // Align title to the left
     },
     subtitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#0000FF', // Bright blue color for visibility
-        textAlign: 'left',
-        marginBottom: 10,
+        fontSize: 15,
+        color: '#4CAF50', // Bright blue color for visibility
+        marginBottom: 20,
+        opacity: '0.8',
+        textAlign: 'center',
+    },
+    list: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: '3rem',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     listItemContainer: {
         flexDirection: 'column', // Stack title and description
@@ -109,55 +106,57 @@ const styles = StyleSheet.create({
     },
     listItem: {
         fontSize: 18,
+        textAlign: 'center',
         fontWeight: 'bold',
         color: '#000000', // Use '#000000' for black color
     },
-
-listDescription: {
-    fontSize: 14,
-    color: '#000000', // Use '#000000' for black color
-        marginLeft: 0,    // No margin needed to align the description properly under the title
-        paddingTop: 5,    // Add some space above the description for better readability
-},
-imageContent: {
-    padding: 20,
-},
-robotCard: {
-    alignItems: 'center',
-        marginRight: 10,
-        backgroundColor: '#FFFFFF', // Card background color for clearer visibility
-        borderRadius: 8,
-        padding: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-        shadowRadius: 4,
-        elevation: 3, // Shadow for Android
-},
-robotImage: {
-    width: 120,
-        height: 120,
-        borderRadius: 8,
-},
-robotName: {
-    fontWeight: 'bold',
-        marginTop: 5,
-},
-robotDescription: {
-    fontSize: 12,
+    listDescription: {
+        fontSize: 14,
+        color: '#000000', // Use '#000000' for black color
+            marginLeft: 0,    // No margin needed to align the description properly under the title
+            paddingTop: 5,    // Add some space above the description for better readability
+    },
+    imageContent: {
+        padding: 20,
+        width: '100%',
+    },
+    robotCard: {
+        alignItems: 'center',
+            marginRight: 10,
+            backgroundColor: '#FFFFFF', // Card background color for clearer visibility
+            borderRadius: 8,
+            padding: 10,
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+            shadowRadius: 4,
+            elevation: 3, // Shadow for Android
+    },
+    robotImage: {
+        width: 120,
+            height: 120,
+            borderRadius: 8,
+    },
+    robotName: {
+        fontWeight: 'bold',
+            marginTop: 5,
+    },
+    robotDescription: {
+        fontSize: 12,
+        fontWeight: 'bold',
         color: '#555',
         textAlign: 'center',
-},
-newImagesContainer: {
-    alignItems: 'center',
-        marginTop: 20,
-},
-vexKitsImage: {
-    width: 200, // Set the width of the VEX Kits image to make it smaller
-        height: 200, // Set a specific height for the kits image
-        borderRadius: 14,
-        marginTop: 12, // Space above the image
-},
+    },
+    newImagesContainer: {
+        alignItems: 'center',
+            marginTop: 20,
+    },
+    vexKitsImage: {
+        width: 200, // Set the width of the VEX Kits image to make it smaller
+            height: 200, // Set a specific height for the kits image
+            borderRadius: 14,
+            marginTop: 12, // Space above the image
+    },
 });
 
 export default HomePage;
