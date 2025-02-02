@@ -21,7 +21,7 @@ const TimelineCard1 = ({ item, index }) => {
 
     return (
         <Animated.View
-            style={{ transform: [{ scale: animatedValue }] }}
+            style={{ transform: [{ scale: animatedValue }], marginBottom: 30  }}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
         >
             <Card style={[styles.card, index % 2 !== 0 ? styles.leftCard : styles.rightCard]}>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     rightCard: {
         marginLeft: 10,
-        backgroundColor: '#FFA500', // Light orange for right cards
+        backgroundColor: '#4CAF50', // Light orange for right cards
         borderColor: '#C2185B',
         borderWidth: 1,
         alignSelf: 'flex-end',
