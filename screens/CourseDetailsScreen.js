@@ -12,8 +12,9 @@ const CourseDetailsScreen = ({ route, navigation }) => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const data = await getCourseById(courseId); // Fetch course details
-                setCourse(data);
+                const response = await getCourseById(courseId); // Fetch course details
+                console.log(response.data)
+                setCourse(response.data);
             } catch (error) {
                 console.error(error);
                 Alert.alert('Error', 'Failed to fetch course details');
@@ -43,8 +44,16 @@ const CourseDetailsScreen = ({ route, navigation }) => {
         <View style={styles.container}>
             {course ? (
                 <>
-                    <Text style={styles.title}>{course.title}</Text>
-                    <Text>{course.description}</Text>
+                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{course.title}</Text>
+                        <Text style={{ fontSize: 20 }}>ID: <Text style={{ fontWeight: 'bold' }}>{course.id}</Text></Text>
+                    </View>
+                    <Text>Created At: <Text style={{ fontWeight: 'bold' }}>{course.createdAt}</Text></Text>
+                    <Text>Level: <Text style={{ fontWeight: 'bold' }}>{course.level}</Text></Text>
+                    <View style={{ marginBottom: 10, marginTop: 10,  display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Text style={{fontSize: 15 }}>{course.description}</Text>
+                        <Text>Duration: <Text style={{ fontWeight: 'bold' }}>{course.duration} hr</Text></Text>
+                    </View>
                     <Button title="Enroll Now" onPress={handleEnroll} />
                 </>
             ) : (
