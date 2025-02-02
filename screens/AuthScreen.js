@@ -12,6 +12,7 @@ const AuthScreen = ({ navigation }) => {
         const credentials = { username, password };
         try {
             const response = await login(credentials);
+            console.log(response.data);
             if (response.token) {
                 // Store token in AsyncStorage
                 await AsyncStorage.setItem('jwt', response.token);

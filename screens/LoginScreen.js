@@ -3,7 +3,8 @@ import {View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity} from
 
 import { AuthContext } from '../context/AuthContext'; // Adjust path as needed
 import {login} from '../utils/api';
-import {UserContext} from "../context/UserContext"; // Import your API functions
+import {UserContext} from "../context/UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Import your API functions
 
 const LoginScreen = ({ navigation }) => {
   const { setUser } = useContext(UserContext);
@@ -14,13 +15,30 @@ const LoginScreen = ({ navigation }) => {
     const [error, setError] = useState('');
 
     const handleSignIn = async () => {
-        // const credentials = { username, password };
+      const credentials = { username, password };
 
         try {
-        /* const response = await axios.post('http://localhost:8083/api/login', { username, password, });*/
-            const response = await login(username, password);
-            // const { token } = response.data; // Assume the backend returns a token
-            const token = response.data; // Expecting the JWT token back from the response
+            const response = await login(credentials);
+            console.log('Login Response:', response);
+            const token = response.data.token; // Assuming the backend returns a token
+
+            if (token) {
+                await AsyncStorage.setItem('token', token); // Store the access token using AsyncStorage
+                console.log('Received token:', token);
+
+                saveToken(token); // Call your AuthContext method to save token if needed
+                setUser(username); // Optionally store the username in UserContext
+
+                navigation.navigate('home'); // Navigate to home screen
+            }
+        } catch (error) {
+            console.error('Login attempt failed:', error); // Log any errors
+            const errorMessage = error.response
+                ? error.response.data.message || 'Login failed. Please try again.'
+                : 'Login failed. Please try again.';
+            setError(errorMessage); // Set and display error message
+        }
+   /*        const token = response.data; // Expecting the JWT token back from the response
             console.log('Received token:', token); // Log the received token
 
             await saveToken(token); // Save the token using AsyncStorage
@@ -33,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
             console.log(err)
 
             setError('Login failed. Please check your credentials.');
-        }
+        }*/
     };
 
     return (

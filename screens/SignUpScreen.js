@@ -10,8 +10,10 @@ const SignupScreen = ({ navigation }) => {
     const [error, setError] = useState('');
 
     const handleSignup = async () => {
+        const signupdata = { username, password, email };
+
         try {
-            await signup(username,password,email);
+            await signup(signupdata);
             // Optional: Redirect on successful signup
         } catch (err) {
             setError('Signup failed. Please try again.');

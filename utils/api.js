@@ -6,136 +6,219 @@ const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
 });
 
-// Interceptor to include the token in the headers
-api.interceptors.request.use(async (config) => {
-    const token = await AsyncStorage.getItem('token'); // Get the token from storage
-    if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`; // Set the Authorization header
-    }
-    return config;
-}, (error) => {
-    return Promise.reject(error);
-});
+// Axios request interceptor for setting Authorization headers
+// api.interceptors.request.use(
+//     request => {
+//         // Check if the request URL does not match the login or signup endpoints
+//         if (!/\/auth\/(login|signup)$/.test(request.url)) {
+//             const token = AsyncStorage.getItem('token').then((retToken) => {
+//                 console.log(retToken, "Promise Key")
+//                 if (token) {
+//                     request.headers.Authorization = `Bearer ${token}`;
+//                 }
+//             }); // Change to AsyncStorage as localStorage is not available in React Native
+//             console.log('Requesting:', request);
+//             console.log('Token:', token);
+//         }
+//         return request;
+//     },
+//     error => {
+//         console.error('Request error:', error);
+//         return Promise.reject(error);
+//     }
+// );
+// const token = await AsyncStorage.getItem('token');
+// Auth operations
+const login = (loginData) => api.post('/auth/login', loginData);
 
-const login = (username, password) => api.post('/auth/login', { username, password },
-    {headers: { 'Content-Type': 'application/json'} });
+const signup = (signupData) => api.post('/auth/signup', signupData);
 
-const signup = (username, password, email) => api.post('/auth/register', { username, password, email });
+// User operations
 const getUserDetails = (userId) => api.get(`/auth/${userId}`);
-const updateUserDetails = (userId, userData) => api.put(`/users/${userId}`, userData);
+const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
 
+// Competition management
+const getAllCompetitions = () => api.get(`/competitions`);
+const getCompetitionById = (competitionId) => api.get(`/competitions/${competitionId}`);
+const registerForCompetition = (competitionId) => api.post(`/competitions/${competitionId}/register`);
+const createCompetition = (competitionData) => api.post('/competitions', competitionData);
+const updateCompetition = (competitionId, competitionData) => api.put(`/competitions/${competitionId}`, competitionData);
+const deleteCompetition = (competitionId) => api.delete(`/competitions/${competitionId}`);
 
- const getAllVexRobotics = () => api.get('/vex-robotics');
-const createVexRobotics = (VexRobotData) => api.post('/vex-robotics', VexRobotData);
+// Vex Robotics operations
+const getAllVexRobotics = () => api.get('/vex-robotics');
+const createVexRobotics = (vexRobotData) => api.post('/vex-robotics', vexRobotData);
 const deleteVexRoboticsById = (vexRobotId) => api.delete(`/vex-robotics/${vexRobotId}`);
-const VexRoboticsById = (vexRobotId) => api.get(`/vex-robotics/${vexRobotId}`);
+const vexRoboticsById = (vexRobotId) => api.get(`/vex-robotics/${vexRobotId}`);
 
-// Product CRUD Operations
+// Product CRUD operations
 const getProducts = () => api.get('/products');
 const createProduct = (productData) => api.post('/products', productData);
 const updateProduct = (productId, productData) => api.put(`/products/${productId}`, productData);
 const deleteProduct = (productId) => api.delete(`/products/${productId}`);
 const getProductDetails = (productId) => api.get(`/products/${productId}`);
 
-const getTimelineEvents = () => api.get('/timeline');
-
-
-
-// Services CRUD Operations
+// Service management
 const getServices = () => api.get('/services');
 const createService = (serviceData) => api.post('/services', serviceData);
 const updateService = (serviceId, serviceData) => api.put(`/services/${serviceId}`, serviceData);
 const deleteService = (serviceId) => api.delete(`/services/${serviceId}`);
-''
-// Course CRUD Operations
- const getAllCourses = () => api.get('/courses');
- // const getCourseById =  (courseId) => api.get(`/courses/${courseId}`);
-const getCourseById = (courseId) => api.get(`/courses/${courseId}`);
 
-const getCoursesByUserId= (userId) => api.get(`/courses/user/${userId}`);
+// Course management
+const getAllCourses = () => api.get('/courses');
+const getCourseById = (courseId) => api.get(`/courses/${courseId}`);
+const getCoursesByUserId = (userId) => api.get(`/courses/user/${userId}`);
 const createCourse = (courseData) => api.post('/courses', courseData);
 const updateCourse = (courseId, courseData) => api.put(`/courses/${courseId}`, courseData);
 const deleteCourse = (courseId) => api.delete(`/courses/${courseId}`);
-const enrollInCourse =  (courseId) =>  api.post('/courses/enroll', { courseId });
+const enrollInCourse = (courseId) => api.post('/courses/enroll', { courseId });
 
-// Event CRUD Operations
+// Event management
 const getEvents = () => api.get('/events');
- const getEventById =  (eventId) => api.get(`/events/${eventId}`);
+const getEventById = (eventId) => api.get(`/events/${eventId}`);
 const createEvent = (eventData) => api.post('/events', eventData);
 const updateEvent = (eventId, eventData) => api.put(`/events/${eventId}`, eventData);
 const deleteEvent = (eventId) => api.delete(`/events/${eventId}`);
-const registerFortEvents = (eventId, userId) => api.post(`/events/${eventId}/register`, {userId});
+const registerForEvents = (eventId) => api.post(`/events/${eventId}/register`);
 
-// Resource CRUD Operations
+// Resource management
 const getResources = () => api.get('/resources');
 const createResource = (resourceData) => api.post('/resources', resourceData);
 const updateResource = (resourceId, resourceData) => api.put(`/resources/${resourceId}`, resourceData);
 const deleteResource = (resourceId) => api.delete(`/resources/${resourceId}`);
-// Partnership Management
-const getPartnership = () => api.get('/partnerships');
+
+// Partnership management
+const getPartnerships = () => api.get('/partnerships');
 const createPartnership = (partnershipData) => api.post('/partnerships', partnershipData);
 const updatePartnership = (partnershipId, partnershipData) => api.put(`/partnerships/${partnershipId}`, partnershipData);
 const deletePartnership = (partnershipId) => api.delete(`/partnerships/${partnershipId}`);
 
-// Order Management
+// Order management
 const fetchOrders = () => api.get(`/orders`);
 const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { status });
 
-// Payment Management
+// Payment management
 const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
 const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);
 
-// Feedback CRUD Operations
+// Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
 const submitFeedback = (feedbackData) => api.post('/feedback', feedbackData);
 
-// Community Management
+// Community management
 const getAllCommunityPosts = () => api.get(`/community-posts`);
-const createCommunityPost =  (post) => api.post(`/community-posts`, post);
-const getCommentsByPostId =  (postId) => api.post(`/community-posts/${postId}/comments`);
+const createCommunityPost = (post) => api.post(`/community-posts`, post);
+const getCommentsByPostId = (postId) => api.get(`/community-posts/${postId}/comments`);
 const postComment = (postId, comment) => api.post(`/community-posts/${postId}/comments`, comment);
 
-// Quiz CRUD Operations
+// Quiz CRUD operations
 const getQuizzes = () => api.get('/quizzes');
 const createQuiz = (quizData) => api.post('/quizzes', quizData);
 const getQuizById = (quizId) => api.get(`/quizzes/${quizId}`);
 
-// Notification Management
+// Notification management
 const getNotifications = (userId) => api.get(`/notifications/user/${userId}`);
 const createNotification = (notificationData) => api.post('/notifications', notificationData);
 
-// Competition Management
-const getAllCompetitions = () =>  api.get(`/competitions`);
-const getCompetitionById =  (competitionId) => api.get(`/competitions/${competitionId}`)
-const registerForCompetition = (competitionId, userId) => api.post(`/competitions/${competitionId}/register`, {userId});
-const createCompetition = (competitionData) => api.post('/competitions', competitionData);
-const updateCompetition  = (competitionId, competitionData) => api.put(`/competitions/${competitionId}`, competitionData);
-const deleteCompetition = (competitionId) => api.delete(`/competitions/${competitionId}`);
-// Meeting Request
-const createMeetingRequest = (requestData) =>  api.post(`${BASE_URL}/meeting-requests`, requestData);
-const getAllMeetingRequests = () => api.get(`${BASE_URL}/meeting-requests`);
+// Meeting requests
+const createMeetingRequest = (requestData) => api.post('/meeting-requests', requestData);
+const getAllMeetingRequests = () => api.get('/meeting-requests');
 
-// Course CRUD Operations
-
-// Export all methods for use in your components
+// Exporting all the methods for usage
 export {
-    deleteVexRoboticsById,VexRoboticsById,createVexRobotics,getAllVexRobotics,
-    createMeetingRequest, getAllMeetingRequests, getTimelineEvents,
-    getAllCommunityPosts, createCommunityPost, getCommentsByPostId, postComment,
-    getAllCompetitions, getCompetitionById, registerForCompetition, createCompetition,updateCompetition,deleteCompetition,
-    login, signup, getUserDetails, updateUserDetails,
-    getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
-    getServices, createService, updateService, deleteService,
-    getAllCourses,createCourse, updateCourse, deleteCourse, getCourseById,enrollInCourse,getCoursesByUserId,
-    getEvents, createEvent, updateEvent, deleteEvent,registerFortEvents,getEventById,
-    getResources, createResource, updateResource, deleteResource,
-    getFeedbackByCourseId, submitFeedback,
-    getQuizzes, createQuiz, getQuizById,
-    getPartnership, createPartnership, updatePartnership, deletePartnership,
-    fetchOrders, updateOrderStatus,
-    initiatePayment, verifyPayment,
-    getNotifications, createNotification
+    login,
+    signup,
+    getUserDetails,
+    updateUserDetails,
+    getAllCompetitions,
+    getCompetitionById,
+    registerForCompetition,
+    createCompetition,
+    updateCompetition,
+    deleteCompetition,
+    getAllVexRobotics,
+    createVexRobotics,
+    deleteVexRoboticsById,
+    vexRoboticsById,
+    getProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getProductDetails,
+    getServices,
+    createService,
+    updateService,
+    deleteService,
+    getAllCourses,
+    getCourseById,
+    getCoursesByUserId,
+    createCourse,
+    updateCourse,
+    deleteCourse,
+    enrollInCourse,
+    getEvents,
+    createEvent,
+    updateEvent,
+    deleteEvent,
+    registerForEvents,
+    getResources,
+    createResource,
+    updateResource,
+    deleteResource,
+    getPartnerships,
+    createPartnership,
+    updatePartnership,
+    deletePartnership,
+    fetchOrders,
+    updateOrderStatus,
+    initiatePayment,
+    verifyPayment,
+    getFeedbackByCourseId,
+    submitFeedback,
+    getAllCommunityPosts,
+    createCommunityPost,
+    getCommentsByPostId,
+    postComment,
+    getQuizzes,
+    createQuiz,
+    getQuizById,
+    getNotifications,
+    createNotification,
+    createMeetingRequest,
+    getAllMeetingRequests,
 };
+/*// Interceptor to include the token in the headers
+api.interceptors.request.use(async (config) => {
+    const token = await AsyncStorage.getItem('token'); // Get the token from storage
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`; // Set the Authorization header
+    }
+    console.log(config)
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});*/
+/*api.interceptors.request.use(
+    request => {
+        // Check if the request URL does NOT match the authentication endpoints for signin and signup
+        if (!/\/auth\/(login|register)$/.test(request.url)) {
+            // If a token exists in local storage, attach it to the Authorization header
+            const token = localStorage.getItem('token');
+            if (token) {
+                request.headers.Authorization = `Bearer ${token}`;
+                // This allows the server to authenticate the user for protected routes
+            }
+        }
+
+        // Return the modified request object to proceed with the request
+        return request;
+    },
+    error => {
+        // Handle request errors if any
+        console.error('Request error:', error);
+        return Promise.reject(error); // Reject the promise for any request error
+    }
+);*/
 // const login = async (username,password) => {
 //     const response = await axios.post('http://localhost:8083/api/auth/login',{username, password}, {
 //         headers: { 'Content-Type': 'application/json' }
