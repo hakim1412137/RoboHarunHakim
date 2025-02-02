@@ -14,7 +14,6 @@ const SignupScreen = ({ navigation }) => {
 
         try {
             await signup(signupdata);
-            // Optional: Redirect on successful signup
         } catch (err) {
             setError('Signup failed. Please try again.');
         }

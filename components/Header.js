@@ -24,7 +24,7 @@ const Header = ({ navigation }) => {
                         onPress={handleEmailPress}
                         activeOpacity={0.7} // Gives feedback to touch interaction
                     >
-                        <FontAwesome name="envelope" size={24} color="#FFD700" />
+                        <FontAwesome name="envelope" size={16} color="#FFD700" />
                         <Text style={styles.contactText}>contact@roboticsapp.com</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -32,7 +32,7 @@ const Header = ({ navigation }) => {
                         onPress={handlePhonePress}
                         activeOpacity={0.7}
                     >
-                        <FontAwesome name="phone" size={24} color="#FFD700" />
+                        <FontAwesome name="phone" size={16} color="#FFD700" />
                         <Text style={styles.contactText}>Mon - Fri: (+251) 000 345 245</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -40,7 +40,7 @@ const Header = ({ navigation }) => {
                         onPress={handleMapPress}
                         activeOpacity={0.7}
                     >
-                        <FontAwesome name="map-marker" size={24} color="#FFD700" />
+                        <FontAwesome name="map-marker" size={16} color="#FFD700" />
                         <Text style={styles.contactText}>
                             Bole, Brass Next To Hotel, Addis Ababa, Ethiopia
                         </Text>
@@ -48,13 +48,13 @@ const Header = ({ navigation }) => {
                 </View>
                 <View style={styles.socialContainer}>
                     <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/PionnerRoboticsEthiopia')}>
-                        <FontAwesome name="facebook" size={24} color="white" />
+                        <FontAwesome name="facebook" size={16} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Linking.openURL('https://twitter.com/PionnerRoboticsEthiopia')}>
-                        <FontAwesome name="twitter" size={24} color="white" />
+                        <FontAwesome name="twitter" size={16} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/company/PionnerRoboticsEthiopia')}>
-                        <FontAwesome name="linkedin" size={24} color="white" />
+                        <FontAwesome name="linkedin" size={16} color="white" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -65,23 +65,12 @@ const Header = ({ navigation }) => {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#4CAF50',
-    },
-    signupButton: {
-        backgroundColor: '#B771E5',  // Changed color for better visibility
-        paddingHorizontal: 20,        // Increased horizontal padding
-        paddingVertical: 12,          // Increased vertical padding
-        borderRadius: 50,
-        elevation: 3,                 // Added shadow effect (Android)
-        shadowColor: '#000',          // Shadow color for iOS
-        shadowOffset: { width: 0, height: 2 }, // Shadow offset
-        shadowOpacity: 0.3,           // Shadow opacity (iOS)
-        shadowRadius: 4,              // Shadow radius (iOS)
+        padding: 10,
     },
     contactContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 20,
-        padding: 15,
     },
     loginContainer: {
         flexDirection: 'row',
@@ -89,34 +78,28 @@ const styles = StyleSheet.create({
         gap: 32,
     },
     topRow: {
+        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
     },
     contactInfo: {
+        display: 'flex',
+        alignItems: 'center',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: 15,
+        gap: 5
     },
     contactText: {
         color: 'B771E5',
-        marginLeft: 5,
-        fontSize: 16,  // Increased font size for better visibility
+        fontSize: 12,  // Increased font size for better visibility
         fontWeight: '500',  // Make the text slightly bolder
     },
     socialContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 40,
-        padding: 15,
-    },
-    title: {
-        color: 'B771E5',
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginVertical: 10,
-    },
+        gap: 30,
+    }
 });
 
 export default Header;

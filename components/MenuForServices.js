@@ -9,7 +9,7 @@ const MenuForServices = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={toggleMenu} style={styles.menuItem}>
+            <TouchableOpacity onPress={toggleMenu} style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center' }}>
                 <Text style={styles.menuText}>Services </Text>
                 <Entypo name="triangle-down" size={18} color="black" style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)' }} />
             </TouchableOpacity>
@@ -46,26 +46,8 @@ const MenuForServices = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 10,
         position: 'relative', // Make sure it’s positioned relative for absolute children
 
-    },
-    menuItem: {
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 5,
-        alignItems: 'center',
-        fontSize: 18,
-        padding: 15,
-        backgroundColor: '#f0f0f0',
-        borderRadius: 10,
-        marginVertical: 5,
-        marginHorizontal: 10,
-        // elevation: 2, // Shadow effect for each menu item
-    },
-    menuText: {
-        color: '#333',
-        fontWeight: 'bold',
     },
     submenu: {
         position: 'absolute', // Crucial for making the submenu pop out
