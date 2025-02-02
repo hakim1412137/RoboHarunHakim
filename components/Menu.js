@@ -12,30 +12,30 @@ const Menu = ({ navigation }) => {
                 <MenuForAboutUs navigation={navigation}  />
                 <MenuForServices navigation={navigation} />
                 <TouchableOpacity onPress={() => navigation.navigate('products')} style={styles.menuItem}>
-                    <Text>Products</Text>
+                    <Text style={styles.menuItemText}>Products</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>  navigation.navigate('courses')}  style={styles.menuItem}>
-                    <Text>Courses</Text>
+                    <Text style={styles.menuItemText}>Courses</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>  navigation.navigate('vexRobotics')}  style={styles.menuItem}>
-                    <Text>VexRobotics</Text>
+                    <Text style={styles.menuItemText}>VexRobotics</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('competitions')} style={styles.menuItem}>
-                    <Text>Competitions</Text>
+                    <Text style={styles.menuItemText}>Competitions</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('events')} style={styles.menuItem}>
-                    <Text>Events</Text>
+                    <Text style={styles.menuItemText}>Events</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
-                    <Text>Contact Us</Text>
+                    <Text style={styles.menuItemText}>Contact Us</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.authContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                    <Text style={{ color: '#4CAF50', fontWeight: 'bold', fontSize: 20 }}>Log in</Text>
+                    <Text style={{ color: '#4CAF50', fontWeight: 'bold', fontSize: 16 }}>Log in</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ backgroundColor: '#4CAF50', padding: 10, paddingHorizontal: 30,borderRadius: 20 }} onPress={() => navigation.navigate("signup")}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#FFFFFF' }}>Sign Up</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#FFFFFF' }}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -67,18 +67,15 @@ const styles = StyleSheet.create({
     },
     menuItem: {
         fontSize: 22,
-        padding: 15,
-        backgroundColor: '#91AC8F',
-        borderRadius: 10,
-        marginVertical: 5,
-        marginHorizontal: 10,
+        paddingHorizontal: 15,
+        backgroundColor: '#FFFFFF',
         alignItems: 'center',
         justifyContent: 'center',
     },
-    menuText: {
-        color: '#FFFFFF', // Changed text color to white
+    menuItemText: {
+        color: '#4CAF50', // Changed text color to white
         fontWeight: 'bold', // Made the text bold for better emphasis
-        fontSize: 26, // Increased font size for added emphasis
+        fontSize: 15, // Increased font size for added emphasis
     },
     activeMenuItem: {
         backgroundColor: '#5A995C', // Slightly lighter shade for active menu items
