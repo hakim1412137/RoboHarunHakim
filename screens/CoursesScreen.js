@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, FlatList, StyleSheet, Alert, ScrollView} from 'react-native';
+import {View, Text, FlatList, StyleSheet, Alert, ScrollView, TextInput } from 'react-native';
 import Loader from '../components/Loader'; // Ensure this component exists
 import { getAllCourses } from '../utils/api';
 import CourseCard from '../components/CourseCard'; // Ensure this path is correct
@@ -7,6 +7,7 @@ import CourseCard from '../components/CourseCard'; // Ensure this path is correc
 const CoursesScreen = ({ navigation }) => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState(true);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -32,8 +33,15 @@ const CoursesScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
+
             <Text style={styles.header}>Available Courses</Text>
             <View style={styles.content}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Search Course"
+                    value={search}
+                    onChangeText={setSearch}
+                />
                 <FlatList
                     data={courses}
                     // keyExtractor={item => item.id.toString()}
@@ -66,6 +74,14 @@ const styles = StyleSheet.create({
         flex: 1, // Ensure it takes up the entire available space
         paddingHorizontal: 16, // Optional: Padding for content
     },
+    input: {
+        height: 40,
+        borderColor: '#ddd',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingHorizontal: 8,
+        borderRadius: 5,
+}
 });
 
 export default CoursesScreen;

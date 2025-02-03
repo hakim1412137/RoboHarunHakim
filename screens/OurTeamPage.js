@@ -9,7 +9,6 @@ const OurTeamPage = () => {
     return (
         <View style={styles.container}>
             {/*<Header />*/}
-            <MenuForAboutUs /> {/* Render the About Us menu */}
             {/*<MenuForAboutUs setCurrentPage={setCurrentPage} /> /!* Pass down the function *!/*/}
             <View style={styles.content}>
                 <Text style={styles.title}>Our Team</Text>

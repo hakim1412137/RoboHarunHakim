@@ -7,10 +7,10 @@ import MenuButtonWithPopup from './MenuButtonWithPopup';
 
 let MenuRoutes = [{ text: 'Products', route: 'products' }, 
                   { text: 'Courses', route: 'courses' }, 
-                  { text: 'VexRobotics', route: 'vexrobotics' }, 
+                  { text: 'VexRobotics', route: 'vexRobotics' },
                   { text: 'Competitions', route: 'competitions' }, 
                   { text: 'Events', route: 'events' },
-                  { text: 'Contact Us', route: 'contactus' }
+                  { text: 'Contact Us', route: 'contactUs' }
                 ];
 
 let popupMenus = [
@@ -22,7 +22,6 @@ let popupMenus = [
                                     ]
                    },
                    { text: 'Services', subMenu: [
-                                        { text: "Services", route: "servicesScreen" },
                                         { text: "Supports", route: "supportScreen" },
                                         { text: "Robotics Training", route: "roboticsTraining" },
                                         { text: "Website Development", route: "websiteDevelopment" },

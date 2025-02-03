@@ -9,7 +9,6 @@ const RoboticsTrainingPage = () => {
     return (
         <View style={styles.container}>
             {/*<Header />*/}
-            <MenuForServices /> {/* Render the Services menu */}
             <View style={styles.content}>
                 <Text style={styles.title}>Robotics Training</Text>
                 <Text style={styles.bodyText}>

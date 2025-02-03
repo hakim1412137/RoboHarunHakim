@@ -54,7 +54,7 @@ const AboutScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 'auto',
+        height: '40rem',
         padding: 16,
         backgroundColor: '#FFFFFF', // Sky Blue
     },
