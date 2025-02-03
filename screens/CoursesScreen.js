@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, FlatList, StyleSheet, Alert, ScrollView, TextInput } from 'react-native';
+import {View, Text, FlatList, StyleSheet, Alert, ScrollView, TextInput, TouchableOpacity, Button} from 'react-native';
 import Loader from '../components/Loader'; // Ensure this component exists
-import { getAllCourses } from '../utils/api';
+import {getAllCourses, getCourseById} from '../utils/api';
 import CourseCard from '../components/CourseCard'; // Ensure this path is correct
 
 const CoursesScreen = ({ navigation }) => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState(true);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -26,6 +26,18 @@ const CoursesScreen = ({ navigation }) => {
         fetchCourses();
     }, []);
 
+    async function fetchCourseById(courseId) {
+        setLoading(true);
+        try {
+            let response = await getCourseById(courseId);
+            setCourses([response.data]);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     if (loading) return <Loader />;
     const navigateToCourseDetails1 = (courseId) => {
         navigation.navigate('courseDetails', { courseId });
@@ -33,18 +45,23 @@ const CoursesScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-
             <Text style={styles.header}>Available Courses</Text>
             <View style={styles.content}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Search Course"
-                    value={search}
-                    onChangeText={setSearch}
-                />
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 5, width: '100%', height: '3rem' ,justifyContent: 'center', alignItems: 'center' }}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Search Course"
+                        value={search}
+                        onChangeText={setSearch}
+                    />
+                    <TouchableOpacity onPress={() => fetchCourseById(search)} style={{ width: '15%', height: '100%', borderRadius: 10 , padding: 10, paddingHorizontal: 20, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#4CAF50' }}>
+                        <Text style={{ fontStyle: 20, fontWeight: 'bold', color: 'white' }}>Search</Text>
+                    </TouchableOpacity>
+                </View>
                 <FlatList
                     data={courses}
                     // keyExtractor={item => item.id.toString()}
+                    contentContainerStyle={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 15 }}
                     renderItem={({ item }) => (
                         <CourseCard
                             course={item}
@@ -75,11 +92,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16, // Optional: Padding for content
     },
     input: {
-        height: 40,
+        height: '100%',
+        width: '85%',
         borderColor: '#ddd',
+        paddingHorizontal: 15,
         borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
         borderRadius: 5,
 }
 });

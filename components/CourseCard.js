@@ -1,39 +1,53 @@
 // components/CourseCard.js
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {View, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
 
 const CourseCard = ({ course, onViewDetails }) => {
     return (
         <View style={styles.card}>
-            <Text style={styles.title}>{course.title}</Text>
-            <Text style={styles.description}>{course.description}</Text>
-            <Text style={styles.level}>Level: {course.level || 'N/A'}</Text>
-            <Text style={styles.duration}>Duration: {course.duration ? `${course.duration} hours` : 'N/A'}</Text>
-            <Button title="View Details" onPress={onViewDetails} />
+            <View style={{ width: '100%' }}>
+                <Text style={styles.title}>{course.title}</Text>
+                <Text style={styles.description}>{course.description}</Text>
+            </View>
+
+            <View style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <View>
+                    <Text style={styles.level}><Text style={{ fontWeight: 'bold' }}>Level:</Text> {course.level || 'N/A'}</Text>
+                    <Text style={styles.duration}><Text style={{ fontWeight: 'bold' }}>Duration:</Text> {course.duration ? `${course.duration} hours` : 'N/A'}</Text>
+                </View>
+
+                <TouchableOpacity onPress={onViewDetails} style={{ borderRadius: 10, backgroundColor: '#4CAF50', display: 'flex', padding: 10, paddingHorizontal: 20, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 14 }}>View Details</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
+        width: '22rem',
+        height: '11rem',
         padding: 15,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#ccffe1',
         marginVertical: 10,
         borderRadius: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
     title: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     description: {
+        fontWeight: '500',
         marginVertical: 5,
     },
     level: {
         fontStyle: 'italic',
-    },
-    duration: {
-        marginBottom: 10,
-    },
+    }
 });
 
 export default CourseCard;
