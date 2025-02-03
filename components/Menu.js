@@ -2,40 +2,54 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import MenuForAboutUs from "./MenuForAboutUs";
 import MenuForServices from "./MenuForServices";
+import MenuButtons from '../screens/MenuButtons';
+import MenuButtonWithPopup from './MenuButtonWithPopup';
 
+let MenuRoutes = [{ text: 'Products', route: 'products' }, 
+                  { text: 'Courses', route: 'courses' }, 
+                  { text: 'VexRobotics', route: 'vexrobotics' }, 
+                  { text: 'Competitions', route: 'competitions' }, 
+                  { text: 'Events', route: 'events' },
+                  { text: 'Contact Us', route: 'contactus' }
+                ];
+
+let popupMenus = [
+                   { text: 'About Us', subMenu: [
+                                        { text: "About Us", route: "aboutUs" },
+                                        { text: "Careers", route: "careers" },
+                                        { text: "Our Team", route: "ourTeam" },
+                                        { text: "Our Clients", route: "ourClients" },
+                                    ]
+                   },
+                   { text: 'Services', subMenu: [
+                                        { text: "Services", route: "servicesScreen" },
+                                        { text: "Supports", route: "supportScreen" },
+                                        { text: "Robotics Training", route: "roboticsTraining" },
+                                        { text: "Website Development", route: "websiteDevelopment" },
+                                        { text: "Android Development", route: "androidDevelopment" },
+                                        { text: "Robotics Training", route: "roboticsTraining" },
+                                    ]
+                   },
+                  ];
 
 // Main Menu Component
 const Menu = ({ navigation }) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.menuContainer}>
-                <MenuForAboutUs navigation={navigation}  />
-                <MenuForServices navigation={navigation} />
-                <TouchableOpacity onPress={() => navigation.navigate('products')} style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>Products</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() =>  navigation.navigate('courses')}  style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>Courses</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() =>  navigation.navigate('vexRobotics')}  style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>VexRobotics</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('competitions')} style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>Competitions</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('events')} style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>Events</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('contactUs')} style={styles.menuItem}>
-                    <Text style={styles.menuItemText}>Contact Us</Text>
-                </TouchableOpacity>
+                {popupMenus.map((popupMenu, index) => (
+                    <MenuButtonWithPopup key={index} navigation={navigation} subMenu={popupMenu.subMenu}>{popupMenu.text}</MenuButtonWithPopup>
+                ))}
+                {MenuRoutes.map((menu, index) => (
+                    <MenuButtons route={menu.route} navigation={navigation} key={index}>{menu.text}</MenuButtons>
+                ))}
             </View>
             <View style={styles.authContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                    <Text style={{ color: '#4CAF50', fontWeight: 'bold', fontSize: 16 }}>Log in</Text>
+                    <Text style={{ color: '#4CAF50', fontWeight: 'bold', fontSize: 14 }}>Log in</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ backgroundColor: '#4CAF50', padding: 10, paddingHorizontal: 30,borderRadius: 20 }} onPress={() => navigation.navigate("signup")}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#FFFFFF' }}>Sign Up</Text>
+                <TouchableOpacity style={{ backgroundColor: '#4CAF50', padding: 7, paddingHorizontal: 20, borderRadius: 20 }} onPress={() => navigation.navigate("signup")}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 14, color: '#FFFFFF' }}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -63,7 +77,11 @@ const styles = StyleSheet.create({
       zIndex: 1
     },
     menuContainer: {
+        display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center',
+        paddingInline: 20,
+        gap: 20
     },
     menuItem: {
         fontSize: 22,
