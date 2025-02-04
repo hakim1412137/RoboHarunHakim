@@ -153,10 +153,16 @@ const getClientById = (clientId) => api.get(`clients/${clientId}`);
 const getAllClients = () =>  api.get('/clients');
 const deleteClient = (clientId) => api.delete(`/clients/${clientId}`);
 
+// Team management API calls
+const createTeam = (teamData) => api.post('/teams', teamData);
+const getTeamById = (teamId) => api.get(`teams/${teamId}`);
+const getAllTeams = () => api.get('/teams');
+const deleteTeam = (teamId) => api.delete(`/teams/${teamId}`);
 
 // Exporting all the methods for usage
 export {
     login,signup,
+    createTeam, getTeamById, getAllTeams, deleteTeam,
     createCareer,getCareerById,getAllCareers,deleteCareer,
     createClient,getClientById, getAllClients, deleteClient,
     getUserDetails,
