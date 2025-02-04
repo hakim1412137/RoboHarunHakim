@@ -57,10 +57,10 @@ const Stack = createStackNavigator();
                                 {/*Menu*/}
                                 <Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />
                                 <Stack.Screen name="courses" component={CoursesScreen} options={{ headerShown: false }}  />
-                                <Stack.Screen name="vexRobotics" component={VexRoboticsList} />
-                                <Stack.Screen name="competitions" component={CompetitionsScreen} />
-                                <Stack.Screen name="events" component={EventListScreen} />
-                                <Stack.Screen name="contactUs" component={ContactUsScreen} />
+                                <Stack.Screen name="vexRobotics" component={VexRoboticsList} options={{ headerShown: false }} />
+                                <Stack.Screen name="competitions" component={CompetitionsScreen}  options={{ headerShown: false }} />
+                                <Stack.Screen name="events" component={EventListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="contactUs" component={ContactUsScreen} options={{ headerShown: false }} />
 
                                 {/*Menu for about us*/}
                                 <Stack.Screen name="aboutUs" component={AboutScreen} />

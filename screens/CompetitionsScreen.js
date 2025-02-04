@@ -10,8 +10,10 @@ import {
 } from "../utils/api";
 import SearchCompetition from "../components/SearchCompetition";
 import SearchComponent from "../components/CompetitionCard"; // Ensure these API methods exist
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
-const CompetitionsScreen = () => {
+const CompetitionsScreen = ({ navigation }) => {
     const [competitions, setCompetitions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
@@ -134,70 +136,76 @@ const CompetitionsScreen = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Competitions</Text>
-            {/* Search input for competition ID */}
-            <TextInput
-                style={styles.input}
-                placeholder="Search Competition by ID"
-                value={searchId}
-                onChangeText={setSearchId}
-            />
-            <Button title="Search" onPress={() => fetchCompetitionById(searchId)} />
-{/*
-            <SearchComponent onSearch={fetchCompetitionById} />
-*/}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
 
-            {/* Search input for competition ID */}
-            {/*<SearchCompetition onSearchComplete={handleSearchComplete} />*/}
-
-            {/* Input fields for new competition data */}
-            <TextInput
-                style={styles.input}
-                placeholder="Competition Name"
-                value={name}
-                onChangeText={setName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Description"
-                value={description}
-                onChangeText={setDescription}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Price (Leave empty for 'Call for price')"
-                value={price}
-                onChangeText={setPrice}
-                keyboardType="numeric" // Numerical input for price
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Due Date (YYYY-MM-DD)"
-                value={dueDate}
-                onChangeText={setDueDate}
-            />
-
-            <Button title={editingId ? "Update Competition" : "Create Competition"} onPress={handleSubmission} />
-
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <FlatList
-                    data={competitions}
-                    renderItem={({ item }) => (
-                        <CompetitionCard
-                            competition={item}
-                            onEdit={() => handleEdit(item)}
-                            onDelete={() => handleDelete(item.id)}
-                            onRegister={() => handleRegister(item.id)} // Register for the competition
-                            // onRegister={() => navigation.navigate('CompetitionDetails', { competitionId: item.id })} // Replace or implement a registration function
-                        />
-                    )}
-                    keyExtractor={(item) => item.id ? item.id.toString() : Math.random().toString()} // Fallback if id is undefined
-
-                    // keyExtractor={(item) => item.id.toString()}
+            <View style={{ padding: 10, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>Competitions</Text>
+                {/* Search input for competition ID */}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Search Competition by ID"
+                    value={searchId}
+                    onChangeText={setSearchId}
                 />
-            )}
+                <Button title="Search" onPress={() => fetchCompetitionById(searchId)} />
+    {/*
+                <SearchComponent onSearch={fetchCompetitionById} />
+    */}
+
+                {/* Search input for competition ID */}
+                {/*<SearchCompetition onSearchComplete={handleSearchComplete} />*/}
+
+                {/* Input fields for new competition data */}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Competition Name"
+                    value={name}
+                    onChangeText={setName}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Description"
+                    value={description}
+                    onChangeText={setDescription}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Price (Leave empty for 'Call for price')"
+                    value={price}
+                    onChangeText={setPrice}
+                    keyboardType="numeric" // Numerical input for price
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Due Date (YYYY-MM-DD)"
+                    value={dueDate}
+                    onChangeText={setDueDate}
+                />
+
+                <Button title={editingId ? "Update Competition" : "Create Competition"} onPress={handleSubmission} />
+
+                {loading ? (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                ) : (
+                    <FlatList
+                        data={competitions}
+                        renderItem={({ item }) => (
+                            <CompetitionCard
+                                competition={item}
+                                onEdit={() => handleEdit(item)}
+                                onDelete={() => handleDelete(item.id)}
+                                onRegister={() => handleRegister(item.id)} // Register for the competition
+                                // onRegister={() => navigation.navigate('CompetitionDetails', { competitionId: item.id })} // Replace or implement a registration function
+                            />
+                        )}
+                        keyExtractor={(item) => item.id ? item.id.toString() : Math.random().toString()} // Fallback if id is undefined
+
+                        // keyExtractor={(item) => item.id.toString()}
+                    />
+                )}
+
+            </View>
         </ScrollView>
     );
 };
@@ -205,7 +213,6 @@ const CompetitionsScreen = () => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        padding: 20,
         backgroundColor: '#fff',
     },
     title: {

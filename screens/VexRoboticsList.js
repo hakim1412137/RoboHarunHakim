@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import {View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView} from 'react-native';
 import { getAllVexRobotics } from "../utils/api"; // Ensure this path is correct
 import VexRoboticsCard from "../components/VexRoboticsCard";
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
 const VexRoboticsList = ({ navigation }) => {
     const [platforms, setPlatforms] = useState([]);
@@ -40,12 +42,16 @@ const VexRoboticsList = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>VEX Robotics Platforms</Text>
-            <FlatList
-                data={platforms}
-                keyExtractor={(item) => item.id.toString()} // Key extractor function
-                renderItem={renderItem} // renderItem uses a separate function
-            />
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 10, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>VEX Robotics Platforms</Text>
+                <FlatList
+                    data={platforms}
+                    keyExtractor={(item) => item.id.toString()} // Key extractor function
+                    renderItem={renderItem} // renderItem uses a separate function
+                />
+            </View>
         </ScrollView>
     );
 };
@@ -53,11 +59,9 @@ const VexRoboticsList = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        padding: 20,
     },
     title: {
         fontSize: 24,
-        marginBottom: 10,
         textAlign: 'center',
     },
 });

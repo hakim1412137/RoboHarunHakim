@@ -1,8 +1,10 @@
 // screens/ContactUsScreen.js (extended)
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Linking, Alert } from 'react-native';
+import Menu from '../components/Menu';
+import Header from '../components/Header';
 
-const ContactUsScreen = () => {
+const ContactUsScreen = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -21,56 +23,60 @@ const ContactUsScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Contact Us</Text>
-            <Text style={styles.subheader}>You can reach us through our social media channels:</Text>
-            <View style={styles.buttonContainer}>
-                <Button
-                    title="Facebook"
-                    onPress={() => openLink('https://www.facebook.com/YourPage')}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+                <Text style={styles.header}>Contact Us</Text>
+                <Text style={styles.subheader}>You can reach us through our social media channels:</Text>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        title="Facebook"
+                        onPress={() => openLink('https://www.facebook.com/YourPage')}
+                    />
+                    <Button
+                        title="Twitter"
+                        onPress={() => openLink('https://twitter.com/YourProfile')}
+                    />
+                    <Button
+                        title="LinkedIn"
+                        onPress={() => openLink('https://www.linkedin.com/company/YourCompany')}
+                    />
+                    <Button
+                        title="Instagram"
+                        onPress={() => openLink('https://www.instagram.com/YourProfile')}
+                    />
+                </View>
+                <Text style={styles.subheader}>Or send us a message:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Your Name"
+                    value={name}
+                    onChangeText={setName}
                 />
-                <Button
-                    title="Twitter"
-                    onPress={() => openLink('https://twitter.com/YourProfile')}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Your Email"
+                    value={email}
+                    onChangeText={setEmail}
                 />
-                <Button
-                    title="LinkedIn"
-                    onPress={() => openLink('https://www.linkedin.com/company/YourCompany')}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Message"
+                    multiline
+                    numberOfLines={4}
+                    value={message}
+                    onChangeText={setMessage}
                 />
-                <Button
-                    title="Instagram"
-                    onPress={() => openLink('https://www.instagram.com/YourProfile')}
-                />
-            </View>
-            <Text style={styles.subheader}>Or send us a message:</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Your Name"
-                value={name}
-                onChangeText={setName}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Your Email"
-                value={email}
-                onChangeText={setEmail}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Message"
-                multiline
-                numberOfLines={4}
-                value={message}
-                onChangeText={setMessage}
-            />
-            <Button title="Send Message" onPress={handleSendMessage} />
-        </View>
+                <Button title="Send Message" onPress={handleSendMessage} />
+    
+                </View>
+       </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         backgroundColor: '#fff',
     },
     header: {
