@@ -27,6 +27,8 @@ import LoginScreen from "./LoginScreen";
 import CareersScreen from "./CareersScreen";
 import ClientScreen from "./ClientScreen";
 import TeamScreen from "./TeamScreen";
+import RoboticsTrainingList from "./RoboticsTrainingList";
+import TrainingDetail from "./TrainingDetail";
 
 
 const HomeScreen = ({ navigation }) => {
@@ -48,6 +50,10 @@ const HomeScreen = ({ navigation }) => {
                 return <TeamScreen />;
             case 'ourClients':
                 return <ClientScreen />;
+            case 'roboticsTraining':
+                return <RoboticsTrainingList />;
+            case 'trainingDetails':
+                return <TrainingDetail />;
 
             case 'AndroidDevelopmentPage':
                 return <AndroidDevelopmentPage />;
