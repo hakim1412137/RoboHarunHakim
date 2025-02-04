@@ -40,6 +40,8 @@ import AndroidDevelopmentPage from "./screens/AndroidDevelopmentPage";
 import ContactUsScreen from "./screens/ContactUsScreen";
 import ClientScreen from "./screens/ClientScreen";
 import TeamScreen from "./screens/TeamScreen";
+import RoboticsTrainingList from "./screens/RoboticsTrainingList";
+import TrainingDetail from "./screens/TrainingDetail";
  // New About Screen
 
 const Stack = createStackNavigator();
@@ -71,8 +73,8 @@ const Stack = createStackNavigator();
                                 {/*Menu for services*/}
                                 <Stack.Screen name="servicesScreen" component={ServicesScreen} />
                                 <Stack.Screen name="supportScreen" component={SupportScreen} />
-                          {/*<Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} />*/}
-                                {/*<Stack.Screen name="trainingDetails" component={TrainingDetailScreen} />*/}
+                          <Stack.Screen name="roboticsTraining" component={RoboticsTrainingList} />
+                                <Stack.Screen name="trainingDetails" component={TrainingDetail} />
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} />
 
