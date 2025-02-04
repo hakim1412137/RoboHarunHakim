@@ -27,7 +27,8 @@ const CourseCard = ({ course, onViewDetails }) => {
 
 const styles = StyleSheet.create({
     card: {
-        width: '22rem',
+        width: '23rem',
+        flex: 1,
         height: '11rem',
         padding: 15,
         backgroundColor: '#ccffe1',
