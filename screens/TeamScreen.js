@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import { getAllTeams } from '../utils/api'; // Ensure this path is correct
 import TeamCard from '../components/TeamCard'; // Adjust path to your TeamCard component
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
 const TeamScreen = ({ navigation }) => {
     const [teams, setTeams] = useState([]);
@@ -39,12 +41,16 @@ const TeamScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Our Team</Text>
-            <FlatList
-                data={teams}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem} // Render item using the defined function
-            />
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>Our Team</Text>
+                <FlatList
+                    data={teams}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem} // Render item using the defined function
+                />
+            </View>
         </ScrollView>
     );
 };
@@ -52,7 +58,6 @@ const TeamScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
     },
     title: {
         fontSize: 24,

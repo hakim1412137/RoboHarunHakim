@@ -4,8 +4,10 @@ import SupportCard from '../components/SupportCard'; // Create a SupportCard com
 import api from '../utils/api';
 import Loader from '../components/Loader';
 import ModalForm from '../components/ModalForm';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
-const SupportScreen = () => {
+const SupportScreen = ({ navigation }) => {
     const [supportRequests, setSupportRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
@@ -41,37 +43,42 @@ const SupportScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Button title="Create Support Request" onPress={() => setModalVisible(true)} />
-            {loading ? (
-                <Loader />
-            ) : (
-                <FlatList
-                    data={supportRequests}
-                    renderItem={({ item }) => (
-                        <SupportCard
-                            supportRequest={item}
-                            onEdit={() => {
-                                setEditData(item);
-                                setModalVisible(true);
-                            }}
-                            onDelete={async () => {
-                                await api.delete(`/support-requests/${item.id}`);
-                                fetchSupportRequests();
-                            }}
-                        />
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+                <Button title="Create Support Request" onPress={() => setModalVisible(true)} />
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <FlatList
+                        data={supportRequests}
+                        renderItem={({ item }) => (
+                            <SupportCard
+                                supportRequest={item}
+                                onEdit={() => {
+                                    setEditData(item);
+                                    setModalVisible(true);
+                                }}
+                                onDelete={async () => {
+                                    await api.delete(`/support-requests/${item.id}`);
+                                    fetchSupportRequests();
+                                }}
+                            />
+                        )}
+                        keyExtractor={(item) => item.id.toString()}
+                    />
+                )}
+                <ModalForm
+                    visible={modalVisible}
+                    onClose={() => {
+                        setModalVisible(false);
+                        setEditData(null);
+                    }}
+                    initialData={editData}
+                    onSubmit={handleAddOrUpdate}
                 />
-            )}
-            <ModalForm
-                visible={modalVisible}
-                onClose={() => {
-                    setModalVisible(false);
-                    setEditData(null);
-                }}
-                initialData={editData}
-                onSubmit={handleAddOrUpdate}
-            />
+            </View>
+
         </View>
     );
 };
@@ -79,7 +86,6 @@ const SupportScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
     },
 });
 

@@ -66,7 +66,7 @@ const CoursesScreen = ({ navigation }) => {
                     <FlatList
                         data={courses}
                         // keyExtractor={item => item.id.toString()}
-                        contentContainerStyle={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 15 }}
+                        contentContainerStyle={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 15, justifyContent: 'space-between' }}
                         renderItem={({ item }) => (
                             <CourseCard
                                 course={item}

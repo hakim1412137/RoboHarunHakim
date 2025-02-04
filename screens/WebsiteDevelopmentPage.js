@@ -4,11 +4,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MenuForServices from '../components/MenuForServices'; // Adjust path
+import Menu from '../components/Menu';
 
-const WebsiteDevelopmentPage = () => {
+const WebsiteDevelopmentPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/*<Header />*/}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
             <View style={styles.content}>
                 <Text style={styles.title}>Website Development</Text>
                 <Text style={styles.bodyText}>
@@ -16,7 +18,6 @@ const WebsiteDevelopmentPage = () => {
                     tailored to meet your needs. We ensure that your online presence is impactful.
                 </Text>
             </View>
-            {/*<Footer />*/}
         </View>
     );
 };

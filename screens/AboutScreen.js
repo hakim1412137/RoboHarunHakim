@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import TimelineCard1 from '../components/TimelineCard1';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
-const AboutUsScreen = () => {
+const AboutUsScreen = ({ navigation }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -38,33 +40,37 @@ const AboutUsScreen = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>About Us</Text>
-            <Text style={styles.description}>
-                Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
-                Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
-            </Text>
-            <Text style={styles.bgTitle}>Background of the Company</Text>
-            <Text style={styles.description}>
-                Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia, offering comprehensive training and resources to foster technological advancement.
-            </Text>
-            <Text style={styles.historyTitle}>History of the Company</Text>
-            <View style={styles.timelineItem}>
-                {loading ? (
-                    <ActivityIndicator size="large" color="#0000ff" />
-                ) : (
-                    <FlatList
-                        data={events} // Use the fetched events
-                        style={{ overflow: 'visible' }}
-                        renderItem={({ item, index }) => (
-                            <TimelineCard1
-                                item={item}
-                                index={index}
-                            />
-                        )}
-                        keyExtractor={(item) => item.id.toString()}
-                        contentContainerStyle={styles.flatList}
-                    />
-                )}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 10, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>About Us</Text>
+                <Text style={styles.description}>
+                    Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
+                    Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
+                </Text>
+                <Text style={styles.bgTitle}>Background of the Company</Text>
+                <Text style={styles.description}>
+                    Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia, offering comprehensive training and resources to foster technological advancement.
+                </Text>
+                <Text style={styles.historyTitle}>History of the Company</Text>
+                <View style={styles.timelineItem}>
+                    {loading ? (
+                        <ActivityIndicator size="large" color="#0000ff" />
+                    ) : (
+                        <FlatList
+                            data={events} // Use the fetched events
+                            style={{ overflow: 'visible' }}
+                            renderItem={({ item, index }) => (
+                                <TimelineCard1
+                                    item={item}
+                                    index={index}
+                                />
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                            contentContainerStyle={styles.flatList}
+                        />
+                    )}
+                </View>
             </View>
         </ScrollView>
     );
@@ -73,8 +79,6 @@ const AboutUsScreen = () => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        padding: 16,
-        paddingHorizontal: 90,
         backgroundColor: '#FFFFFF', // Sky Blue
     },
     title: {

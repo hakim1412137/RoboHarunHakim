@@ -3,8 +3,10 @@ import { View, FlatList, ActivityIndicator, ScrollView, StyleSheet } from 'react
 import { Card, Text } from 'react-native-paper';
 import TimelineCard from '../components/TimelineCard';
 import { getEvents } from "../utils/api";
+import Menu from '../components/Menu';
+import Header from '../components/Header';
 
-const AboutScreen = () => {
+const AboutScreen = ({ navigation }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     //const [hovered, setHovered] = useState(true);
@@ -28,25 +30,30 @@ const AboutScreen = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Robotics Educational and Shop - Timeline of Key Events</Text>
-            <Text style={styles.description}>Robotics Application strives to make a better Africa via AI technology and innovation.</Text>
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
 
-            <View style={styles.timelineItem}>
-                {loading ? (
-                    <ActivityIndicator size="large" color="#0000ff" />
-                ) : (
-                    <FlatList
-                        data={events}
-                        style={{ height: 'auto', overflow: 'visible', width: '80%' }}
-                        renderItem={({ item, index }) => (
-                            <TimelineCard
-                                item={item}
-                                index={index}
-                            />
-                        )}
-                        keyExtractor={(item) => item.id.toString()}
-                    />
-                )}
+            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>Robotics Educational and Shop - Timeline of Key Events</Text>
+                <Text style={styles.description}>Robotics Application strives to make a better Africa via AI technology and innovation.</Text>
+
+                <View style={styles.timelineItem}>
+                    {loading ? (
+                        <ActivityIndicator size="large" color="#0000ff" />
+                    ) : (
+                        <FlatList
+                            data={events}
+                            style={{ height: 'auto', overflow: 'visible', width: '80%' }}
+                            renderItem={({ item, index }) => (
+                                <TimelineCard
+                                    item={item}
+                                    index={index}
+                                />
+                            )}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    )}
+                </View>
             </View>
         </ScrollView>
     );
@@ -55,7 +62,6 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        padding: 16,
         backgroundColor: '#FFFFFF', // Sky Blue
     },
     title: {

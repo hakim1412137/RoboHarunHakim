@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import { getAllClients } from "../utils/api"; // Ensure this path points to your API calls
 import ClientCard from "../components/ClientCard"; // Placeholder for your client card component
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
 const ClientScreen = ({ navigation }) => {
     const [clients, setClients] = useState([]);
@@ -39,12 +41,16 @@ const ClientScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Our Clients</Text>
-            <FlatList
-                data={clients}
-                keyExtractor={(item) => item.id.toString()} // Key extractor function
-                renderItem={renderItem} // Render item using the defined function
-            />
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+                <Text style={styles.title}>Our Clients</Text>
+                <FlatList
+                    data={clients}
+                    keyExtractor={(item) => item.id.toString()} // Key extractor function
+                    renderItem={renderItem} // Render item using the defined function
+                />
+            </View>
         </ScrollView>
     );
 };
@@ -52,7 +58,6 @@ const ClientScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
     },
     title: {
         fontSize: 24,

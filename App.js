@@ -59,24 +59,24 @@ const Stack = createStackNavigator();
                                 {/*Menu*/}
                                 <Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />
                                 <Stack.Screen name="courses" component={CoursesScreen} options={{ headerShown: false }}  />
-                                <Stack.Screen name="vexRobotics" component={VexRoboticsList} />
-                                <Stack.Screen name="competitions" component={CompetitionsScreen} />
-                                <Stack.Screen name="events" component={EventListScreen} />
-                                <Stack.Screen name="contactUs" component={ContactUsScreen} />
+                                <Stack.Screen name="vexRobotics" component={VexRoboticsList} options={{ headerShown: false }} />
+                                <Stack.Screen name="competitions" component={CompetitionsScreen}  options={{ headerShown: false }} />
+                                <Stack.Screen name="events" component={EventListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="contactUs" component={ContactUsScreen} options={{ headerShown: false }} />
 
                                 {/*Menu for about us*/}
-                                <Stack.Screen name="aboutUs" component={AboutScreen} />
+                                <Stack.Screen name="aboutUs" component={AboutScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="careers" component={CareersScreen} options={{ headerShown: false }} />
-                                <Stack.Screen name="ourTeam" component={TeamScreen} />
-                                <Stack.Screen name="ourClients" component={ClientScreen} />
+                                <Stack.Screen name="ourTeam" component={TeamScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="ourClients" component={ClientScreen} options={{ headerShown: false }} />
 
                                 {/*Menu for services*/}
-                                <Stack.Screen name="servicesScreen" component={ServicesScreen} />
-                                <Stack.Screen name="supportScreen" component={SupportScreen} />
-                          <Stack.Screen name="roboticsTraining" component={RoboticsTrainingList} />
-                                <Stack.Screen name="trainingDetails" component={TrainingDetail} />
-                                <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} />
-                                <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} />
+                                <Stack.Screen name="servicesScreen" component={ServicesScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} options={{ headerShown: false }} />
+                                {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
+                                <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
+                                <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
