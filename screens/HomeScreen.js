@@ -4,14 +4,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Menu from '../components/Menu';
 import AboutScreen from "./AboutScreen"; // About Us page
-import CareersPage from './CareersPage';
-import OurTeamPage from './OurTeamPage';
-import OurClientsPage from './OurClientsPage';
-import ServicesPage from './ServicesPage';
-import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import ProductScreen from "./ProductScreen";
-// import ProductDetailsScreen from "./ProductDetailsScreen";
 import HomePage from "./HomePage";
 import CourseDetailsScreen from "./CourseDetailsScreen";
 import CoursesScreen from "./CoursesScreen";
@@ -26,7 +20,6 @@ import JoinUsScreen from "./JoinUsScreen";
 import ServicesScreen from "./ServicesScreen";
 import SupportScreen from "./SupportScreen";
 import WebsiteDevelopmentPage from "./WebsiteDevelopmentPage";
-import RoboticsTrainingPage from "./RoboticsTrainingPage";
 import AddVexRobotics from "./AddVexRobotics";
 import VexRoboticsDetail from "./VexRoboticsDetail";
 import VexRoboticsList from "./VexRoboticsList";
@@ -34,6 +27,7 @@ import LoginScreen from "./LoginScreen";
 import CareersScreen from "./CareersScreen";
 import ClientScreen from "./ClientScreen";
 import TeamScreen from "./TeamScreen";
+
 
 const HomeScreen = ({ navigation }) => {
     const [currentPage, setCurrentPage] = useState('homepage');
@@ -54,10 +48,7 @@ const HomeScreen = ({ navigation }) => {
                 return <TeamScreen />;
             case 'ourClients':
                 return <ClientScreen />;
-           /* case 'services':
-                return <ServicesPage />;*/
-            case 'RoboticsTrainingPage':
-                return <RoboticsTrainingPage />;
+
             case 'AndroidDevelopmentPage':
                 return <AndroidDevelopmentPage />;
             case 'WebsiteDevelopmentPage':
@@ -167,7 +158,6 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        paddingHorizontal: 16, // Optional: Add horizontal padding if needed
     },
     submenuItem: {
         fontSize: 16,

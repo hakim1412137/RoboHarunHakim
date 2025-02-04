@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import {getAllCareers} from "../utils/api"; // Replace with your API utility
+import {getAllCareers} from "../utils/api";
+import CareersPage from "./CareersPage";
+import Menu from "../components/Menu";
+import Header from "../components/Header"; // Replace with your API utility
 
-const CareersScreen = () => {
+const CareersScreen = ({ navigation }) => {
     const [careers, setCareers] = useState([]);
     const [loading, setLoading] = useState(true);
 //createCareer,getCareerById,getAllCareers,deleteCareer,
@@ -32,34 +35,48 @@ const CareersScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Career Opportunities</Text>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <FlatList
-                    data={careers}
-                    renderItem={renderCareerItem}
-                    keyExtractor={item => item.id.toString()}
-                />
-            )}
-        </View>
+            <Header />
+            <Menu navigation={navigation} />
+            <View style={{ padding: 16, paddingHorizontal: 100 }}>
+                <Text style={styles.header}>Career Opportunities</Text>
+                <Text style={{ textAlign: 'center', marginVertical: 10, fontSize: 14 }}>
+                    Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
+                    Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
+                </Text>
+                <Text style={{ marginVertical: 10, fontWeight: 'bold', textAlign: 'center', fontSize: 16 }}>Background of the Company</Text>
+                <Text style={{ fontSize: 14, textAlign: 'center' }}>
+                    Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia, offering comprehensive training and resources to foster technological advancement.
+                </Text>
+                {loading ? (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                ) : (
+                    <FlatList
+                        data={careers}
+                        contentContainerStyle={{  marginTop: 25 }}
+                        renderItem={renderCareerItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                )}
+            </View>
+      </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        backgroundColor: '#FBF1E6',
+        height: '40rem'
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        width: '100%',
+        textAlign: 'center'
     },
     card: {
         marginBottom: 15,
         padding: 15,
-        backgroundColor: '#f9f9f9',
         borderRadius: 5,
         shadowColor: '#000',
         shadowOpacity: 0.1,

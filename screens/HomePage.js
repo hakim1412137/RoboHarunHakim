@@ -67,7 +67,8 @@ const HomePage = () => {
 const styles = StyleSheet.create({
     mainContainer: {
         height: '40rem',
-        padding: 35
+        padding: 35,
+        backgroundColor: '#FBF1E6'
     },
     backgroundImage: {
         flex: 1,

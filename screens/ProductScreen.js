@@ -2,7 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import {View, FlatList, ActivityIndicator, Alert, StyleSheet, ScrollView} from 'react-native';
 import ProductCard from '../components/ProductCard';
 import { CartContext } from '../context/CartContext';
-import {getProductDetails, deleteProduct, getProducts} from "../utils/api"; // Import deleteProduct function
+import {getProductDetails, deleteProduct, getProducts} from "../utils/api";
+import Header from "../components/Header";
+import Menu from "../components/Menu"; // Import deleteProduct function
 
 const ProductsScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
@@ -63,6 +65,8 @@ const ProductsScreen = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+            <Header />
+            <Menu navigation={navigation} />
             <View style={styles.container}>
                 {loading ? (
                     <ActivityIndicator size="large" color="#0000ff" />
@@ -92,11 +96,11 @@ const ProductsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         padding: 10,
+        paddingHorizontal: 100,
+        backgroundColor: '#FBF1E6',
     },
     scrollContentContainer: {
         height: '40rem',
-        alignItems: 'center',
-        paddingBottom: 60,
     },
 });
 

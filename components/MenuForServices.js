@@ -22,10 +22,10 @@ const MenuForServices = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate('supportScreen')}>
                         <Text style={styles.submenuItem}>Supports</Text>
                     </TouchableOpacity>
-                    <View style={styles.divider} />
+                  {/*  <View style={styles.divider} />
                     <TouchableOpacity onPress={() => navigation.navigate('roboticsTraining')}>
                         <Text style={styles.submenuItem}>Robotics Training</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                     <View style={styles.divider} />
                     <TouchableOpacity onPress={() => navigation.navigate('websiteDevelopment')}>
                         <Text style={styles.submenuItem}>Website Development</Text>
@@ -34,10 +34,10 @@ const MenuForServices = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate('androidDevelopment')}>
                         <Text style={styles.submenuItem}>Android Development</Text>
                     </TouchableOpacity>
-                    <View style={styles.divider} />
-                    <TouchableOpacity onPress={() => navigation.navigate('roboticsTraining')}>
+                 {/*   <View style={styles.divider} />
+                    <TouchableOpacity onPress={() => navigation.navigate('roboticsDesign')}>
                         <Text style={styles.submenuItem}>Robotics Training</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
                 </View>
             )}
         </View>

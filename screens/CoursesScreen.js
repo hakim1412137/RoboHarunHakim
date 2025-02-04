@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {View, Text, FlatList, StyleSheet, Alert, ScrollView, TextInput, TouchableOpacity, Button} from 'react-native';
 import Loader from '../components/Loader'; // Ensure this component exists
 import {getAllCourses, getCourseById} from '../utils/api';
-import CourseCard from '../components/CourseCard'; // Ensure this path is correct
+import CourseCard from '../components/CourseCard';
+import Header from "../components/Header";
+import Menu from "../components/Menu"; // Ensure this path is correct
 
 const CoursesScreen = ({ navigation }) => {
     const [courses, setCourses] = useState([]);
@@ -45,33 +47,38 @@ const CoursesScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.header}>Available Courses</Text>
-            <View style={styles.content}>
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 5, width: '100%', height: '3rem' ,justifyContent: 'center', alignItems: 'center' }}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Search Course"
-                        value={search}
-                        onChangeText={setSearch}
-                    />
-                    <TouchableOpacity onPress={() => fetchCourseById(search)} style={{ width: '15%', height: '100%', borderRadius: 10 , padding: 10, paddingHorizontal: 20, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#4CAF50' }}>
-                        <Text style={{ fontStyle: 20, fontWeight: 'bold', color: 'white' }}>Search</Text>
-                    </TouchableOpacity>
-                </View>
-                <FlatList
-                    data={courses}
-                    // keyExtractor={item => item.id.toString()}
-                    contentContainerStyle={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 15 }}
-                    renderItem={({ item }) => (
-                        <CourseCard
-                            course={item}
-                            // onViewDetails={() => navigation.navigate('CourseDetails1', { id: item.id })} // Make sure this matches
-                             onViewDetails={() => navigateToCourseDetails1(item.id)} // Make sure this matches
+            <Header />
+            <Menu navigation={navigation} />
+            <View style={{ padding: 20, paddingHorizontal: 100  }}>
+                <Text style={styles.header}>Available Courses</Text>
+                <View style={styles.content}>
+                    <View style={{ display: 'flex', flexDirection: 'row', gap: 5, width: '100%', height: '3rem' ,justifyContent: 'center', alignItems: 'center' }}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Search Course"
+                            value={search}
+                            onChangeText={setSearch}
                         />
-                    )}
-                    showsVerticalScrollIndicator={false} // Optional: hides the scroll indicator
-                />
+                        <TouchableOpacity onPress={() => fetchCourseById(search)} style={{ width: '15%', height: '100%', borderRadius: 10 , padding: 10, paddingHorizontal: 20, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#4CAF50' }}>
+                            <Text style={{ fontStyle: 20, fontWeight: 'bold', color: 'white' }}>Search</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <FlatList
+                        data={courses}
+                        // keyExtractor={item => item.id.toString()}
+                        contentContainerStyle={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 15 }}
+                        renderItem={({ item }) => (
+                            <CourseCard
+                                course={item}
+                                // onViewDetails={() => navigation.navigate('CourseDetails1', { id: item.id })} // Make sure this matches
+                                onViewDetails={() => navigateToCourseDetails1(item.id)} // Make sure this matches
+                            />
+                        )}
+                        showsVerticalScrollIndicator={false} // Optional: hides the scroll indicator
+                    />
+                </View>
             </View>
+
         </ScrollView>
     );
 };
@@ -79,8 +86,7 @@ const CoursesScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#FBF1E6',
     },
     header: {
         fontSize: 24,

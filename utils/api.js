@@ -159,9 +159,18 @@ const getTeamById = (teamId) => api.get(`teams/${teamId}`);
 const getAllTeams = () => api.get('/teams');
 const deleteTeam = (teamId) => api.delete(`/teams/${teamId}`);
 
+
+const createTraining =(trainingData) =>api.post('/robotics-trainings', trainingData); // Create a new training
+const getTrainingsById =  (trainingId) => api.get(`robotics-trainings/${trainingId}`); // Fetch all trainings
+const getAllTrainings= () => api.get('/robotics-trainings');
+const updateTraining =  (trainingId, trainingData) => api.put(`${trainingId}`, trainingData); // Update the specified training
+const deleteTraining =  (trainingId) => api.delete(`robotics-trainings/${trainingId}`); // Delete the specified training
+
+
 // Exporting all the methods for usage
 export {
     login,signup,
+    getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,
     createTeam, getTeamById, getAllTeams, deleteTeam,
     createCareer,getCareerById,getAllCareers,deleteCareer,
     createClient,getClientById, getAllClients, deleteClient,

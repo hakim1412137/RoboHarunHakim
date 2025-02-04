@@ -22,13 +22,14 @@ const LoginScreen = ({ navigation }) => {
         try {
             const response = await login(credentials);
             console.log('Login Response:', response);
-            const token = response.data.accessToken; // Assuming the backend returns a token
+            const { accessToken, tokenType } = response.data; // Assuming the backend returns a token
 
-            if (token) {
-                await AsyncStorage.setItem('token', token); // Store the access token using AsyncStorage
-                console.log('Received token:', token);
+            if (accessToken && tokenType) {
+                await AsyncStorage.setItem('token', accessToken); // Store the access token using AsyncStorage
+                console.log('Received token:', accessToken);
 
-                saveToken(token); // Call your AuthContext method to save token if needed
+                saveToken(accessToken); // Call your AuthContext method to save token if needed
+                console.log()
                 setUser(username); // Optionally store the username in UserContext
 
                 navigation.navigate('home'); // Navigate to home screen

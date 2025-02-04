@@ -39,7 +39,8 @@ import WebsiteDevelopmentPage from "./screens/WebsiteDevelopmentPage";
 import AndroidDevelopmentPage from "./screens/AndroidDevelopmentPage";
 import ContactUsScreen from "./screens/ContactUsScreen";
 import ClientScreen from "./screens/ClientScreen";
-import TeamScreen from "./screens/TeamScreen"; // New About Screen
+import TeamScreen from "./screens/TeamScreen";
+ // New About Screen
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -49,13 +50,13 @@ const Stack = createStackNavigator();
                     <CartProvider>
                         <NavigationContainer>
                             <Stack.Navigator initialRouteName="home">
-                                <Stack.Screen name="home" component={HomeScreen}  options={{ headerShown: false }}/>
+                                <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
                                 <Stack.Screen name="about" component={AboutScreen} />
                                 <Stack.Screen name="Shop" component={ShopScreen} />
 
                                 {/*Menu*/}
-                                <Stack.Screen name="products" component={ProductScreen} />
-                                <Stack.Screen name="courses" component={CoursesScreen} />
+                                <Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />
+                                <Stack.Screen name="courses" component={CoursesScreen} options={{ headerShown: false }}  />
                                 <Stack.Screen name="vexRobotics" component={VexRoboticsList} />
                                 <Stack.Screen name="competitions" component={CompetitionsScreen} />
                                 <Stack.Screen name="events" component={EventListScreen} />
@@ -63,14 +64,15 @@ const Stack = createStackNavigator();
 
                                 {/*Menu for about us*/}
                                 <Stack.Screen name="aboutUs" component={AboutScreen} />
-                                <Stack.Screen name="careers" component={CareersScreen} />
+                                <Stack.Screen name="careers" component={CareersScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ourTeam" component={TeamScreen} />
                                 <Stack.Screen name="ourClients" component={ClientScreen} />
 
                                 {/*Menu for services*/}
                                 <Stack.Screen name="servicesScreen" component={ServicesScreen} />
                                 <Stack.Screen name="supportScreen" component={SupportScreen} />
-                                <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} />
+                          {/*<Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} />*/}
+                                {/*<Stack.Screen name="trainingDetails" component={TrainingDetailScreen} />*/}
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} />
 
