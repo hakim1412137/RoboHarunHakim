@@ -73,7 +73,9 @@ const Stack = createStackNavigator();
                                 {/*Menu for services*/}
                                 <Stack.Screen name="servicesScreen" component={ServicesScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
-                                <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} options={{ headerShown: false }} />
+                                <Stack.Screen name="roboticsTraining" component={RoboticsTrainingList} options={{ headerShown: false }} />
+                                <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />
+
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
