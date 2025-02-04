@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import api from '../utils/api2'; // Replace with your API utility
+import {getAllCareers} from "../utils/api"; // Replace with your API utility
 
 const CareersScreen = () => {
     const [careers, setCareers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+//createCareer,getCareerById,getAllCareers,deleteCareer,
     useEffect(() => {
         const fetchCareers = async () => {
             try {
-                const response = await api.get('/careers'); // Adjust the endpoint accordingly
-                setCareers(response);
+                const response = await getAllCareers(); // Adjust the endpoint accordingly
+                setCareers(response.data);
             } catch (error) {
                 console.error(error);
                 Alert.alert("Error", "Failed to fetch careers");

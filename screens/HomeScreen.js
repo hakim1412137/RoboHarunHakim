@@ -31,6 +31,8 @@ import AddVexRobotics from "./AddVexRobotics";
 import VexRoboticsDetail from "./VexRoboticsDetail";
 import VexRoboticsList from "./VexRoboticsList";
 import LoginScreen from "./LoginScreen";
+import CareersScreen from "./CareersScreen";
+import ClientScreen from "./ClientScreen";
 
 const HomeScreen = ({ navigation }) => {
     const [currentPage, setCurrentPage] = useState('homepage');
@@ -46,11 +48,11 @@ const HomeScreen = ({ navigation }) => {
             case 'aboutUs':
                 return <AboutScreen />;
             case 'careers':
-                return <CareersPage />;
+                return <CareersScreen />;
             case 'ourTeam':
                 return <OurTeamPage />;
             case 'ourClients':
-                return <OurClientsPage />;
+                return <ClientScreen />;
            /* case 'services':
                 return <ServicesPage />;*/
             case 'RoboticsTrainingPage':

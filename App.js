@@ -37,7 +37,8 @@ import RoboticsTrainingPage from "./screens/RoboticsTrainingPage";
 import ServicesScreen from "./screens/ServicesScreen";
 import WebsiteDevelopmentPage from "./screens/WebsiteDevelopmentPage";
 import AndroidDevelopmentPage from "./screens/AndroidDevelopmentPage";
-import ContactUsScreen from "./screens/ContactUsScreen"; // New About Screen
+import ContactUsScreen from "./screens/ContactUsScreen";
+import ClientScreen from "./screens/ClientScreen"; // New About Screen
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -63,7 +64,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="aboutUs" component={AboutScreen} />
                                 <Stack.Screen name="careers" component={CareersScreen} />
                                 <Stack.Screen name="ourTeam" component={ourTeamPage} />
-                                <Stack.Screen name="ourClients" component={ourClientsPage} />
+                                <Stack.Screen name="ourClients" component={ClientScreen} />
 
                                 {/*Menu for services*/}
                                 <Stack.Screen name="servicesScreen" component={ServicesScreen} />

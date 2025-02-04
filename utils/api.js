@@ -1,33 +1,49 @@
 import axios from 'axios';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Create an instance of Axios
 const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
 });
-
+/*
 // Axios request interceptor for setting Authorization headers
-// api.interceptors.request.use(
-//     request => {
-//         // Check if the request URL does not match the login or signup endpoints
-//         if (!/\/auth\/(login|signup)$/.test(request.url)) {
-//             const token = AsyncStorage.getItem('token').then((retToken) => {
-//                 console.log(retToken, "Promise Key")
-//                 if (token) {
-//                     request.headers.Authorization = `Bearer ${token}`;
-//                 }
-//             }); // Change to AsyncStorage as localStorage is not available in React Native
-//             console.log('Requesting:', request);
-//             console.log('Token:', token);
-//         }
-//         return request;
-//     },
-//     error => {
-//         console.error('Request error:', error);
-//         return Promise.reject(error);
-//     }
-// );
-// const token = await AsyncStorage.getItem('token');
+api.interceptors.request.use(
+    async (request) => {
+        // Check if the request URL does not match the login or signup endpoints
+        if (!/\/auth\/(login|signup)$/.test(request.url)) {
+            const token = await AsyncStorage.getItem('token'); // Retrieve the token from AsyncStorage
+            if (token) {
+                request.headers.Authorization = `Bearer ${token}`; // Attach the token to the request
+            }
+        }
+        return request;
+    },
+    (error) => {
+        console.error('Request error:', error);
+        return Promise.reject(error);
+    }
+);
+
+// Axios response interceptor for handling token expiration or unauthorized access
+api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        if (error.response?.status === 401) {
+            // Handle unauthorized access (e.g., redirect to login screen)
+            await AsyncStorage.removeItem('token'); // Clear the token
+            // Optionally, redirect the user to the login screen
+        }
+        return Promise.reject(error);
+    }
+);
+// Logout function
+const logoutUser = async () => {
+    await AsyncStorage.removeItem('token'); // Clear the token
+    // Optionally, redirect the user to the login screen
+};*/
+
+
+
 // Auth operations
 const login = (loginData) => api.post('/auth/login', loginData);
 
@@ -36,6 +52,8 @@ const signup = (signupData) => api.post('/auth/signup', signupData);
 // User operations
 const getUserDetails = (userId) => api.get(`/auth/${userId}`);
 const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
+
+
 
 // Competition management
 const getAllCompetitions = () => api.get(`/competitions`);
@@ -124,10 +142,23 @@ const createNotification = (notificationData) => api.post('/notifications', noti
 const createMeetingRequest = (requestData) => api.post('/meeting-requests', requestData);
 const getAllMeetingRequests = () => api.get('/meeting-requests');
 
+// Career management
+const createCareer = (careerData) => api.post('/careers', careerData);
+const getCareerById = (careerId) => api.get(`/careers/${careerId}`);
+const getAllCareers = () => api.get('/careers');
+const deleteCareer = (careerId) => api.delete(`/careers/${careerId}`);
+
+const createClient = (clientData) => api.post('/clients', clientData);
+const getClientById = (clientId) => api.get(`clients/${clientId}`);
+const getAllClients = () =>  api.get('/clients');
+const deleteClient = (clientId) => api.delete(`/clients/${clientId}`);
+
+
 // Exporting all the methods for usage
 export {
-    login,
-    signup,
+    login,signup,
+    createCareer,getCareerById,getAllCareers,deleteCareer,
+    createClient,getClientById, getAllClients, deleteClient,
     getUserDetails,
     updateUserDetails,
     getAllCompetitions,
@@ -185,8 +216,42 @@ export {
     getNotifications,
     createNotification,
     createMeetingRequest,
-    getAllMeetingRequests,
+    getAllMeetingRequests
+    // , logoutUser
 };
+
+/*import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// Create an instance of Axios
+const api = axios.create({
+    baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
+});
+
+// Axios request interceptor for setting Authorization headers
+// api.interceptors.request.use(
+//     request => {
+//         // Check if the request URL does not match the login or signup endpoints
+//         if (!/\/auth\/(login|signup)$/.test(request.url)) {
+//             const token = AsyncStorage.getItem('token').then((retToken) => {
+//                 console.log(retToken, "Promise Key")
+//                 if (token) {
+//                     request.headers.Authorization = `Bearer ${token}`;
+//                 }
+//             }); // Change to AsyncStorage as localStorage is not available in React Native
+//             console.log('Requesting:', request);
+//             console.log('Token:', token);
+//         }
+//         return request;
+//     },
+//     error => {
+//         console.error('Request error:', error);
+//         return Promise.reject(error);
+//     }
+// );
+// const token = await AsyncStorage.getItem('token');*/
+
+
 /*// Interceptor to include the token in the headers
 api.interceptors.request.use(async (config) => {
     const token = await AsyncStorage.getItem('token'); // Get the token from storage
