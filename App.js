@@ -42,8 +42,15 @@ import ClientScreen from "./screens/ClientScreen";
 import TeamScreen from "./screens/TeamScreen";
  // New About Screen
 
+import * as Font from 'expo-font';
+import { useFonts, Electrolize_400Regular } from '@expo-google-fonts/electrolize';
+
 const Stack = createStackNavigator();
   const App = () => {
+        let [fontsLoaded] = useFonts({
+            Electrolize_400Regular, // Load the font
+        });
+
         return (
             <AuthProvider>
                 <UserProvider>

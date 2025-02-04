@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 
-export default MenuForAboutUs = ({ navigation, children, subMenu }) => {
+export default MenuForAboutUs = ({ navigation, children, subMenu, textColor }) => {
     const [expanded, setExpanded] = useState(false);
     const toggleMenu = () => setExpanded(prev => !prev);
     const [hovered, setHovered] = useState(false);
@@ -10,8 +10,8 @@ export default MenuForAboutUs = ({ navigation, children, subMenu }) => {
     return (
         <View style={{ position: 'relative' }}>
             <TouchableOpacity onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onPress={toggleMenu} style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' }}>
-                <Text style={{ color: hovered ? '#4CAF50' : '#333', fontWeight: 'bold' }}>{children}</Text>
-                <Entypo name="triangle-down" size={18} style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)' }} color="black" />
+                <Text style={{ color: hovered ? '#4CAF50' : textColor, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }}>{children}</Text>
+                <Entypo name="triangle-down" size={18} style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)', color: textColor }} color="black" />
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>

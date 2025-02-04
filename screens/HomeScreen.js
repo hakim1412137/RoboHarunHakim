@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Animated, Button, Easing,ImageBackground  } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Menu from '../components/Menu';
+import Menu from '../components/Menu_for_home_page';
 import AboutScreen from "./AboutScreen"; // About Us page
 import SignUpScreen from './SignUpScreen';
 import ProductScreen from "./ProductScreen";
@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
     const renderContent = () => {
         switch (currentPage) {
             case 'homepage':
-                return <HomePage />;
+                return <HomePage navigation={navigation} />;
             case 'aboutUs':
                 return <AboutScreen />;
             case 'careers':
@@ -98,9 +98,8 @@ const HomeScreen = ({ navigation }) => {
 
         <View style={styles.container}>
             <Header navigation={navigation} />
-            <Menu navigation={navigation} />
             {expanded && <AboutUsPopup position={position} setCurrentPage={setCurrentPage} />}
-            <View style={styles.content}>
+            <View>
                 {renderContent()}
             </View>
             {/*<Footer />*/}
@@ -155,9 +154,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         margin: 20,
-    },
-    content: {
-        flex: 1,
     },
     submenuItem: {
         fontSize: 16,
