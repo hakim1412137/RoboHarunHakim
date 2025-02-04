@@ -40,6 +40,8 @@ import AndroidDevelopmentPage from "./screens/AndroidDevelopmentPage";
 import ContactUsScreen from "./screens/ContactUsScreen";
 import ClientScreen from "./screens/ClientScreen";
 import TeamScreen from "./screens/TeamScreen";
+import RoboticsTrainingList from "./screens/RoboticsTrainingList";
+import TrainingDetail from "./screens/TrainingDetail";
  // New About Screen
 
 const Stack = createStackNavigator();
