@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, FlatList, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import VEXkitsImage from '../assets/VEXkits.jpg'; // Path to VEX Kits Image
+import Menu from '../components/Menu_for_home_page';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const robotImages1 = [
     { id: '1', uri: require('../assets/VEX5.jpg') , description: 'VEX5 5'},
@@ -15,7 +17,7 @@ const robotImages1 = [
     { id: '2', uri: require('../assets/robot2.jpg'), description: 'A humanoid robot designed for friendly interaction.' },
 ];*/
 
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
     const dataList = [
         { id: '1', title: 'VEX V5', description: 'Offers a powerful robotics platform with more advanced mechanical, electrical, and programming capabilities.' },
         { id: '2', title: 'VEX Robotics Kit', description: 'An educational kit for building programmable robots and enhancing STEM skills.' },
@@ -26,9 +28,14 @@ const HomePage = () => {
 
     return (
         <ScrollView style={styles.mainContainer}>
-            <View style={styles.textContent}>
-                <Text style={styles.title}>Welcome to Ethio Robotics Center!</Text>
-                <Text style={styles.subtitle}>Explore a wide range of educational robots and accessories.</Text>
+                    <View style={{ width: '100%', paddingVertical: 200, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.3" }}></ImageBackground>
+                        <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}>
+                        </LinearGradient>
+                        <Menu navigation={navigation} />
+                        <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: 'white', fontFamily: 'Electrolize_400Regular' }}>Welcome to Ethio Robotics Center!</Text>
+                        <Text style={{ fontSize: 15, color: 'white', width: '60%', textAlign: 'center', fontWeight: '100', opacity: '0.8' }}>Discover an extensive collection of innovative educational tools and high-quality accessories designed to enhance learning, foster creativity, and develop problem-solving skills for students</Text>
+                    </View>
                 <FlatList
                     data={dataList}
                     contentContainerStyle={styles.list}
@@ -40,7 +47,6 @@ const HomePage = () => {
                         </View>
                     )}
                 />
-            </View>
 
             <Text style={styles.title}>VEX Kits</Text>
             <View style={styles.imageContent}>
@@ -67,17 +73,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
     mainContainer: {
         height: '40rem',
-        padding: 35,
         backgroundColor: '#FBF1E6'
-    },
-    backgroundImage: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-        backgroundColor: '#FFFAFA', // Light color (e.g., Snow)
-    },
-    textContent: {
-        marginBottom: 20,
     },
     title: {
         fontSize: 30,

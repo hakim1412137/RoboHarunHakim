@@ -44,8 +44,15 @@ import RoboticsTrainingList from "./screens/RoboticsTrainingList";
 import TrainingDetail from "./screens/TrainingDetail";
  // New About Screen
 
+import * as Font from 'expo-font';
+import { useFonts, Electrolize_400Regular } from '@expo-google-fonts/electrolize';
+
 const Stack = createStackNavigator();
   const App = () => {
+        let [fontsLoaded] = useFonts({
+            Electrolize_400Regular, // Load the font
+        });
+
         return (
             <AuthProvider>
                 <UserProvider>
