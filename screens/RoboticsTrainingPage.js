@@ -4,10 +4,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MenuForServices from '../components/MenuForServices'; // Adjust path
+import Menu from '../components/Menu';
 
-const RoboticsTrainingPage = () => {
+const RoboticsTrainingPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
             {/*<Header />*/}
             <View style={styles.content}>
                 <Text style={styles.title}>Robotics Training</Text>
@@ -24,6 +27,10 @@ const RoboticsTrainingPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    content: {
+        padding: 20,
+        paddingHorizontal: 200
     },
     title: {
         fontSize: 24,

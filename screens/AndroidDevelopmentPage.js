@@ -4,11 +4,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MenuForServices from '../components/MenuForServices'; // Adjust path
+import Menu from '../components/Menu';
 
-const AndroidDevelopmentPage = () => {
+const AndroidDevelopmentPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/*<Header />*/}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
             <View style={styles.content}>
                 <Text style={styles.title}>Android Development</Text>
                 <Text style={styles.bodyText}>
@@ -16,7 +18,6 @@ const AndroidDevelopmentPage = () => {
                     We focus on creating robust and scalable applications tailored to your target audience.
                 </Text>
             </View>
-            {/*<Footer />*/}
         </View>
     );
 };
@@ -24,6 +25,10 @@ const AndroidDevelopmentPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    content: {
+        padding: 20,
+        paddingHorizontal: 200
     },
     title: {
         fontSize: 24,

@@ -4,12 +4,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MenuForAboutUs from '../components/MenuForAboutUs'; // Adjust path
+import Menu from '../components/Menu';
 
 const OurClientsPage = () => {
     return (
         <View style={styles.container}>
-            {/*<Header />*/}
-            {/*<MenuForAboutUs setCurrentPage={setCurrentPage} /> /!* Pass down the function *!/*/}
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+
             <View style={styles.content}>
                 <Text style={styles.title}>Our Clients</Text>
                 <Text style={styles.bodyText}>
@@ -22,7 +24,6 @@ const OurClientsPage = () => {
                     - Local Schools and Clubs
                 </Text>
             </View>
-            {/*<Footer />*/}
         </View>
     );
 };
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         margin: 20,
+    },
+    content: {
+        padding: 10,
+        paddingHorizontal: 200
     },
     bodyText: {
         fontSize: 16,
