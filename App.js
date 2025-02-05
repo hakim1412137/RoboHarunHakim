@@ -46,6 +46,8 @@ import TrainingDetail from "./screens/TrainingDetail";
 
 import * as Font from 'expo-font';
 import { useFonts, Electrolize_400Regular } from '@expo-google-fonts/electrolize';
+import PostListScreen from "./screens/PostListScreen";
+import PostDetailScreen from "./screens/PostDetailScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -83,6 +85,9 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="roboticsTraining" component={RoboticsTrainingList} options={{ headerShown: false }} />
                                 <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />
 
+                            {/*    <Stack.Screen name="PostList" component={PostListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{ headerShown: false }} />
+*/}
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />

@@ -29,6 +29,8 @@ import ClientScreen from "./ClientScreen";
 import TeamScreen from "./TeamScreen";
 import RoboticsTrainingList from "./RoboticsTrainingList";
 import TrainingDetail from "./TrainingDetail";
+import PostListScreen from "./PostListScreen";
+import PostDetailScreen from "./PostDetailScreen";
 
 
 const HomeScreen = ({ navigation }) => {
@@ -54,7 +56,10 @@ const HomeScreen = ({ navigation }) => {
                 return <RoboticsTrainingList />;
             case 'trainingDetails':
                 return <TrainingDetail />;
-
+           /* case 'PostList':
+                return <PostListScreen />;
+            case 'PostDetail':
+                return <PostDetailScreen />;*/
             case 'AndroidDevelopmentPage':
                 return <AndroidDevelopmentPage />;
             case 'WebsiteDevelopmentPage':

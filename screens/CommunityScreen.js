@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Button, StyleSheet } from 'react-native';
-/*
-import communityService from '../services/communityService';
-*/
+
 import Loader from '../components/Loader';
+import {getAllCommunityPosts} from "../utils/api";
 
 const CommunityScreen = ({ navigation }) => {
     const [posts, setPosts] = useState([]);
@@ -11,8 +10,8 @@ const CommunityScreen = ({ navigation }) => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const data = await communityService.getAllPosts();
-            setPosts(data);
+            const response  = await getAllCommunityPosts();
+            setPosts(response.data);
             setLoading(false);
         };
         fetchPosts();

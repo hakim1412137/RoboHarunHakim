@@ -62,8 +62,11 @@ const getUserDetails = (userId) => api.get(`/auth/${userId}`);
 const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
 
 // Payment API calls
-const initializePayment = (paymentData) => api.post("/payments/initialize", paymentData);
+const initializePayment = (paymentData) => api.post('/payments/initialize', paymentData);
 const verifyPayment = (txRef) => api.get(`/payments/verify/${txRef}`);
+
+/*const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
+const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);*/
 
 // Competition management
 const getAllCompetitions = () => api.get(`/competitions`);
@@ -125,19 +128,24 @@ const deletePartnership = (partnershipId) => api.delete(`/partnerships/${partner
 const fetchOrders = () => api.get(`/orders`);
 const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { status });
 
-// Payment management
-/*const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
-const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);*/
+
 
 // Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
 const submitFeedback = (feedbackData) => api.post('/feedback', feedbackData);
 
+const getAllPosts = () => api.get(`/posts`);
+const createPost = (post) => api.post(`/posts`, post);
+const getPostById = (postId) => api.get(`/posts/${postId}`);
+const getPostsByUserId = (userId) => api.get(`/posts/user/${userId}`);
+const getCommentsByPostId = (postId) => api.get(`/comments/post/${postId}`);
+const postComment = (postId, comment) => api.post(`/posts/${postId}/comments`, comment);
+
 // Community management
-const getAllCommunityPosts = () => api.get(`/community-posts`);
+/*const getAllCommunityPosts = () => api.get(`/community-posts`);
 const createCommunityPost = (post) => api.post(`/community-posts`, post);
 const getCommentsByPostId = (postId) => api.get(`/community-posts/${postId}/comments`);
-const postComment = (postId, comment) => api.post(`/community-posts/${postId}/comments`, comment);
+const postComment = (postId, comment) => api.post(`/community-posts/${postId}/comments`, comment);*/
 
 // Quiz CRUD operations
 const getQuizzes = () => api.get('/quizzes');
@@ -195,7 +203,7 @@ export {
     getResources, createResource, updateResource, deleteResource,
     getPartnerships, createPartnership, updatePartnership, deletePartnership,
     fetchOrders, updateOrderStatus, getFeedbackByCourseId,
-    submitFeedback, getAllCommunityPosts, createCommunityPost, getCommentsByPostId, postComment,
+    submitFeedback, getAllPosts, createPost, getCommentsByPostId, postComment,getPostById,getPostsByUserId,
     getQuizzes, createQuiz, getQuizById,
     getNotifications, createNotification,
     createMeetingRequest, getAllMeetingRequests

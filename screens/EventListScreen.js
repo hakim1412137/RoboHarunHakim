@@ -34,7 +34,7 @@ const AboutScreen = ({ navigation }) => {
             <Menu navigation={navigation}></Menu>
 
             <View style={{ padding: 20, paddingHorizontal: 200 }}>
-                <Text style={styles.title}>Robotics Educational and Shop - Timeline of Key Events</Text>
+                <Text style={styles.title}>Robotics WorkShop- Timeline of Key Events</Text>
                 <Text style={styles.description}>Robotics Application strives to make a better Africa via AI technology and innovation.</Text>
 
                 <View style={styles.timelineItem}>

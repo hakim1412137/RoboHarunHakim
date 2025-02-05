@@ -7,7 +7,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"; // Import 
 
 const LoginScreen = ({ navigation }) => {
   const { setUser } = useContext(UserContext);
-    // const { saveToken } = useContext(AuthContext);
     const { token, saveToken, logout, isAuthenticated } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -46,37 +45,9 @@ const LoginScreen = ({ navigation }) => {
     const handleLogout = async () => {
         await logout(); // Clear token and user data
         setUser(null); // Clear user data in UserContext
+        // navigation.navigate('Login'); // Redirect to login screen
+
     };
-  /*  return (
-        <View style={styles.container}>
-            <Image source={require('../assets/robot1.jpg')} style={styles.logo} />
-            <Text style={styles.title}>Welcome Back!</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
-            <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-                <Text style={styles.buttonText}>Sign In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup')}>
-                <Text style={styles.buttonText}>Sign Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { /!* Handle password reset *!/ }}>
-                <Text style={styles.forgotPassword}>Forgot Password?</Text>
-            </TouchableOpacity>
-        </View>
-    );
-};*/
     return (
         <View style={styles.container}>
             <Image source={require('../assets/robot1.jpg')} style={styles.logo} />
