@@ -1,159 +1,187 @@
-// screens/PaymentScreen.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { initiatePayment } from '../utils/api';
-import { verifyPayment } from '../utils/api';
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, Alert, Linking } from "react-native";
+import api from "./api";
+import {initializePayment, verifyPayment} from "../utils/api"; // Import the API service
 
-const PaymentScreen = ({ route }) => {
-    const { amount } = route.params; // Get amount from parameters
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [payMethodToken, setPayMethodToken] = useState('');
+const PaymentScreen = () => {
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [amount, setAmount] = useState("");
+    const [txRef, setTxRef] = useState("");
 
-    const initiatePayment1 = async () => {
-        const paymentData = {
-            email,phoneNumber,amount,
-            paymentMethod: payMethodToken,
-        };
-
+    const handleInitializePayment = async () => {
         try {
-            const response = await initiatePayment(paymentData);
-            Alert.alert(response);
+            const paymentData = {
+                email,
+                phoneNumber,
+                amount: parseFloat(amount),
+             /*   currency: "ETB",
+                txRef: `tx-ref-${Date.now()}`, // Unique transaction reference*/
+            };
+            // Call the initializePayment API
+            const response = await initializePayment(paymentData);
+            // Get the checkout URL from the backend
+            const checkoutUrl = response.data;
+
+            // Redirect to the payment link
+            Linking.openURL(checkoutUrl);
         } catch (error) {
-            console.error(error);
-            Alert.alert('Error', 'An error occurred while initiating payment.');
+            Alert.alert("Error", "Failed to initialize payment");
         }
     };
 
-    const verifyPayment1 = async (token) => {
-        const verificationData = {
-            token,
-            amount,
-            paymentMethod: payMethodToken,
-        };
-
+    const handleVerifyPayment = async () => {
         try {
-            const response = await verifyPayment(verificationData);
-            Alert.alert('Success', 'Payment successful!');
-            // Navigate to another screen if needed
+            // Call the verifyPayment API
+            const response = await verifyPayment(txRef);
+            const transaction = response.data;
+
+            Alert.alert("Payment Status", `Transaction status: ${transaction.status}`);
         } catch (error) {
-            console.error(error);
-            Alert.alert('Error', 'Payment verification failed.');
+            Alert.alert("Error", "Failed to verify payment");
         }
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Payment Page</Text>
-            <Text>Total Amount: ${amount}</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your Email"
-                value={email}
-                onChangeText={setEmail}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your Phone Number"
-                value={phoneNumber}
-                onChangeText={setPhoneNumber}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Payment Method Token"
-                value={payMethodToken}
-                onChangeText={setPayMethodToken}
-            />
-            <Button title="Initiate Payment" onPress={initiatePayment1} />
-            <Button title="Verify Payment" onPress={() => verifyPayment1(payMethodToken)} />
+        <View>
+            <Text>Email:</Text>
+            <TextInput value={email} onChangeText={setEmail} />
+
+            <Text>Phone Number:</Text>
+            <TextInput value={phoneNumber} onChangeText={setPhoneNumber} />
+
+            <Text>Amount:</Text>
+            <TextInput value={amount} onChangeText={setAmount} keyboardType="numeric" />
+
+            <Button title="Initialize Payment" onPress={handleInitializePayment} />
+
+            <Text>Transaction Reference:</Text>
+            <TextInput value={txRef} onChangeText={setTxRef} />
+
+            <Button title="Verify Payment" onPress={handleVerifyPayment} />
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    header: {
-        fontSize: 24,
-        marginBottom: 10,
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 15,
-        paddingLeft: 8,
-    },
-});
-
 export default PaymentScreen;
+
 /*
-// screens/PaymentScreen.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import paymentService from '../services/paymentService';
+Frontend: Sends only the necessary data (email, phone number, and amount) to the backend.
+Backend: Handles the creation of the paymentData object, generates the tx_ref, and calls the Chapa API.
+Benefits: Simpler frontend, improved security, and centralized logic.
 
-const PaymentScreen = ({ route }) => {
-    const { orderId, amount } = route.params;  // Get order details from params
-    const [paymentMethod, setPaymentMethod] = useState('');
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, Alert, Linking } from "react-native";
+import api from "./api"; // Import the API service
 
-    const handlePayment = async () => {
-        const paymentData = {
-            orderId,
-            amount,
-            paymentMethod,
-        };
+const PaymentScreen = () => {
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [amount, setAmount] = useState("");
 
+    const handleInitializePayment = async () => {
         try {
-            const response = await paymentService.createPayment(paymentData);
-            if (response.status === 'success') {
-                // Handle success (e.g., navigate to confirmation page)
-                alert('Payment Successful!');
-            } else {
-                alert('Payment Failed: ' + response.message);
-            }
+            // Send only the necessary data to the backend
+            const response = await api.post("/payments/initialize", {
+                email,
+                phoneNumber,
+                amount: parseFloat(amount),
+            });
+
+            // Get the checkout URL from the backend
+            const checkoutUrl = response.data;
+            Linking.openURL(checkoutUrl); // Redirect to the payment page
         } catch (error) {
-            console.error(error);
-            alert('An error occurred while processing the payment.');
+            Alert.alert("Error", "Failed to initialize payment");
         }
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Payment Page</Text>
-            <Text>Total Amount: ${amount}</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter Payment Method (e.g., token or card info)"
-                value={paymentMethod}
-                onChangeText={setPaymentMethod}
-            />
-            <Button title="Process Payment" onPress={handlePayment} />
+        <View>
+            <Text>Email:</Text>
+            <TextInput value={email} onChangeText={setEmail} />
+
+            <Text>Phone Number:</Text>
+            <TextInput value={phoneNumber} onChangeText={setPhoneNumber} />
+
+            <Text>Amount:</Text>
+            <TextInput value={amount} onChangeText={setAmount} keyboardType="numeric" />
+
+            <Button title="Initialize Payment" onPress={handleInitializePayment} />
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    },
-    header: {
-        fontSize: 24,
-        marginBottom: 10,
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 15,
-        paddingLeft: 8,
-    },
-});
+export default PaymentScreen;
+
+Uses the api service to call the backend endpoints.
+Handles user input for email, phone number, amount, and transaction reference.
+Redirects the user to the payment link after initializing the payment.
+Verifies the payment status using the transaction reference.
+
+Initialize Payment
+When the user clicks the "Initialize Payment" button, the handleInitializePayment function is called. It sends a POST request to the backend with the payment details.
+
+Verify Payment
+When the user clicks the "Verify Payment" button, the handleVerifyPayment function is called. It sends a GET request to the backend with the transaction reference (txRef).
+
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, Alert } from "react-native";
+import axios from "axios";
+
+const PaymentScreen = () => {
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [amount, setAmount] = useState("");
+    const [txRef, setTxRef] = useState("");
+
+    const initializePayment = async () => {
+        try {
+            const response = await axios.post("http://your-backend-url/api/payments/initialize", {
+                email,
+                phoneNumber,
+                amount: parseFloat(amount),
+                currency: "ETB",
+                txRef: `tx-ref-${Date.now()}`, // Unique transaction reference
+            });
+            const checkoutUrl = response.data;
+            // Redirect to the payment link (e.g., using WebView or Linking)
+            Alert.alert("Payment Link", checkoutUrl);
+        } catch (error) {
+            Alert.alert("Error", "Failed to initialize payment");
+        }
+    };
+
+    const verifyPayment = async () => {
+        try {
+            const response = await axios.get(`http://your-backend-url/api/payments/verify/${txRef}`);
+            const transaction = response.data;
+            Alert.alert("Payment Status", `Transaction status: ${transaction.status}`);
+        } catch (error) {
+            Alert.alert("Error", "Failed to verify payment");
+        }
+    };
+
+    return (
+        <View>
+            <Text>Email:</Text>
+            <TextInput value={email} onChangeText={setEmail} />
+
+            <Text>Phone Number:</Text>
+            <TextInput value={phoneNumber} onChangeText={setPhoneNumber} />
+
+            <Text>Amount:</Text>
+            <TextInput value={amount} onChangeText={setAmount} keyboardType="numeric" />
+
+            <Button title="Initialize Payment" onPress={initializePayment} />
+
+            <Text>Transaction Reference:</Text>
+            <TextInput value={txRef} onChangeText={setTxRef} />
+
+            <Button title="Verify Payment" onPress={verifyPayment} />
+        </View>
+    );
+};
 
 export default PaymentScreen;
- */
+*/

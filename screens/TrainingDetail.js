@@ -41,8 +41,8 @@ const TrainingDetail = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{training.title}</Text>
-            <Text style={styles.bodyText}>Type: {training.training_type}</Text>
-            <Text style={styles.bodyText}>Difficulty Level: {training.difficulty_level}</Text>
+            <Text style={styles.bodyText}>Type: {training.trainingType}</Text>
+            <Text style={styles.bodyText}>Difficulty Level: {training.difficultyLevel}</Text>
             <Text style={styles.bodyText}>Description: {training.description}</Text>
             {/* Add more details as needed */}
             <Button title="Back to Trainings" onPress={() => navigation.goBack()} />

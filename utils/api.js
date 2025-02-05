@@ -1,10 +1,18 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+const BASE_URL = "http://localhost:8083/api";
 
-// Create an instance of Axios
+// Create an Axios instance
+const api = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
+/*// Create an instance of Axios
 const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
-});
+});*/
 /*
 // Axios request interceptor for setting Authorization headers
 api.interceptors.request.use(
@@ -53,7 +61,9 @@ const signup = (signupData) => api.post('/auth/signup', signupData);
 const getUserDetails = (userId) => api.get(`/auth/${userId}`);
 const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
 
-
+// Payment API calls
+const initializePayment = (paymentData) => api.post("/payments/initialize", paymentData);
+const verifyPayment = (txRef) => api.get(`/payments/verify/${txRef}`);
 
 // Competition management
 const getAllCompetitions = () => api.get(`/competitions`);
@@ -116,8 +126,8 @@ const fetchOrders = () => api.get(`/orders`);
 const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { status });
 
 // Payment management
-const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
-const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);
+/*const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
+const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);*/
 
 // Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
@@ -170,68 +180,25 @@ const deleteTraining =  (trainingId) => api.delete(`robotics-trainings/${trainin
 // Exporting all the methods for usage
 export {
     login,signup,
+    initializePayment, verifyPayment,
     getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,
     createTeam, getTeamById, getAllTeams, deleteTeam,
     createCareer,getCareerById,getAllCareers,deleteCareer,
     createClient,getClientById, getAllClients, deleteClient,
-    getUserDetails,
-    updateUserDetails,
-    getAllCompetitions,
-    getCompetitionById,
-    registerForCompetition,
-    createCompetition,
-    updateCompetition,
-    deleteCompetition,
-    getAllVexRobotics,
-    createVexRobotics,
-    deleteVexRoboticsById,
-    vexRoboticsById,
-    getProducts,
-    createProduct,
-    updateProduct,
-    deleteProduct,
-    getProductDetails,
-    getServices,
-    createService,
-    updateService,
-    deleteService,
-    getAllCourses,
-    getCourseById,
-    getCoursesByUserId,
-    createCourse,
-    updateCourse,
-    deleteCourse,
-    enrollInCourse,
-    getEvents,
-    createEvent,
-    updateEvent,
-    deleteEvent,
-    registerForEvents,
-    getResources,
-    createResource,
-    updateResource,
-    deleteResource,
-    getPartnerships,
-    createPartnership,
-    updatePartnership,
-    deletePartnership,
-    fetchOrders,
-    updateOrderStatus,
-    initiatePayment,
-    verifyPayment,
-    getFeedbackByCourseId,
-    submitFeedback,
-    getAllCommunityPosts,
-    createCommunityPost,
-    getCommentsByPostId,
-    postComment,
-    getQuizzes,
-    createQuiz,
-    getQuizById,
-    getNotifications,
-    createNotification,
-    createMeetingRequest,
-    getAllMeetingRequests
+    getUserDetails, updateUserDetails,
+    getAllCompetitions, getCompetitionById, registerForCompetition, createCompetition, updateCompetition, deleteCompetition,
+    getAllVexRobotics, createVexRobotics, deleteVexRoboticsById, vexRoboticsById,
+    getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
+    getServices, createService, updateService, deleteService,
+    getAllCourses, getCourseById, getCoursesByUserId, createCourse, updateCourse, deleteCourse, enrollInCourse,
+    getEvents, createEvent, updateEvent, deleteEvent, registerForEvents,
+    getResources, createResource, updateResource, deleteResource,
+    getPartnerships, createPartnership, updatePartnership, deletePartnership,
+    fetchOrders, updateOrderStatus, getFeedbackByCourseId,
+    submitFeedback, getAllCommunityPosts, createCommunityPost, getCommentsByPostId, postComment,
+    getQuizzes, createQuiz, getQuizById,
+    getNotifications, createNotification,
+    createMeetingRequest, getAllMeetingRequests
     // , logoutUser
 };
 

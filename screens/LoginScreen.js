@@ -1,8 +1,5 @@
-
-
 import React, { useState, useContext } from 'react';
 import {View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-
 import { AuthContext } from '../context/AuthContext'; // Adjust path as needed
 import {login} from '../utils/api';
 import {UserContext} from "../context/UserContext";
@@ -10,14 +7,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage"; // Import 
 
 const LoginScreen = ({ navigation }) => {
   const { setUser } = useContext(UserContext);
-    const { saveToken } = useContext(AuthContext);
-
+    // const { saveToken } = useContext(AuthContext);
+    const { token, saveToken, logout, isAuthenticated } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleSignIn = async () => {
       const credentials = { username, password };
+        const credentials2 = { username: 'existingUser', password: 'correctPassword' }; // Hardcoded credentials
+        console.log('Login Payload:', credentials); // Log the payload for debugging
 
         try {
             const response = await login(credentials);
@@ -29,8 +28,9 @@ const LoginScreen = ({ navigation }) => {
                 console.log('Received token:', accessToken);
 
                 saveToken(accessToken); // Call your AuthContext method to save token if needed
-                console.log()
+                console.log(accessToken);
                 setUser(username); // Optionally store the username in UserContext
+                console.log(username);
 
                 navigation.navigate('home'); // Navigate to home screen
             }
@@ -41,23 +41,13 @@ const LoginScreen = ({ navigation }) => {
                 : 'Login failed. Please try again.';
             setError(errorMessage); // Set and display error message
         }
-   /*        const token = response.data; // Expecting the JWT token back from the response
-            console.log('Received token:', token); // Log the received token
 
-            await saveToken(token); // Save the token using AsyncStorage
-            setUser(username); // Optionally store the username in UserContext
-
-            console.log(navigation)
-            navigation.navigate('home');
-        } catch (err) {
-            console.error('Login error:', error.response ? error.response.data : error.message);
-            console.log(err)
-
-            setError('Login failed. Please check your credentials.');
-        }*/
     };
-
-    return (
+    const handleLogout = async () => {
+        await logout(); // Clear token and user data
+        setUser(null); // Clear user data in UserContext
+    };
+  /*  return (
         <View style={styles.container}>
             <Image source={require('../assets/robot1.jpg')} style={styles.logo} />
             <Text style={styles.title}>Welcome Back!</Text>
@@ -81,13 +71,53 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup')}>
                 <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { /* Handle password reset */ }}>
+            <TouchableOpacity onPress={() => { /!* Handle password reset *!/ }}>
                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
             </TouchableOpacity>
         </View>
     );
+};*/
+    return (
+        <View style={styles.container}>
+            <Image source={require('../assets/robot1.jpg')} style={styles.logo} />
+            <Text style={styles.title}>Welcome Back!</Text>
+            {isAuthenticated() ? (
+                <>
+                    <Text style={styles.welcomeText}>You are logged in as {username}!</Text>
+                    <TouchableOpacity style={styles.button} onPress={handleLogout}>
+                        <Text style={styles.buttonText}>Logout</Text>
+                    </TouchableOpacity>
+                </>
+            ) : (
+                <>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Username"
+                        value={username}
+                        onChangeText={setUsername}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                    {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                    <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+                        <Text style={styles.buttonText}>Sign In</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup')}>
+                        <Text style={styles.buttonText}>Sign Up</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { /!* Handle password reset *!/ }}>
+                        <Text style={styles.forgotPassword}>Forgot Password?</Text>
+                    </TouchableOpacity>
+                </>
+            )}
+        </View>
+    );
 };
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -144,6 +174,21 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
+/*        const token = response.data; // Expecting the JWT token back from the response
+         console.log('Received token:', token); // Log the received token
+
+         await saveToken(token); // Save the token using AsyncStorage
+         setUser(username); // Optionally store the username in UserContext
+
+         console.log(navigation)
+         navigation.navigate('home');
+     } catch (err) {
+         console.error('Login error:', error.response ? error.response.data : error.message);
+         console.log(err)
+
+         setError('Login failed. Please check your credentials.');
+     }*/
 /*
 /*import React, { useState, useContext } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';

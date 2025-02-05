@@ -22,6 +22,7 @@
     "expo": "52.0.28",
     "expo-font": "~13.0.3",
     "expo-image": "~2.0.4",
+    "expo-linear-gradient": "~14.0.2",
     "expo-speech": "~13.0.1",
     "expo-status-bar": "~2.0.1",
     "lottie-react-native": "7.1.0",
@@ -37,8 +38,7 @@
     "react-native-screens": "^4.4.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
-    "RoboHakim": "file:",
-    "expo-linear-gradient": "~14.0.2"
+    "RoboHakim": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

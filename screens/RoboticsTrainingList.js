@@ -38,6 +38,13 @@ const RoboticsTrainingList = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>Robotics Trainings</Text>
+            <View style={styles.content}>
+            
+                <Text style={styles.bodyText}>
+                    Our robotics training program is designed for individuals and groups eager to learn about robotics.
+                    We provide hands-on training sessions that empower participants with the knowledge needed to build and program robots.
+                </Text>
+            </View>
             <FlatList
                 data={trainings}
                 keyExtractor={(item) => item.id.toString()} // Unique key for each item
@@ -56,6 +63,15 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 10,
         textAlign: 'center',
+    },
+    bodyText: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 20,
+    },
+    content: {
+        padding: 20,
+        paddingHorizontal: 200
     },
 });
 
