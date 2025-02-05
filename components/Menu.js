@@ -10,6 +10,7 @@ let MenuRoutes = [{ text: 'Products', route: 'products' },
                   { text: 'VexRobotics', route: 'vexRobotics' },
                   { text: 'Competitions', route: 'competitions' }, 
                   { text: 'Events', route: 'events' },
+                  { text: 'Posts', route: 'postList' },
                   { text: 'Contact Us', route: 'contactUs' }
                 ];
 

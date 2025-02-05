@@ -77,7 +77,7 @@ const ContactUsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#FBF1E6',
     },
     header: {
         fontSize: 28,

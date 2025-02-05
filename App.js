@@ -88,9 +88,9 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
-                            {/*    <Stack.Screen name="PostList" component={PostListScreen} options={{ headerShown: false }} />
-                                <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{ headerShown: false }} />
-*/}
+                                <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="postDetail" component={PostDetailScreen} options={{ headerShown: false }} />
+
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
 
                                 {/*Details*/}

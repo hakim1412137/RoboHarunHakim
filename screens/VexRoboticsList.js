@@ -41,24 +41,23 @@ const VexRoboticsList = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Header></Header>
             <Menu navigation={navigation}></Menu>
-            <View style={{ padding: 10, paddingHorizontal: 200 }}>
+            <ScrollView style={{ padding: 10, paddingHorizontal: 200, height: '40rem' }}>
                 <Text style={styles.title}>VEX Robotics Platforms</Text>
                 <FlatList
                     data={platforms}
                     keyExtractor={(item) => item.id.toString()} // Key extractor function
                     renderItem={renderItem} // renderItem uses a separate function
                 />
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
     },
     title: {
         fontSize: 24,

@@ -213,7 +213,7 @@ const CompetitionsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        backgroundColor: '#fff',
+        backgroundColor: '#FBF1E6',
     },
     title: {
         fontSize: 24,

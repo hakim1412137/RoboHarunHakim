@@ -62,7 +62,7 @@ const AboutScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         height: '40rem',
-        backgroundColor: '#FFFFFF', // Sky Blue
+        backgroundColor: '#FBF1E6', // Sky Blue
     },
     title: {
         fontSize: 24,
