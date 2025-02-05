@@ -30,7 +30,7 @@ const TeamScreen = ({ navigation }) => {
         return (
             <TeamCard
                 team={item} // Pass team member data to the TeamCard component
-                onPress={() => navigation.navigate('TeamDetail', { id: item.id })} // Navigate to detail screen
+                onPress={() => navigation.navigate('teamDetail', { id: item.id })} // Navigate to detail screen
             />
         );
     };
@@ -57,7 +57,8 @@ const TeamScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
+        backgroundColor: '#FBF1E6'
     },
     title: {
         fontSize: 24,

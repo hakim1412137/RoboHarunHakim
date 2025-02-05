@@ -48,6 +48,7 @@ import * as Font from 'expo-font';
 import { useFonts, Electrolize_400Regular } from '@expo-google-fonts/electrolize';
 import PostListScreen from "./screens/PostListScreen";
 import PostDetailScreen from "./screens/PostDetailScreen";
+import TeamDetail from "./screens/TeamDetail";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -84,13 +85,13 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="roboticsTraining" component={RoboticsTrainingList} options={{ headerShown: false }} />
                                 <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />
+                                <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
+                                <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
                             {/*    <Stack.Screen name="PostList" component={PostListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{ headerShown: false }} />
 */}
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
-                                <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
-                                <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
@@ -98,6 +99,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
                                 <Stack.Screen name="ProductDetails" component={ProductDetail} />
                                 <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
+                                <Stack.Screen name="teamDetail" component={TeamDetail} />
                                 <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
 
                                 {/*Auth*/}

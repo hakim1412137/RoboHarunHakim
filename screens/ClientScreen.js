@@ -58,6 +58,7 @@ const ClientScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#FBF1E6'
     },
     title: {
         fontSize: 24,

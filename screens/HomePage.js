@@ -30,8 +30,7 @@ const HomePage = ({ navigation }) => {
         <ScrollView style={styles.mainContainer}>
                     <View style={{ width: '100%', paddingVertical: 200, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.3" }}></ImageBackground>
-                        <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}>
-                        </LinearGradient>
+                        <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}></LinearGradient>
                         <Menu navigation={navigation} />
                         <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: 'white', fontFamily: 'Electrolize_400Regular' }}>Welcome to Ethio Robotics Center!</Text>
                         <Text style={{ fontSize: 15, color: 'white', width: '60%', textAlign: 'center', fontWeight: '100', opacity: '0.8' }}>Discover an extensive collection of innovative educational tools and high-quality accessories designed to enhance learning, foster creativity, and develop problem-solving skills for students</Text>
@@ -69,7 +68,6 @@ const HomePage = ({ navigation }) => {
 };
 
 // Styles
-
 const styles = StyleSheet.create({
     mainContainer: {
         height: '40rem',
