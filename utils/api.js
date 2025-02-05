@@ -130,6 +130,8 @@ const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { s
 
 
 
+
+
 // Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
 const submitFeedback = (feedbackData) => api.post('/feedback', feedbackData);
@@ -159,6 +161,9 @@ const createNotification = (notificationData) => api.post('/notifications', noti
 // Meeting requests
 const createMeetingRequest = (requestData) => api.post('/meeting-requests', requestData);
 const getAllMeetingRequests = () => api.get('/meeting-requests');
+const getMeetingRequestById = (requestId) => api.get(`/meeting-requests/${requestId}`);
+const deleteMeetingRequest = (requestId) => api.delete(`/meeting-requests/${requestId}`);
+
 
 // Career management
 const createCareer = (careerData) => api.post('/careers', careerData);
@@ -206,7 +211,7 @@ export {
     submitFeedback, getAllPosts, createPost, getCommentsByPostId, postComment,getPostById,getPostsByUserId,
     getQuizzes, createQuiz, getQuizById,
     getNotifications, createNotification,
-    createMeetingRequest, getAllMeetingRequests
+    createMeetingRequest, getAllMeetingRequests,getMeetingRequestById,deleteMeetingRequest
     // , logoutUser
 };
 

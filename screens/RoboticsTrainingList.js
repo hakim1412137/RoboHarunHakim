@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
 import { getAllTrainings } from '../utils/api'; // Ensure this path is correct
-import TrainingCard from '../components/TrainingCard'; // Adjust path to your TrainingCard component
+import TrainingCard from '../components/TrainingCard';
+import Header from "../components/Header";
+import Menu from "../components/Menu"; // Adjust path to your TrainingCard component
 
 const RoboticsTrainingList = ({ navigation }) => {
     const [trainings, setTrainings] = useState([]);
@@ -36,28 +38,31 @@ const RoboticsTrainingList = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>Robotics Trainings</Text>
-            <View style={styles.content}>
-            
-                <Text style={styles.bodyText}>
-                    Our robotics training program is designed for individuals and groups eager to learn about robotics.
-                    We provide hands-on training sessions that empower participants with the knowledge needed to build and program robots.
-                </Text>
-            </View>
-            <FlatList
-                data={trainings}
-                keyExtractor={(item) => item.id.toString()} // Unique key for each item
-                renderItem={renderItem} // Render items using the defined function
-            />
-        </ScrollView>
+        <View style={styles.container}>
+            <Header></Header>
+            <Menu navigation={navigation}></Menu>
+            <ScrollView style={{ padding: 20, paddingHorizontal: 200, height: '40rem' }}>
+                <Text style={styles.title}>Robotics Trainings</Text>
+                <View style={styles.content}>
+
+                    <Text style={styles.bodyText}>
+                        Our robotics training program is designed for individuals and groups eager to learn about robotics.
+                        We provide hands-on training sessions that empower participants with the knowledge needed to build and program robots.
+                    </Text>
+                </View>
+                <FlatList
+                    data={trainings}
+                    keyExtractor={(item) => item.id.toString()} // Unique key for each item
+                    renderItem={renderItem} // Render items using the defined function
+                />
+            </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
     },
     title: {
         fontSize: 24,

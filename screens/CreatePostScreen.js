@@ -1,7 +1,7 @@
 // screens/CreatePostScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { createCommunityPost } from "../utils/api";
+import {createCommunityPost} from "../utils/api";
 
 const CreatePostScreen = ({ navigation }) => {
     const [title, setTitle] = useState('');

@@ -13,8 +13,8 @@ const TrainingDetail = ({ navigation }) => {
         const loadTraining = async () => {
             setLoading(true);
             try {
-                const response = await getTrainingsById(id); // Fetch training details
-                setTraining(response); // Set the training data
+                const response = await getTrainingsById(id);
+                setTraining(response.data);
             } catch (error) {
                 console.error("Error fetching training details:", error);
             } finally {
