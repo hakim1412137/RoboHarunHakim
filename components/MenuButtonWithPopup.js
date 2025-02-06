@@ -11,7 +11,7 @@ export default MenuForAboutUs = ({ navigation, children, subMenu, textColor }) =
         <View style={{ position: 'relative' }}>
             <TouchableOpacity onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onPress={toggleMenu} style={{ display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center' }}>
                 <Text style={{ color: hovered ? '#4CAF50' : textColor, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }}>{children}</Text>
-                <Entypo name="triangle-down" size={18} style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)', color: textColor }} color="black" />
+                <Entypo name="triangle-down" size={18} style={{ transform: expanded ? 'rotate(180deg)': 'rotate(0)', color: hovered ? '#4CAF50' : textColor }} />
             </TouchableOpacity>
             {expanded && (
                 <View style={styles.submenu}>

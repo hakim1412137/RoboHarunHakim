@@ -1,157 +1,128 @@
 import React from 'react';
-import {View, Text, FlatList, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native';
-import VEXkitsImage from '../assets/VEXkits.jpg'; // Path to VEX Kits Image
+import {View, Text, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import Menu from '../components/Menu_for_home_page';
+import Footer from '../components/Footer';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const robotImages1 = [
-    { id: '1', uri: require('../assets/VEX5.jpg') , description: 'VEX5 5'},
-    { id: '2', uri: require('../assets/VXECTE.jpg'),  description: 'VEX CTE'},
-    { id: '4', uri: require('../assets/VEXIQ.jpg'), description: 'VEX IQ' },
-    { id: '3', uri: require('../assets/123classroombundles.jpg'), description: '123 Classroom Bundles' },
-    { id: '5', uri: require('../assets/blocks-switch-text-tile.jpg'), description: 'Code Blocks' },
-    { id: '6', uri: require('../assets/VEXkits.jpg'), description: 'VEX Kits' },
- ];
-/*const robotImages1 = [
-    { id: '1', uri: require('../assets/robot1.jpg'), description: 'This is an educational robot used in many classrooms.' },
-    { id: '2', uri: require('../assets/robot2.jpg'), description: 'A humanoid robot designed for friendly interaction.' },
-];*/
-
 const HomePage = ({ navigation }) => {
-    const dataList = [
-        { id: '1', title: 'VEX V5', description: 'Offers a powerful robotics platform with more advanced mechanical, electrical, and programming capabilities.' },
-        { id: '2', title: 'VEX Robotics Kit', description: 'An educational kit for building programmable robots and enhancing STEM skills.' },
-        { id: '3', title: 'VEX IQ', description: 'VEXcode IQ to program the robot. It can be programmed with block-based coding or Python.' },
-        { id: '4', title: 'Sphero Mini', description: 'A robotic ball that you can control using your smartphone or tablet.' },
-        { id: '5', title: 'Arduino Starter Kit', description: 'Includes an Arduino board and components to create interactive projects.' },
-    ];
-
     return (
-        <ScrollView style={styles.mainContainer}>
-                    <View style={{ width: '100%', paddingVertical: 200, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.3" }}></ImageBackground>
-                        <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}></LinearGradient>
-                        <Menu navigation={navigation} />
-                        <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: 'white', fontFamily: 'Electrolize_400Regular' }}>Welcome to Ethio Robotics Center!</Text>
-                        <Text style={{ fontSize: 15, color: 'white', width: '60%', textAlign: 'center', fontWeight: '100', opacity: '0.8' }}>Discover an extensive collection of innovative educational tools and high-quality accessories designed to enhance learning, foster creativity, and develop problem-solving skills for students</Text>
-                    </View>
-                <FlatList
-                    data={dataList}
-                    contentContainerStyle={styles.list}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.listItemContainer}>
-                            <Text style={styles.listItem}>{item.title}</Text>
-                            <Text style={styles.listDescription}>{item.description}</Text>
-                        </View>
-                    )}
-                />
-
-            <Text style={styles.title}>VEX Kits</Text>
-            <View style={styles.imageContent}>
-                <FlatList
-                    data={robotImages1}
-                    horizontal
-                    contentContainerStyle={{ display: 'flex', justifyContent: 'center', overflow: 'visible', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: 15 }}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.robotCard}>
-                            <Image source={item.uri} style={styles.robotImage} />
-                            <Text style={styles.robotName}>{item.name}</Text>
-                            <Text style={styles.robotDescription}>{item.description}</Text>
-                        </View>
-                    )}
-                />
+        <ScrollView style={{ height: '40rem', backgroundColor: '#FBF1E6' }}>
+            <View style={{ width: '100%', paddingVertical: 200, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.3" }}></ImageBackground>
+                <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}></LinearGradient>
+                <Menu navigation={navigation} />
+                <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: 'white', fontFamily: 'Electrolize_400Regular' }}>Welcome to Ethio Robotics Center!</Text>
+                <Text style={{ fontSize: 15, color: 'white', width: '60%', textAlign: 'center', fontWeight: '100', opacity: '0.8' }}>Discover an extensive collection of innovative educational tools and high-quality accessories designed to enhance learning, foster creativity, and develop problem-solving skills for students</Text>
             </View>
+
+            <View style={styles.sectionContainer}>
+                <View style={styles.imageContainer}>
+                    <View style={styles.imageCard}>
+                        <Image source={require('../assets/blocks-switch-text-tile.jpg')} style={styles.image} />
+                    </View>
+                </View>
+
+                <View style={styles.textContainer}>
+                    <Text style={styles.textTitle}>VEX IQ</Text>
+                    <Text style={styles.textDescription}>
+                        VEXcode IQ to program the robot. It can be programmed with coding or Python
+                        VEXcode to program the  be programmed with block-based coding or Python
+                        to program the It can be programmed with block-based coding or Python
+                    </Text>
+                </View>
+            </View>
+
+            <View style={styles.sectionContainer}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.textTitle}>Classroom Bundles</Text>
+                    <Text style={styles.textDescription}>
+                        VEXcode IQ to program the robot. It can be programmed with coding or Python
+                        VEXcode to program the  be programmed with block-based coding or Python
+                        to program the It can be programmed with block-based coding or Python
+                    </Text>
+                </View>
+
+                <View style={styles.imageContainer}>
+                    <View style={styles.imageCard}>
+                        <Image source={require('../assets/VEXkits.jpg')} style={styles.image} />
+                    </View>
+                </View>
+            </View>
+
+            <View style={styles.sectionContainer}>
+                <View style={styles.imageContainer}>
+                    <View style={styles.imageCard}>
+                        <Image source={require('../assets/VXECTE.jpg')} style={styles.image} />
+                    </View>
+                </View>
+
+                <View style={styles.textContainer}>
+                    <Text style={styles.textTitle}>Vex CTE</Text>
+                    <Text style={styles.textDescription}>
+                        VEXcode IQ to program the robot. It can be programmed with coding or Python
+                        VEXcode to program the  be programmed with block-based coding or Python
+                        to program the It can be programmed with block-based coding or Python
+                    </Text>
+                </View>
+            </View>
+
+            <View style={styles.sectionContainer}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.textTitle}>VEX5 5</Text>
+                    <Text style={styles.textDescription}>
+                        VEXcode IQ to program the robot. It can be programmed with coding or Python
+                        VEXcode to program the  be programmed with block-based coding or Python
+                        to program the It can be programmed with block-based coding or Python
+                    </Text>
+                </View>
+
+                <View style={styles.imageContainer}>
+                    <View style={styles.imageCard}>
+                        <Image source={require('../assets/VEX5.jpg')} style={styles.image} />
+                    </View>
+                </View>
+            </View>
+
+            <View style={styles.sectionContainer}>
+                <View style={styles.imageContainer}>
+                    <View style={styles.imageCard}>
+                        <Image source={require('../assets/123classroombundles.jpg')} style={styles.image} />
+                    </View>
+                </View>
+
+                <View style={styles.textContainer}>
+                    <Text style={styles.textTitle}>VEX KIT</Text>
+                    <Text style={styles.textDescription}>
+                        VEXcode IQ to program the robot. It can be programmed with coding or Python
+                        VEXcode to program the  be programmed with block-based coding or Python
+                        to program the It can be programmed with block-based coding or Python
+                    </Text>
+                </View>
+            </View>
+            <Footer />
         </ScrollView>
     );
 };
 
-// Styles
 const styles = StyleSheet.create({
-    mainContainer: {
-        height: '40rem',
-        backgroundColor: '#FBF1E6'
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#4CAF50', // Bright blue color for visibility
-        textAlign: 'center', // Align title to the left
-    },
-    subtitle: {
-        fontSize: 15,
-        color: '#4CAF50', // Bright blue color for visibility
-        marginBottom: 20,
-        opacity: '0.8',
-        textAlign: 'center',
-    },
-    list: {
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: '3rem',
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    listItemContainer: {
-        flexDirection: 'column', // Stack title and description
-        paddingVertical: 10,
-    },
-    listItem: {
-        fontSize: 18,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: '#000000', // Use '#000000' for black color
-    },
-    listDescription: {
-        fontSize: 14,
-        color: '#000000', // Use '#000000' for black color
-            marginLeft: 0,    // No margin needed to align the description properly under the title
-            paddingTop: 5,    // Add some space above the description for better readability
-    },
-    imageContent: {
+    sectionContainer: { width: '100%', height: '75vh', display: 'flex', flexDirection: 'row' },
+    imageContainer: { width: '50%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' },
+    imageCard: {
+        backgroundColor: '#FFFFFF',
+        width: '70%',
+        height: '70%',
+        borderRadius: 8,
         padding: 20,
-        width: '100%',
-    },
-    robotCard: {
-        alignItems: 'center',
-            marginRight: 10,
-            backgroundColor: '#FFFFFF', // Card background color for clearer visibility
-            borderRadius: 8,
-            padding: 10,
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
-            shadowRadius: 4,
-            elevation: 3, // Shadow for Android
+        shadowRadius: 4,
+        elevation: 3, // Shadow for Android
     },
-    robotImage: {
-        width: 120,
-            height: 120,
-            borderRadius: 8,
-    },
-    robotName: {
-        fontWeight: 'bold',
-            marginTop: 5,
-    },
-    robotDescription: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: '#555',
-        textAlign: 'center',
-    },
-    newImagesContainer: {
-        alignItems: 'center',
-            marginTop: 20,
-    },
-    vexKitsImage: {
-        width: 200, // Set the width of the VEX Kits image to make it smaller
-            height: 200, // Set a specific height for the kits image
-            borderRadius: 14,
-            marginTop: 12, // Space above the image
-    },
+    image: { width: '100%', height: '100%', borderRadius: 8, },
+    textContainer: { width: '50%', height: '100%', paddingHorizontal: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 10 },
+    textTitle: { fontSize: 35, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' },
+    textDescription: { fontSize: 14, opacity: 0.5 }
 });
 
 export default HomePage;
