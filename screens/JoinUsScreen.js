@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import api from '../utils/api'; // Your API utility
+// import api from '../utils/api'; // Your API utility
 
 const JoinUsScreen = () => {
     const [name, setName] = useState('');

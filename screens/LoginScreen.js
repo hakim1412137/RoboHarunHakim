@@ -81,9 +81,12 @@ const LoginScreen = ({ navigation }) => {
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('signup')}>
                         <Text style={styles.buttonText}>Sign Up</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { /!* Handle password reset *!/ }}>
+                    <TouchableOpacity onPress={() =>navigation.navigate('forgotPassword')}>
                         <Text style={styles.forgotPassword}>Forgot Password?</Text>
                     </TouchableOpacity>
+                  {/*  <TouchableOpacity style={styles.button} onPress={handleLogout}>
+                        <Text style={styles.buttonText}>Logout</Text>
+                    </TouchableOpacity>*/}
                 </>
             )}
         </View>

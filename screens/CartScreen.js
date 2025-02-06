@@ -3,16 +3,16 @@ import React, { useContext } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import { CartContext } from '../context/CartContext';
 
-const CartScreen = () => {
-    const { cart } = useContext(CartContext);
-    //const { cartItems, removeItem, clearCart } = useContext(CartContext);
+const CartScreen = ( navigation ) => {
+ /*   const { cart } = useContext(CartContext);*/
+  const { cart, removeItem, clearCart } = useContext(CartContext);
 
     const calculateTotal = () => {
         return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     };
 
     const handleCheckout = () => {
-        // Implement checkout logic here (e.g., navigate to PaymentScreen)
+        navigation.navigate('OrderConfirmation'); // Navigate to OrderConfirmationScreen
     };
 
     return (

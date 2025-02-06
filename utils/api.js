@@ -54,8 +54,10 @@ const logoutUser = async () => {
 
 // Auth operations
 const login = (loginData) => api.post('/auth/login', loginData);
-
 const signup = (signupData) => api.post('/auth/signup', signupData);
+// const refreshToken = (refreshTokenData) => api.post('/auth/refresh-token', refreshTokenData);
+// const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
+const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 
 // User operations
 const getUserDetails = (userId) => api.get(`/auth/${userId}`);
@@ -128,10 +130,6 @@ const deletePartnership = (partnershipId) => api.delete(`/partnerships/${partner
 const fetchOrders = () => api.get(`/orders`);
 const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { status });
 
-
-
-
-
 // Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
 const submitFeedback = (feedbackData) => api.post('/feedback', feedbackData);
@@ -193,6 +191,8 @@ const deleteTraining =  (trainingId) => api.delete(`robotics-trainings/${trainin
 // Exporting all the methods for usage
 export {
     login,signup,
+    // refreshToken,
+    forgotPassword,
     initializePayment, verifyPayment,
     getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,
     createTeam, getTeamById, getAllTeams, deleteTeam,

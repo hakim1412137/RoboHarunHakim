@@ -49,6 +49,9 @@ import { useFonts, Electrolize_400Regular } from '@expo-google-fonts/electrolize
 import PostListScreen from "./screens/PostListScreen";
 import PostDetailScreen from "./screens/PostDetailScreen";
 import TeamDetail from "./screens/TeamDetail";
+import OrdersManagementScreen from "./screens/OrdersManagementScreen";
+import OrderDetailsScreen from "./screens/OrderDetailsScreen";
+import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -65,7 +68,6 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
                                 <Stack.Screen name="about" component={AboutScreen} />
                                 <Stack.Screen name="Shop" component={ShopScreen} />
-
                                 {/*Menu*/}
                                 <Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />
                                 <Stack.Screen name="courses" component={CoursesScreen} options={{ headerShown: false }}  />
@@ -108,12 +110,18 @@ const Stack = createStackNavigator();
 
                                 <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                 <Stack.Screen name="Resources" component={ResourcesListScreen} />
-                                <Stack.Screen name="Cart" component={CartScreen} />
                                 <Stack.Screen name="EditProduct" component={EditProductScreen} />
                                 <Stack.Screen name="AddVexRobot" component={AddVexRobotics} />
 
                                 <Stack.Screen name="Partners" component={PartnerScreen} />
                                 <Stack.Screen name="Support" component={SupportScreen} />
+                                <Stack.Screen name="Cart" component={CartScreen} />
+                                {/*
+                                <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Cart' }} />
+                                <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ title: 'Order Confirmation' }}/>
+                                <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} options={{ title: 'Order Details' }}/>
+                                <Stack.Screen name="OrdersManagement" component={OrdersManagementScreen} options={{ title: 'Manage Orders' }}/>
+                                */}
                             </Stack.Navigator>
                         </NavigationContainer>
                     </CartProvider>
