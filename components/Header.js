@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     contactText: {
-        color: 'B771E5',
+        color: 'white',
         fontSize: 12,  // Increased font size for better visibility
         fontWeight: '500',  // Make the text slightly bolder
     },

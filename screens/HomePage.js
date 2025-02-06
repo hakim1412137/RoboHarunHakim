@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import Menu from '../components/Menu_for_home_page';
+import Footer from '../components/Footer';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const HomePage = ({ navigation }) => {
@@ -98,6 +99,7 @@ const HomePage = ({ navigation }) => {
                     </Text>
                 </View>
             </View>
+            <Footer />
         </ScrollView>
     );
 };
