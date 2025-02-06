@@ -52,6 +52,7 @@ import TeamDetail from "./screens/TeamDetail";
 import OrdersManagementScreen from "./screens/OrdersManagementScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -90,14 +91,13 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
-                                <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
-                                <Stack.Screen name="postDetail" component={PostDetailScreen} options={{ headerShown: false }} />
-
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
 
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
                                 <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
+                                <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="postDetail" component={PostDetailScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
                                 <Stack.Screen name="ProductDetails" component={ProductDetail} />
                                 <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
@@ -107,6 +107,7 @@ const Stack = createStackNavigator();
                                 {/*Auth*/}
                                 <Stack.Screen name="login" component={LoginScreen} />
                                 <Stack.Screen name="signup" component={SignUpScreen} />
+                                <Stack.Screen name="forgotPassword" component={ForgotPasswordScreen} />
 
                                 <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                 <Stack.Screen name="Resources" component={ResourcesListScreen} />
