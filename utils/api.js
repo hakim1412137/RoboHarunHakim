@@ -9,11 +9,7 @@ const api = axios.create({
         "Content-Type": "application/json",
     },
 });
-/*// Create an instance of Axios
-const api = axios.create({
-    baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
-});*/
-/*
+
 // Axios request interceptor for setting Authorization headers
 api.interceptors.request.use(
     async (request) => {
@@ -45,12 +41,22 @@ api.interceptors.response.use(
     }
 );
 // Logout function
-const logoutUser = async () => {
+/*const logoutUser = async () => {
     await AsyncStorage.removeItem('token'); // Clear the token
     // Optionally, redirect the user to the login screen
 };*/
+// const enrollInCourse = (courseId) => api.post('/courses/enroll', { courseId });
 
-
+ const enrollInCourse = (userId, courseId) => api.post(`/enrollments/enroll?userId=${userId}&courseId=${courseId}`);
+/*export const enrollInCourse = async (courseId) => {
+    try {
+        const userId = await AsyncStorage.getItem('userId'); // Retrieve the logged-in user's ID
+        const response = await axios.post('/enrollments/enroll', { userId, courseId });
+        return response.data;
+    } catch (error) {
+        throw error.response ? error.response.data : error;
+    }
+};*/
 
 // Auth operations
 const login = (loginData) => api.post('/auth/login', loginData);
@@ -58,7 +64,7 @@ const signup = (signupData) => api.post('/auth/signup', signupData);
 // const refreshToken = (refreshTokenData) => api.post('/auth/refresh-token', refreshTokenData);
 // const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
-
+ const resetPassword = (token, newPassword) => api.post('/auth/reset-password', { token, newPassword });
 // User operations
 const getUserDetails = (userId) => api.get(`/auth/${userId}`);
 const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
@@ -104,7 +110,7 @@ const getCoursesByUserId = (userId) => api.get(`/courses/user/${userId}`);
 const createCourse = (courseData) => api.post('/courses', courseData);
 const updateCourse = (courseId, courseData) => api.put(`/courses/${courseId}`, courseData);
 const deleteCourse = (courseId) => api.delete(`/courses/${courseId}`);
-const enrollInCourse = (courseId) => api.post('/courses/enroll', { courseId });
+
 
 // Event management
 const getEvents = () => api.get('/events');
@@ -192,7 +198,7 @@ const deleteTraining =  (trainingId) => api.delete(`robotics-trainings/${trainin
 export {
     login,signup,
     // refreshToken,
-    forgotPassword,
+    forgotPassword,resetPassword,
     initializePayment, verifyPayment,
     getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,
     createTeam, getTeamById, getAllTeams, deleteTeam,
@@ -203,7 +209,7 @@ export {
     getAllVexRobotics, createVexRobotics, deleteVexRoboticsById, vexRoboticsById,
     getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
     getServices, createService, updateService, deleteService,
-    getAllCourses, getCourseById, getCoursesByUserId, createCourse, updateCourse, deleteCourse, enrollInCourse,
+    getAllCourses, getCourseById, getCoursesByUserId, createCourse, updateCourse, deleteCourse,enrollInCourse,
     getEvents, createEvent, updateEvent, deleteEvent, registerForEvents,
     getResources, createResource, updateResource, deleteResource,
     getPartnerships, createPartnership, updatePartnership, deletePartnership,
@@ -214,7 +220,10 @@ export {
     createMeetingRequest, getAllMeetingRequests,getMeetingRequestById,deleteMeetingRequest
     // , logoutUser
 };
-
+/*// Create an instance of Axios
+const api = axios.create({
+    baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL
+});*/
 /*import axios from 'axios';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

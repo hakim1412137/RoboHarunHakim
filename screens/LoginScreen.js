@@ -6,7 +6,7 @@ import {UserContext} from "../context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import your API functions
 
 const LoginScreen = ({ navigation }) => {
-  const { setUser } = useContext(UserContext);
+  const {user, setUser } = useContext(UserContext);
     const { token, saveToken, logout, isAuthenticated } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,14 +21,20 @@ const LoginScreen = ({ navigation }) => {
             const response = await login(credentials);
             console.log('Login Response:', response);
             const { accessToken, tokenType } = response.data; // Assuming the backend returns a token
+            // const { accessToken, tokenType, user } = response.data;
+            // if (accessToken && tokenType && user) {
 
             if (accessToken && tokenType) {
                 await AsyncStorage.setItem('token', accessToken); // Store the access token using AsyncStorage
+                // await AsyncStorage.setItem('user', JSON.stringify(user));
+
                 console.log('Received token:', accessToken);
 
                 saveToken(accessToken); // Call your AuthContext method to save token if needed
                 console.log(accessToken);
-                setUser(username); // Optionally store the username in UserContext
+            setUser(username); // Optionally store the username in UserContext
+                // setUser(user);
+
                 console.log(username);
 
                 navigation.navigate('home'); // Navigate to home screen
@@ -45,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
     const handleLogout = async () => {
         await logout(); // Clear token and user data
         setUser(null); // Clear user data in UserContext
-        // navigation.navigate('Login'); // Redirect to login screen
+     navigation.navigate('Login'); // Redirect to login screen
 
     };
     return (
