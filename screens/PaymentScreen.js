@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, Linking } from "react-native";
-import api from "./api";
+
 import {initializePayment, verifyPayment} from "../utils/api"; // Import the API service
 
-const PaymentScreen = () => {
+const PaymentScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [amount, setAmount] = useState("");
@@ -37,6 +37,8 @@ const PaymentScreen = () => {
             const transaction = response.data;
 
             Alert.alert("Payment Status", `Transaction status: ${transaction.status}`);
+            navigation.navigate('OrderConfirmation'); // Navigate to confirmation screen
+
         } catch (error) {
             Alert.alert("Error", "Failed to verify payment");
         }

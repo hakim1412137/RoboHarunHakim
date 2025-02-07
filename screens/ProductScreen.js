@@ -1,3 +1,275 @@
+// screens/ProductsScreen.js
+// screens/ProductsScreen.js
+import React, { useEffect, useState, useContext } from 'react';
+import { View, FlatList, ActivityIndicator, Alert, StyleSheet, Button, TextInput, Text } from 'react-native';
+import ProductCard from '../components/ProductCard';
+import { CartContext } from '../context/CartContext';
+import { getProducts, deleteProduct } from '../utils/api';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
+
+const ProductsScreen = ({ navigation }) => {
+    const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const { addToCart } = useContext(CartContext);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await getProducts();
+                setProducts(response.data);
+                setFilteredProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                Alert.alert('Error', 'Failed to fetch products. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+        const newFilteredProducts = products.filter((product) =>
+            product.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredProducts(newFilteredProducts);
+    };
+
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        Alert.alert('Success', `${product.name} has been added to your cart.`);
+    };
+
+    const navigateToProductDetail = (productId) => {
+        navigation.navigate('ProductDetails', { productId });
+    };
+
+    const handleEditProduct = (product) => {
+        navigation.navigate('EditProduct', { product });
+    };
+
+    const handleDeleteProduct = (productId) => {
+        Alert.alert(
+            'Delete Product',
+            'Are you sure you want to delete this product?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                    text: 'OK',
+                    onPress: async () => {
+                        try {
+                            await deleteProduct(productId);
+                            setProducts((prevProducts) =>
+                                prevProducts.filter((product) => product.id !== productId)
+                            );
+                            setFilteredProducts((prevProducts) =>
+                                prevProducts.filter((product) => product.id !== productId)
+                            );
+                            Alert.alert('Success', 'Product deleted successfully.');
+                        } catch (error) {
+                            console.error('Error deleting product:', error);
+                            Alert.alert('Error', 'Failed to delete the product.');
+                        }
+                    },
+                },
+            ]
+        );
+    };
+
+    const renderProductCard = ({ item }) => (
+        <ProductCard
+            product={item}
+           onAddToCart={() => handleAddToCart(item)}
+        // onAddToCart={handleAddToCart}
+            onPress={() => navigateToProductDetail(item.id)}
+            onEdit={() => handleEditProduct(item)}
+            onDelete={() => handleDeleteProduct(item.id)}
+        />
+    );
+
+    if (loading) {
+        return <ActivityIndicator size="large" color="#0000ff" />;
+    }
+
+    return (
+        <View style={styles.container}>
+            <Header />
+            <Menu navigation={navigation} />
+            {/* Search Bar */}
+            <TextInput
+                placeholder="Search Products..."
+                value={searchQuery}
+                onChangeText={handleSearch}
+                style={styles.searchInput}
+            />
+            {/* Add Product Button */}
+            <Button
+                title="Add New Product"
+                onPress={() => navigation.navigate('AddProduct')}
+                color="#007BFF"
+            />
+            {filteredProducts.length === 0 ? (
+                <Text style={styles.noProductsText}>No products found.</Text>
+            ) : (
+                <FlatList
+                    data={filteredProducts}
+                    renderItem={renderProductCard}
+                    keyExtractor={(item) => item.id.toString()}
+                    numColumns={3}
+                />
+            )}
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#FBF1E6',
+    },
+    searchInput: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+    },
+    noProductsText: {
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: 16,
+    },
+});
+
+export default ProductsScreen;
+/*
+
+import React, { useEffect, useState, useContext } from 'react';
+import { View, FlatList, ActivityIndicator, Alert, StyleSheet, ScrollView, Button } from 'react-native';
+import ProductCard from '../components/ProductCard';
+import { CartContext } from '../context/CartContext';
+import { getProducts, deleteProduct } from '../utils/api';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
+import ProductList from "./ProductList";
+
+const ProductsScreen = ({ navigation }) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { addToCart } = useContext(CartContext);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await getProducts();
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                Alert.alert('Error', 'Failed to fetch products. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        Alert.alert('Success', `${product.name} has been added to your cart.`);
+    };
+
+    const navigateToProductDetail = (productId) => {
+        navigation.navigate('ProductDetails', { productId });
+    };
+
+    const handleEditProduct = (product) => {
+        navigation.navigate('EditProduct', { product });
+    };
+
+    const handleDeleteProduct = (productId) => {
+        Alert.alert(
+            'Delete Product',
+            'Are you sure you want to delete this product?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                    text: 'OK',
+                    onPress: async () => {
+                        try {
+                            await deleteProduct(productId);
+                            setProducts((prevProducts) =>
+                                prevProducts.filter((product) => product.id !== productId)
+                            );
+                            Alert.alert('Success', 'Product deleted successfully.');
+                        } catch (error) {
+                            console.error('Error deleting product:', error);
+                            Alert.alert('Error', 'Failed to delete the product.');
+                        }
+                    },
+                },
+            ]
+        );
+    };
+
+    const renderProductCard = ({ item }) => (
+        <ProductCard
+            product={item}
+            onAddToCart={() => handleAddToCart(item)}
+            onPress={() => navigateToProductDetail(item.id)}
+            onEdit={() => handleEditProduct(item)}
+            onDelete={() => handleDeleteProduct(item.id)}
+        />
+    );
+
+    return (
+        <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+            <Header />
+            <Menu navigation={navigation} />
+            <View style={styles.container}>
+                {/!* Add Product Button *!/}
+                <Button
+                    title="Add New Product"
+                    onPress={() => navigation.navigate('AddProduct')}
+                    color="#007BFF"
+                />
+                {loading ? (
+                    <ActivityIndicator size="large" color="#0000ff" />
+                ) : (
+                    <FlatList
+                        data={products}
+                        renderItem={renderProductCard}
+                        keyExtractor={(item) => item.id.toString()}
+                        numColumns={3}
+                    />
+                )}
+                {/!*<ProductList />*!/}
+            </View>
+        </ScrollView>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 10,
+        paddingHorizontal: 20,
+        backgroundColor: '#FBF1E6',
+    },
+    scrollContentContainer: {
+        flexGrow: 1,
+    },
+});
+
+export default ProductsScreen;
+*/
+
+/*
 import React, { useEffect, useState, useContext } from 'react';
 import {View, FlatList, ActivityIndicator, Alert, StyleSheet, ScrollView} from 'react-native';
 import ProductCard from '../components/ProductCard';
@@ -10,12 +282,12 @@ const ProductsScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const { addToCart } = useContext(CartContext);
-
+    // const navigation = useNavigation();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await getProducts(); // Adjust to your API for fetching products
-                setProducts(response.data);
+                setProducts(response.data); //                setProducts(data);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -76,7 +348,9 @@ const ProductsScreen = ({ navigation }) => {
                         renderItem={({ item }) => (
                             <ProductCard
                                 product={item}
-                                onAddToCart={handleAddToCart}
+                                // onAddToCart={handleAddToCart}
+                                 onAddToCart={() => handleAddToCart(item)}
+
                                 onPress={() => navigateToProductDetail(item.id)}
                                 onEdit={() => handleEditProduct(item)}
                                 onDelete={() => handleDeleteProduct(item.id)} // Pass delete functionality
@@ -105,6 +379,7 @@ const styles = StyleSheet.create({
 });
 
 export default ProductsScreen;
+*/
 
 /*
 

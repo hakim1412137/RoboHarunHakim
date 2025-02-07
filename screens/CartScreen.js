@@ -1,6 +1,6 @@
  // screens/CartScreen.js
 import React, { useContext } from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
+import {View, Text, Button, FlatList, StyleSheet, Alert} from 'react-native';
 import { CartContext } from '../context/CartContext';
 
 const CartScreen = ( navigation ) => {
@@ -11,8 +11,15 @@ const CartScreen = ( navigation ) => {
         return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     };
 
-    const handleCheckout = () => {
+  /*  const handleCheckout = () => {
         navigation.navigate('OrderConfirmation'); // Navigate to OrderConfirmationScreen
+    };*/
+    const handleCheckout = () => {
+        if (cart.length === 0) {
+            Alert.alert('Error', 'Your cart is empty.');
+            return;
+        }
+        navigation.navigate('Payment');
     };
 
     return (
@@ -23,12 +30,17 @@ const CartScreen = ( navigation ) => {
             ) : (
                 <FlatList
                     data={cart}
-                    keyExtractor={item => item.productId.toString()}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <View style={styles.cartItem}>
+                            <Text>{item.name} - Price: ${item.price} x {item.quantity}</Text>
+                            <Button title="Remove" onPress={() => removeItem(item.id)} />
+                 {/*   keyExtractor={item => item.productId.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.cartItem}>
                             <Text>{item.name}</Text>
                             <Text>Price: ${item.price}</Text>
-                            <Text>Quantity: {item.quantity}</Text>
+                            <Text>Quantity: {item.quantity}</Text>*/}
                         </View>
                     )}
                 />

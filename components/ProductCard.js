@@ -10,8 +10,10 @@ const ProductCard = ({ product, onAddToCart ,onPress, onEdit, onDelete }) => {
             <Text style={styles.description}>{product.description}</Text>
             {/*<Text style={styles.price}>${product.price}</Text>*/}
             <Text style={styles.price}>${product.price.toFixed(2)}</Text> 
-            <Text style={styles.stock}>{product.inStock ? 'In stock' : 'Out of stock'}</Text>
-            <Button title="Add to Cart" onPress={() => onAddToCart(product)} disabled={!product.inStock} />
+            {/*<Text style={styles.stock}>{product.inStock ? 'In stock' : 'Out of stock'}</Text>*/}
+            {/*<Button title="Add to Cart" onPress={() => onAddToCart(product)} disabled={!product.inStock} />*/}
+            <Button title="Add to Cart" onPress={() => onAddToCart(product)} />
+
             <Button title="View Details" onPress={onPress} />
             <Button title="Edit" onPress={onEdit} />
             <Button title="Delete" onPress={onDelete} color="red" />

@@ -7,7 +7,7 @@ const OrderConfirmationScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.title}>Order Confirmation</Text>
             <Text style={styles.message}>Your order has been placed successfully!</Text>
-            <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+            <Button title="Go to Home" onPress={() => navigation.navigate('products')} />
         </View>
     );
 };

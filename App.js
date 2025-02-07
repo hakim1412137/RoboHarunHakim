@@ -53,6 +53,11 @@ import OrdersManagementScreen from "./screens/OrdersManagementScreen";
 import OrderDetailsScreen from "./screens/OrderDetailsScreen";
 import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import AddProductScreen from "./screens/AddProduct";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
+import ProductList from "./screens/ProductList";
+import PaymentScreen from "./screens/PaymentScreen";
+import ShoppingCart from "./screens/ShoppingCart";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -70,13 +75,26 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="about" component={AboutScreen} />
                                 <Stack.Screen name="Shop" component={ShopScreen} />
                                 {/*Menu*/}
-                                <Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />
+                                {/*<Stack.Screen name="products" component={ProductScreen} options={{ headerShown: false }}   />*/}
                                 <Stack.Screen name="courses" component={CoursesScreen} options={{ headerShown: false }}  />
                                 <Stack.Screen name="vexRobotics" component={VexRoboticsList} options={{ headerShown: false }} />
                                 <Stack.Screen name="competitions" component={CompetitionsScreen}  options={{ headerShown: false }} />
                                 <Stack.Screen name="events" component={EventListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="contactUs" component={ContactUsScreen} options={{ headerShown: false }} />
-
+                                <Stack.Screen
+                                    name="products"
+                                    component={ProductScreen}
+                                    options={({ navigation }) => ({
+                                        headerTitle: () => <ShoppingCart navigation={navigation} />, // Place ShoppingCart here
+                                    })}
+                                />
+                                <Stack.Screen name="ProductList" component={ProductList} />
+                                <Stack.Screen name="AddProduct" component={AddProductScreen} />
+                                <Stack.Screen name="EditProduct" component={EditProductScreen} />
+                                <Stack.Screen name="ProductDetails" component={ProductDetailScreen} />
+                                <Stack.Screen name="Cart" component={CartScreen} />
+                                <Stack.Screen name="Payment" component={PaymentScreen} />
+                                <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} />
                                 {/*Menu for about us*/}
                                 <Stack.Screen name="aboutUs" component={AboutScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="careers" component={CareersScreen} options={{ headerShown: false }} />
@@ -99,7 +117,6 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="postDetail" component={PostDetailScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
-                                <Stack.Screen name="ProductDetails" component={ProductDetail} />
                                 <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
                                 <Stack.Screen name="teamDetail" component={TeamDetail} />
                                 <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
@@ -111,12 +128,10 @@ const Stack = createStackNavigator();
 
                                 <Stack.Screen name="MyAccount" component={MyAccountScreen} />
                                 <Stack.Screen name="Resources" component={ResourcesListScreen} />
-                                <Stack.Screen name="EditProduct" component={EditProductScreen} />
                                 <Stack.Screen name="AddVexRobot" component={AddVexRobotics} />
 
                                 <Stack.Screen name="Partners" component={PartnerScreen} />
                                 <Stack.Screen name="Support" component={SupportScreen} />
-                                <Stack.Screen name="Cart" component={CartScreen} />
                                 {/*
                                 <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Cart' }} />
                                 <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ title: 'Order Confirmation' }}/>

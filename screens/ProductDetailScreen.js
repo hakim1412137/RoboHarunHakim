@@ -22,8 +22,8 @@ const ProductDetailScreen = ({ route, navigation }) => {
             if (productId) {
                 try {
                     setLoading(true);
-                    const data = await getProductDetails(productId);
-                    setProduct(data);
+                    const response= await getProductDetails(productId);
+                    setProduct(response.data);
                     setError(null);
                 } catch (err) {
                     setError(err.message);
@@ -45,7 +45,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
         // Renaming for clarity
         if (product) { // Ensure product is not null
             addToCart(product);
-            Alert.alert('Added to Cart', `${product.title} has been added to your cart.`);
+            Alert.alert('Added to Cart', `${product.name} has been added to your cart.`);
         }
     };
 
@@ -66,10 +66,10 @@ return (
     <View style={{ padding: 20 }}>
         {product ? ( // Check if product exists
             <>
-                <Text style={{ fontSize: 24 }}>{product.title}</Text>
+                <Text style={{ fontSize: 24 }}>{product.name}</Text>
                 <Text style={{ marginVertical: 10 }}>{product.description}</Text>
                 <Text>Price: ${product.price}</Text>
-                <Text>Status: {product.inStock ? 'In stock' : 'Out of stock'}</Text>
+                {/*<Text>Status: {product.inStock ? 'In stock' : 'Out of stock'}</Text>*/}
                 <Button title="Add to Cart" onPress={addToCartHandler} />
                 <Button title="Go Back" onPress={() => navigation.goBack()} />
             </>
