@@ -7,6 +7,8 @@ import { CartContext } from '../context/CartContext';
 import { getProducts, deleteProduct } from '../utils/api';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
+import ShoppingCart from './ShoppingCart';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ProductsScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
@@ -101,28 +103,36 @@ const ProductsScreen = ({ navigation }) => {
             <Header />
             <Menu navigation={navigation} />
             {/* Search Bar */}
-            <TextInput
-                placeholder="Search Products..."
-                value={searchQuery}
-                onChangeText={handleSearch}
-                style={styles.searchInput}
-            />
-            {/* Add Product Button */}
-            <Button
-                title="Add New Product"
-                onPress={() => navigation.navigate('AddProduct')}
-                color="#007BFF"
-            />
-            {filteredProducts.length === 0 ? (
-                <Text style={styles.noProductsText}>No products found.</Text>
-            ) : (
-                <FlatList
-                    data={filteredProducts}
-                    renderItem={renderProductCard}
-                    keyExtractor={(item) => item.id.toString()}
-                    numColumns={3}
-                />
-            )}
+            <View style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                <View style={{ position: 'absolute', display: 'flex', flexDirection: 'row', width: '100%', gap: 20 ,paddingHorizontal: 200, paddingVertical: 20, zIndex: 10 }}>
+                    <TextInput
+                        placeholder="Search Products..."
+                        value={searchQuery}
+                        onChangeText={handleSearch}
+                        style={{ borderWidth: 1, padding: 10, borderRadius: 5, borderColor: '#ccc', flex: '1', backgroundColor: 'white' }}
+                    />
+                    <ShoppingCart navigation={navigation} />
+                </View>
+                <ScrollView style={{ height: '40rem', width: '100%', paddingTop: 80 }}>
+                    {/* Add Product Button */}
+                    {/* <Button
+                        title="Add New Product"
+                        onPress={() => navigation.navigate('AddProduct')}
+                        color="#007BFF"
+                    /> */}
+                    {filteredProducts.length === 0 ? (
+                        <Text style={styles.noProductsText}>No products found.</Text>
+                    ) : (
+                        <FlatList
+                            data={filteredProducts}
+                            renderItem={renderProductCard}
+                            scrollEnabled={false}
+                            contentContainerStyle={{ display: 'flex', flexDirection: 'column', height: 'auto', paddingVertical: 15, gap: 10, alignItems: 'center' }}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
+                    )}
+                </ScrollView>
+            </View>
         </View>
     );
 };
@@ -130,7 +140,6 @@ const ProductsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
         backgroundColor: '#FBF1E6',
     },
     searchInput: {
