@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import {View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { AuthContext } from '../context/AuthContext'; // Adjust path as needed
-import {login} from '../utils/api';
+import {getUserDetails, login} from '../utils/api';
 import {UserContext} from "../context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import your API functions
 
@@ -14,28 +14,26 @@ const LoginScreen = ({ navigation }) => {
 
     const handleSignIn = async () => {
       const credentials = { username, password };
-        const credentials2 = { username: 'existingUser', password: 'correctPassword' }; // Hardcoded credentials
         console.log('Login Payload:', credentials); // Log the payload for debugging
 
         try {
             const response = await login(credentials);
             console.log('Login Response:', response);
             const { accessToken, tokenType } = response.data; // Assuming the backend returns a token
-            // const { accessToken, tokenType, user } = response.data;
-            // if (accessToken && tokenType && user) {
+
 
             if (accessToken && tokenType) {
                 await AsyncStorage.setItem('token', accessToken); // Store the access token using AsyncStorage
-                // await AsyncStorage.setItem('user', JSON.stringify(user));
+                const fetchedUser = await getUserDetails(username);
+                await AsyncStorage.setItem('user', JSON.stringify(fetchedUser.data));
+                const user1=  await AsyncStorage.getItem('user');
+                const userId = JSON.parse(user1).id;
+                console.log('fetchedUser:', user1);
+                console.log('User ID:', userId);
 
                 console.log('Received token:', accessToken);
-
                 saveToken(accessToken); // Call your AuthContext method to save token if needed
-                console.log(accessToken);
-            setUser(username); // Optionally store the username in UserContext
-                // setUser(user);
-
-                console.log(username);
+                setUser(username); // Optionally store the username in UserContext
 
                 navigation.navigate('home'); // Navigate to home screen
             }
@@ -51,8 +49,16 @@ const LoginScreen = ({ navigation }) => {
     const handleLogout = async () => {
         await logout(); // Clear token and user data
         setUser(null); // Clear user data in UserContext
-     navigation.navigate('Login'); // Redirect to login screen
+        // navigation.navigate('Login'); // Redirect to login screen
+    };
 
+    const fetchUserDetails = async (userId) => {
+        try {
+            const response = await getUserDetails(userId);
+            console.log('User Details:', response.data);
+        } catch (error) {
+            console.error('Failed to fetch user details:', error);
+        }
     };
     return (
         <View style={styles.container}>
@@ -60,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.title}>Welcome Back!</Text>
             {isAuthenticated() ? (
                 <>
-                    <Text style={styles.welcomeText}>You are logged in as {username}!</Text>
+                    <Text style={styles.welcomeText}>You are logged in as {user}!</Text>
                     <TouchableOpacity style={styles.button} onPress={handleLogout}>
                         <Text style={styles.buttonText}>Logout</Text>
                     </TouchableOpacity>
@@ -154,7 +160,12 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+/*      const { accessToken, user } = response.data;
 
+            // Store the token and user details
+            AsyncStorage.setItem('token', accessToken);
+            AsyncStorage.setItem('userId', user.id);
+            AsyncStorage.setItem('username', user.username);*/
 /*        const token = response.data; // Expecting the JWT token back from the response
          console.log('Received token:', token); // Log the received token
 

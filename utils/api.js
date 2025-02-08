@@ -16,6 +16,8 @@ api.interceptors.request.use(
         // Check if the request URL does not match the login or signup endpoints
         if (!/\/auth\/(login|signup)$/.test(request.url)) {
             const token = await AsyncStorage.getItem('token'); // Retrieve the token from AsyncStorage
+           // const userId = await AsyncStorage.getItem('userId'); // Retrieve the logged-in user's ID
+
             if (token) {
                 request.headers.Authorization = `Bearer ${token}`; // Attach the token to the request
             }
@@ -35,28 +37,19 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             // Handle unauthorized access (e.g., redirect to login screen)
             await AsyncStorage.removeItem('token'); // Clear the token
+            // await AsyncStorage.removeItem('userId');
+
             // Optionally, redirect the user to the login screen
         }
         return Promise.reject(error);
     }
 );
-// Logout function
-/*const logoutUser = async () => {
-    await AsyncStorage.removeItem('token'); // Clear the token
-    // Optionally, redirect the user to the login screen
-};*/
-// const enrollInCourse = (courseId) => api.post('/courses/enroll', { courseId });
 
- const enrollInCourse = (userId, courseId) => api.post(`/enrollments/enroll?userId=${userId}&courseId=${courseId}`);
-/*export const enrollInCourse = async (courseId) => {
-    try {
-        const userId = await AsyncStorage.getItem('userId'); // Retrieve the logged-in user's ID
-        const response = await axios.post('/enrollments/enroll', { userId, courseId });
-        return response.data;
-    } catch (error) {
-        throw error.response ? error.response.data : error;
-    }
-};*/
+// const enrollInCourse = (courseId) => api.post('/courses/enroll', { courseId });
+const getUserDetails = (username) => api.get(`/auth/username/${username}`);
+
+// const enrollInCourse = (userId, courseId) => api.post(`/enrollments/enroll?userId=${userId}&courseId=${courseId}`);
+ const enrollInCourse = (userId, courseId) => api.post('/enrollments/enroll',{userId, courseId});
 
 // Auth operations
 const login = (loginData) => api.post('/auth/login', loginData);
@@ -65,9 +58,7 @@ const signup = (signupData) => api.post('/auth/signup', signupData);
 // const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
  const resetPassword = (token, newPassword) => api.post('/auth/reset-password', { token, newPassword });
-// User operations
-const getUserDetails = (userId) => api.get(`/auth/${userId}`);
-const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
+
 
 // Payment API calls
 const initializePayment = (paymentData) => api.post('/payments/initialize', paymentData);
@@ -204,7 +195,8 @@ export {
     createTeam, getTeamById, getAllTeams, deleteTeam,
     createCareer,getCareerById,getAllCareers,deleteCareer,
     createClient,getClientById, getAllClients, deleteClient,
-    getUserDetails, updateUserDetails,
+    getUserDetails,
+    // updateUserDetails,
     getAllCompetitions, getCompetitionById, registerForCompetition, createCompetition, updateCompetition, deleteCompetition,
     getAllVexRobotics, createVexRobotics, deleteVexRoboticsById, vexRoboticsById,
     getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
@@ -220,6 +212,34 @@ export {
     createMeetingRequest, getAllMeetingRequests,getMeetingRequestById,deleteMeetingRequest
     // , logoutUser
 };
+
+// User operations
+// const getUserDetails = (username) => api.post('/auth/username', { username });
+// const getUserDetails = (username) => api.get(`/auth/username/${username}`);
+// const updateUserDetails = (userId, userData) => api.put(`/auth/${userId}`, userData);
+// Logout function
+/*const logoutUser = async () => {
+    await AsyncStorage.removeItem('token'); // Clear the token
+    // Optionally, redirect the user to the login screen
+};*/
+/*export const enrollInCourse = async (courseId) => {
+   try {
+       const userId = await AsyncStorage.getItem('userId'); // Retrieve the logged-in user's ID
+       const response = await axios.post('/enrollments/enroll', { userId, courseId });
+       return response.data;
+   } catch (error) {
+       throw error.response ? error.response.data : error;
+   }
+};*/
+/*// Request interceptor
+api.interceptors.request.use(async (config) => {
+    const token = await AsyncStorage.getItem('token');
+    if (token && !config.url.includes('/auth/')) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});*/
+
 /*// Create an instance of Axios
 const api = axios.create({
     baseURL: 'http://localhost:8083/api', // Replace with your actual backend API URL

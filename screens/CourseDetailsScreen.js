@@ -1,13 +1,13 @@
 // screens/CourseDetailsScreen.js
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
 import Loader from '../components/Loader';
-import { getCourseById, enrollInCourse } from '../utils/api';
+import {getCourseById, enrollInCourse, getUserDetails} from '../utils/api';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {useUser} from "../context/UserContext";
+import {UserContext, useUser} from "../context/UserContext";
 
 const CourseDetailsScreen = ({ route, navigation }) => {
-    const { user } = useUser();
+    const {user, setUser } = useContext(UserContext);
 
     const courseId = route.params.courseId;
     const [course, setCourse] = useState(null);
@@ -34,9 +34,12 @@ const CourseDetailsScreen = ({ route, navigation }) => {
 
     const handleEnroll = async () => {
         try {
-            // const userId = user.id; // Assuming `user` contains the logged-in user's details
 
-          const userId = await AsyncStorage.getItem('userId');
+            const user1=  await AsyncStorage.getItem('user');
+            const userId = JSON.parse(user1).id;
+            console.log('fetchedUser:', user1);
+
+            console.log('User and Course ID:', userId, courseId);
             const response = await enrollInCourse(userId, courseId);
             Alert.alert("Success", "You have been enrolled in the course!");
             console.log(response.data);
@@ -86,7 +89,12 @@ const styles = StyleSheet.create({
 });
 
 export default CourseDetailsScreen;
-
+// const userId = user.id; // Assuming `user` contains the logged-in user's details
+//     if (!user) {
+//         Alert.alert("Error", "Please login to enroll");
+//         navigation.navigate('login');
+//         return;
+//     }
 /*import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
 import Loader from '../components/Loader'; // Ensure this component exists
