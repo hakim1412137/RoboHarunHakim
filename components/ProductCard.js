@@ -1,36 +1,56 @@
 
+import { ImageBackground } from 'expo-image';
 import React from 'react';
-import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 const ProductCard = ({ product, onAddToCart ,onPress, onEdit, onDelete }) => {
     return (
-        <View style={styles.card}>
-            <Image source={{ uri: product.image }} style={styles.image} />
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            {/*<Text style={styles.price}>${product.price}</Text>*/}
-            <Text style={styles.price}>${product.price.toFixed(2)}</Text> 
-            {/*<Text style={styles.stock}>{product.inStock ? 'In stock' : 'Out of stock'}</Text>*/}
-            {/*<Button title="Add to Cart" onPress={() => onAddToCart(product)} disabled={!product.inStock} />*/}
-            <Button title="Add to Cart" onPress={() => onAddToCart(product)} />
+        <View style={{ aspectRatio: 3 / 1, height: '20rem', display: 'flex', flexDirection: 'row', backgroundColor: '#FFFFFF', borderRadius: 8 }}>
+            <View style={{ width: '50%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+                <View style={styles.imageCard}>
+                    <ImageBackground source={{ uri: product.image }} style={styles.image} />
+                </View>
+            </View>
+            <View style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-around', paddingHorizontal: 20, paddingVertical: 50 }}>
+                <View>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular'  }}>{product.name}</Text>
+                    <Text style={styles.description}>{product.description}</Text>
+                    <Text style={{ color: '#4CAF50', fontSize: 16, fontWeight: 'bold' }}>${product.price.toFixed(2)}</Text> 
+                </View>
 
-            <Button title="View Details" onPress={onPress} />
-            <Button title="Edit" onPress={onEdit} />
-            <Button title="Delete" onPress={onDelete} color="red" />
+                {/*<Text style={styles.price}>${product.price}</Text>*/}
+                {/*<Text style={styles.stock}>{product.inStock ? 'In stock' : 'Out of stock'}</Text>*/}
+                {/*<Button title="Add to Cart" onPress={() => onAddToCart(product)} disabled={!product.inStock} />*/}
+                {/* <Button title="Edit" onPress={onEdit} /> */}
+                {/* <Button title="View Details" onPress={onPress} /> */}
+
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: 6 }}>
+                    <TouchableOpacity style={{ flex: 2 }} onPress={() => onAddToCart(product)}>
+                        <Text style={{ color: '#4CAF50', fontSize: 16, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }}>Add to Cart</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ flex: 1 }} onPress={onPress}>
+                        <Text style={{ color: '#4CAF50', fontSize: 16, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }}>View Details</Text>
+                    </TouchableOpacity>
+                    {/* <Button title="Add to Cart" onPress={() => onAddToCart(product)} /> */}
+                </View>
+
+                {/* <Button title="Delete" onPress={onDelete} color="red" /> */}
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
+        height: 'auto',
+        aspectRatio: 1,
         borderWidth: 1,
         borderColor: '#ddd',
         borderRadius: 10,
-        margin: 10,
         padding: 16,
     },
     image: {
-        height: 100,
+        height: '100%',
         width: '100%',
         borderRadius: 10,
     },
@@ -46,6 +66,21 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#4CAF50',
     },
+    imageContainer: { width: '50%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' },
+    imageCard: {
+        backgroundColor: '#FFFFFF',
+        height: '70%',
+        aspectRatio: 1,
+        borderRadius: 8,
+        padding: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3, // Shadow for Android
+    },
+    buttonContainer: { backgroundColor: 'white', paddingVertical: 13, paddingHorizontal: 14, borderRadius: 10 },
+    buttonText: { color: '#4CAF50', fontSize: 16, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }
 });
 
 export default ProductCard;

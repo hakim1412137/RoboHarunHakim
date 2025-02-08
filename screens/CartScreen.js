@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import {View, Text, Button, FlatList, StyleSheet, Alert} from 'react-native';
 import { CartContext } from '../context/CartContext';
 
-const CartScreen = ( navigation ) => {
+const CartScreen = ({ navigation }) => {
  /*   const { cart } = useContext(CartContext);*/
   const { cart, removeItem, clearCart } = useContext(CartContext);
 

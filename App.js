@@ -84,9 +84,10 @@ const Stack = createStackNavigator();
                                 <Stack.Screen
                                     name="products"
                                     component={ProductScreen}
-                                    options={({ navigation }) => ({
-                                        headerTitle: () => <ShoppingCart navigation={navigation} />, // Place ShoppingCart here
-                                    })}
+                                    options={{ headerShown: false }}
+                                    // options={({ navigation }) => ({
+                                        // headerTitle: () => <ShoppingCart navigation={navigation} />, // Place ShoppingCart here
+                                    // })}
                                 />
                                 <Stack.Screen name="ProductList" component={ProductList} />
                                 <Stack.Screen name="AddProduct" component={AddProductScreen} />

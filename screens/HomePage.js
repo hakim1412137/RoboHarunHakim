@@ -8,7 +8,7 @@ const HomePage = ({ navigation }) => {
     return (
         <ScrollView style={{ height: '40rem', backgroundColor: '#FBF1E6' }}>
             <View style={{ width: '100%', paddingVertical: 200, backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.3" }}></ImageBackground>
+                <ImageBackground source={require('../assets/home-page-background-image-2.png')} resizeMode='cover' style={{ width: '100%', height: '100%', position: 'absolute', top: 0, opacity: "0.5" }}></ImageBackground>
                 <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%' }} colors={['transparent', '#FBF1E6']}></LinearGradient>
                 <Menu navigation={navigation} />
                 <Text style={{ fontSize: 40, fontWeight: 'bold', textAlign: 'center', color: 'white', fontFamily: 'Electrolize_400Regular' }}>Welcome to Ethio Robotics Center!</Text>
@@ -25,9 +25,9 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.textTitle}>VEX IQ</Text>
                     <Text style={styles.textDescription}>
-                        VEXcode IQ to program the robot. It can be programmed with coding or Python
-                        VEXcode to program the  be programmed with block-based coding or Python
-                        to program the It can be programmed with block-based coding or Python
+                        VEX IQ is a beginner-friendly robotics system designed for students to explore STEM concepts through
+                        hands-on learning. With snap-together pieces and a block-based coding platform, it’s perfect for building
+                        problem-solving skills and creativity.
                     </Text>
                 </View>
             </View>
@@ -36,9 +36,9 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.textTitle}>Classroom Bundles</Text>
                     <Text style={styles.textDescription}>
-                        VEXcode IQ to program the robot. It can be programmed with coding or Python
-                        VEXcode to program the  be programmed with block-based coding or Python
-                        to program the It can be programmed with block-based coding or Python
+                        Our Classroom Bundles provide educators with everything needed to bring robotics into the classroom.
+                        Each bundle includes multiple VEX kits, curriculum resources, and programming tools to support collaborative
+                        learning and STEM education.
                     </Text>
                 </View>
 
@@ -59,20 +59,19 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.textTitle}>Vex CTE</Text>
                     <Text style={styles.textDescription}>
-                        VEXcode IQ to program the robot. It can be programmed with coding or Python
-                        VEXcode to program the  be programmed with block-based coding or Python
-                        to program the It can be programmed with block-based coding or Python
+                        VEX CTE (Career and Technical Education) focuses on equipping students with industry-relevant
+                        skills in engineering, coding, and automation. These programs integrate real-world applications,
+                        preparing students for careers in robotics and technology.
                     </Text>
                 </View>
             </View>
 
             <View style={styles.sectionContainer}>
                 <View style={styles.textContainer}>
-                    <Text style={styles.textTitle}>VEX5 5</Text>
+                    <Text style={styles.textTitle}>VEX 5</Text>
                     <Text style={styles.textDescription}>
-                        VEXcode IQ to program the robot. It can be programmed with coding or Python
-                        VEXcode to program the  be programmed with block-based coding or Python
-                        to program the It can be programmed with block-based coding or Python
+                    VEX 5 is the next level of robotics innovation, offering advanced building components, sensors, and programming
+                    capabilities. Ideal for competitions and research, it allows users to push the boundaries of robotics engineering.
                     </Text>
                 </View>
 
@@ -93,9 +92,9 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.textTitle}>VEX KIT</Text>
                     <Text style={styles.textDescription}>
-                        VEXcode IQ to program the robot. It can be programmed with coding or Python
-                        VEXcode to program the  be programmed with block-based coding or Python
-                        to program the It can be programmed with block-based coding or Python
+                        Our VEX Kits include all the essential parts to start building and programming robots.
+                        Available in various levels, from beginner to advanced, each kit is designed to foster hands-on
+                        STEM learning and inspire future innovators.
                     </Text>
                 </View>
             </View>
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     image: { width: '100%', height: '100%', borderRadius: 8, },
     textContainer: { width: '50%', height: '100%', paddingHorizontal: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 10 },
     textTitle: { fontSize: 35, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' },
-    textDescription: { fontSize: 14, opacity: 0.5 }
+    textDescription: { fontSize: 20, opacity: 0.7 }
 });
 
 export default HomePage;
