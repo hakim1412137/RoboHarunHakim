@@ -7,7 +7,6 @@ import {
     ActivityIndicator,
     Alert,
     StyleSheet,
-    Button,
     TextInput,
     Text,
     TouchableHighlight, TouchableHighlightComponent
@@ -98,7 +97,6 @@ const ProductsScreen = ({ navigation }) => {
         <ProductCard
             product={item}
            onAddToCart={() => handleAddToCart(item)}
-        // onAddToCart={handleAddToCart}
             onPress={() => navigateToProductDetail(item.id)}
             onEdit={() => handleEditProduct(item)}
             onDelete={() => handleDeleteProduct(item.id)}
