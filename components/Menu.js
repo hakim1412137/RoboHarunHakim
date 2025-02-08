@@ -34,11 +34,13 @@ let popupMenus = [
 
 // Main Menu Component
 const Menu = ({ navigation }) => {
+    let [expanded, setExpanded] = useState(-1);
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.menuContainer}>
                 {popupMenus.map((popupMenu, index) => (
-                    <MenuButtonWithPopup key={index} navigation={navigation} subMenu={popupMenu.subMenu}>{popupMenu.text}</MenuButtonWithPopup>
+                    <MenuButtonWithPopup key={index} navigation={navigation} subMenu={popupMenu.subMenu} expanded={expanded} setExpanded={setExpanded} index={index}>{popupMenu.text}</MenuButtonWithPopup>
                 ))}
                 {MenuRoutes.map((menu, index) => (
                     <MenuButtons route={menu.route} navigation={navigation} key={index}>{menu.text}</MenuButtons>
