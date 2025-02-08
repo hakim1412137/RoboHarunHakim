@@ -2,10 +2,21 @@
 import { ImageBackground } from 'expo-image';
 import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const ProductCard = ({ product, onAddToCart ,onPress, onEdit, onDelete }) => {
     return (
-        <View style={{ aspectRatio: 3 / 1, height: '20rem', display: 'flex', flexDirection: 'row', backgroundColor: '#FFFFFF', borderRadius: 8 }}>
+        <View style={{ aspectRatio: 3 / 1, height: '20rem', display: 'flex', flexDirection: 'row', backgroundColor: '#FFFFFF', borderRadius: 8, position: 'relative' }}>
+
+            <View style={{ position: 'absolute', top: 10, right: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 5, zIndex: 10  }}>
+                <TouchableHighlight onPress={onEdit} style={{ width: 40, height: 40, padding: 5, position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <AntDesign name="edit" size={24} color="black" />
+                </TouchableHighlight>
+                <TouchableHighlight onPress={onDelete} style={{ width: 40, height: 40, padding: 5, position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <AntDesign name="delete" size={24} color="black" />
+                </TouchableHighlight>
+            </View>
+
             <View style={{ width: '50%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
                 <View style={styles.imageCard}>
                     <ImageBackground source={{ uri: product.image }} style={styles.image} />

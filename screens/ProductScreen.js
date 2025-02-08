@@ -1,7 +1,17 @@
 // screens/ProductsScreen.js
 // screens/ProductsScreen.js
 import React, { useEffect, useState, useContext } from 'react';
-import { View, FlatList, ActivityIndicator, Alert, StyleSheet, Button, TextInput, Text } from 'react-native';
+import {
+    View,
+    FlatList,
+    ActivityIndicator,
+    Alert,
+    StyleSheet,
+    Button,
+    TextInput,
+    Text,
+    TouchableHighlight, TouchableHighlightComponent
+} from 'react-native';
 import ProductCard from '../components/ProductCard';
 import { CartContext } from '../context/CartContext';
 import { getProducts, deleteProduct } from '../utils/api';
@@ -9,6 +19,7 @@ import Header from '../components/Header';
 import Menu from '../components/Menu';
 import ShoppingCart from './ShoppingCart';
 import { ScrollView } from 'react-native-gesture-handler';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const ProductsScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
@@ -104,13 +115,16 @@ const ProductsScreen = ({ navigation }) => {
             <Menu navigation={navigation} />
             {/* Search Bar */}
             <View style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
-                <View style={{ position: 'absolute', display: 'flex', flexDirection: 'row', width: '100%', gap: 20 ,paddingHorizontal: 200, paddingVertical: 20, zIndex: 10 }}>
+                <View style={{ position: 'absolute', display: 'flex', flexDirection: 'row', alignItems: 'center' ,width: '100%', gap: 20 ,paddingHorizontal: 200, paddingVertical: 20, zIndex: 10 }}>
                     <TextInput
                         placeholder="Search Products..."
                         value={searchQuery}
                         onChangeText={handleSearch}
                         style={{ borderWidth: 1, padding: 10, borderRadius: 5, borderColor: '#ccc', flex: '1', backgroundColor: 'white' }}
                     />
+                    <TouchableHighlight onPress={() => navigation.navigate('AddProduct')} style={{ width: 40, height: 40, padding: 5, position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <AntDesign name="plus" size={24} color="black" />
+                    </TouchableHighlight>
                     <ShoppingCart navigation={navigation} />
                 </View>
                 <ScrollView style={{ height: '40rem', width: '100%', paddingTop: 80 }}>
