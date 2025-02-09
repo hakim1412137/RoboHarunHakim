@@ -1,30 +1,45 @@
 // components/CourseCard.js
-
-import React from 'react';
+import React from 'react'; 
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const CourseCard = ({ course, onViewDetails }) => {
     return (
         <View style={styles.card}>
-            {/* Course Title and Description */}
-            <View style={styles.header}>
+            <LinearGradient
+                colors={['#4CAF50', '#A4E5C3']} // Softer green gradient
+                style={styles.gradientHeader}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+            >
                 <Text style={styles.title}>{course.title}</Text>
                 <Text style={styles.description}>{course.description}</Text>
-            </View>
+            </LinearGradient>
 
-            {/* Course Level, Duration, and View Details Button */}
-            <View style={styles.footer}>
-                <View style={styles.details}>
-                    <Text style={styles.level}>
-                        <Text style={styles.label}>Level:</Text> {course.level || 'N/A'}
-                    </Text>
-                    <Text style={styles.duration}>
-                        <Text style={styles.label}>Duration:</Text> {course.duration ? `${course.duration} hours` : 'N/A'}
-                    </Text>
+            <View style={styles.content}>
+                <View style={styles.metaContainer}>
+                    <View style={styles.metaItem}>
+                        <Ionicons name="school-outline" size={16} color="#444" />
+                        <Text style={styles.metaText}>
+                            {course.level || 'Beginner'}
+                        </Text>
+                    </View>
+                    <View style={styles.metaItem}>
+                        <Ionicons name="time-outline" size={16} color="#444" />
+                        <Text style={styles.metaText}>
+                            {course.duration ? `${course.duration}h` : 'Flexible'}
+                        </Text>
+                    </View>
                 </View>
 
-                <TouchableOpacity onPress={onViewDetails} style={styles.viewDetailsButton}>
-                    <Text style={styles.buttonText}>View Details</Text>
+                <TouchableOpacity 
+                    onPress={onViewDetails} 
+                    style={styles.viewDetailsButton}
+                    activeOpacity={0.8}
+                >
+                    <Text style={styles.buttonText}>Explore Course</Text>
+                    <Ionicons name="arrow-forward" size={18} color="white" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -33,67 +48,166 @@ const CourseCard = ({ course, onViewDetails }) => {
 
 const styles = StyleSheet.create({
     card: {
-        width: '100%', // Use 100% width for responsiveness
-        padding: 16,
-        backgroundColor: '#ccffe1',
-        marginVertical: 8,
-        borderRadius: 8,
+        width: '100%',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 15,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3, // For Android shadow
+        shadowOffset: { width: 0, height: 2 }, // Softer shadow
+        shadowOpacity: 0.08,
+        shadowRadius: 6,
+        elevation: 3,
+        overflow: 'hidden', // Prevents child overflow
     },
-    header: {
-        marginBottom: 12,
+    gradientHeader: {
+        padding: 18,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#333',
+        fontFamily: 'Electrolize_400Regular',
+        color: '#FFFFFF',
+        marginBottom: 6,
     },
     description: {
         fontSize: 14,
-        color: '#666',
-        marginTop: 4,
+        color: 'rgba(255,255,255,0.85)',
+        lineHeight: 20,
     },
-    footer: {
+    content: {
+        padding: 16,
+    },
+    metaContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: 12,
+    },
+    metaItem: {
+        flexDirection: 'row',
         alignItems: 'center',
+        gap: 5,
     },
-    details: {
-        flex: 1,
-    },
-    level: {
+    metaText: {
         fontSize: 14,
-        color: '#555',
-        fontStyle: 'italic',
-    },
-    duration: {
-        fontSize: 14,
-        color: '#555',
-        marginTop: 4,
-    },
-    label: {
-        fontWeight: 'bold',
+        color: '#444',
+        fontWeight: '500',
     },
     viewDetailsButton: {
+        borderRadius: 10,
+        overflow: 'hidden',
         backgroundColor: '#4CAF50',
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 8,
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 18,
+        gap: 8,
     },
     buttonText: {
-        color: '#fff',
+        color: '#FFFFFF',
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: '600',
     },
 });
 
 export default CourseCard;
+
+
+// import React from 'react';
+// import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+// const CourseCard = ({ course, onViewDetails }) => {
+//     return (
+//         <View style={styles.card}>
+//             {/* Course Title and Description */}
+//             <View style={styles.header}>
+//                 <Text style={styles.title}>{course.title}</Text>
+//                 <Text style={styles.description}>{course.description}</Text>
+//             </View>
+
+//             {/* Course Level, Duration, and View Details Button */}
+//             <View style={styles.footer}>
+//                 <View style={styles.details}>
+//                     <Text style={styles.level}>
+//                         <Text style={styles.label}>Level:</Text> {course.level || 'N/A'}
+//                     </Text>
+//                     <Text style={styles.duration}>
+//                         <Text style={styles.label}>Duration:</Text> {course.duration ? `${course.duration} hours` : 'N/A'}
+//                     </Text>
+//                 </View>
+
+//                 <TouchableOpacity onPress={onViewDetails} style={styles.viewDetailsButton}>
+//                     <Text style={styles.buttonText}>View Details</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         </View>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     card: {
+//         width: '100%', // Use 100% width for responsiveness
+//         padding: 16,
+//         backgroundColor: '#FFFFFF',
+//         marginVertical: 8,
+//         borderRadius: 8,
+//         shadowColor: '#000',
+//         shadowOffset: { width: 0, height: 2 },
+//         shadowOpacity: 0.1,
+//         shadowRadius: 4,
+//         elevation: 3, // For Android shadow
+//     },
+//     header: {
+//         marginBottom: 12,
+//     },
+//     title: {
+//         fontSize: 18,
+//         fontWeight: 'bold',
+//         color: '#333',
+//     },
+//     description: {
+//         fontSize: 14,
+//         color: '#666',
+//         marginTop: 4,
+//     },
+//     footer: {
+//         flexDirection: 'row',
+//         justifyContent: 'space-between',
+//         alignItems: 'center',
+//     },
+//     details: {
+//         flex: 1,
+//     },
+//     level: {
+//         fontSize: 14,
+//         color: '#555',
+//         fontStyle: 'italic',
+//     },
+//     duration: {
+//         fontSize: 14,
+//         color: '#555',
+//         marginTop: 4,
+//     },
+//     label: {
+//         fontWeight: 'bold',
+//     },
+//     viewDetailsButton: {
+//         backgroundColor: '#4CAF50',
+//         paddingVertical: 8,
+//         paddingHorizontal: 16,
+//         borderRadius: 8,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//     },
+//     buttonText: {
+//         color: '#fff',
+//         fontSize: 14,
+//         fontWeight: 'bold',
+//     },
+// });
+
+// export default CourseCard;
 
 
 
