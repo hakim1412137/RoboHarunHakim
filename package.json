@@ -13,7 +13,7 @@
     "@expo-google-fonts/electrolize": "^0.2.3",
     "@expo-google-fonts/orbitron": "^0.2.3",
     "@expo/metro-runtime": "~4.0.1",
-    "@expo/vector-icons": "^14.0.4",
+    "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-community/cli": "^15.1.3",
     "@react-native-community/masked-view": "^0.1.11",
