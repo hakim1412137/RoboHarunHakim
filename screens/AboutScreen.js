@@ -1,124 +1,266 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import TimelineCard1 from '../components/TimelineCard1';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 
+const sampleData = [
+    { id: 1, year: 2003, event: 'Founding of the Robotics Educational Center in Ethiopia.', eventDate: '2003-01-01T00:00:00Z', title: 'Founding the Center', subtitle: 'A New Era in Robotics Education' },
+    { id: 2, year: 2005, event: 'Launched the first series of robotics training programs for schools.', eventDate: '2005-06-15T00:00:00Z', title: 'First Training Programs', subtitle: 'Empowering Young Minds' },
+    { id: 3, year: 2007, event: 'First robotics competition held in Ethiopia, organized by the center.', eventDate: '2007-09-10T00:00:00Z', title: 'Inaugural Competition', subtitle: 'A Competitive Spirit' },
+    { id: 4, year: 2010, event: 'Introduced online shopping platform for robotics kits and educational materials.', eventDate: '2010-04-01T00:00:00Z', title: 'Launch of Online Store', subtitle: 'Convenience in Robotics' },
+    { id: 5, year: 2012, event: 'Conducted community workshops to promote STEM education.', eventDate: '2012-11-20T00:00:00Z', title: 'Community Workshops', subtitle: 'Engaging the Community' },
+    { id: 6, year: 2015, event: 'Opened a physical store in Addis Ababa for robotics supplies.', eventDate: '2015-07-05T00:00:00Z', title: 'Physical Store Opening', subtitle: 'Accessibility to Robotics Kits' },
+    { id: 7, year: 2018, event: 'Became the leading supplier of robotics components in Ethiopia.', eventDate: '2018-10-12T00:00:00Z', title: 'Market Leadership', subtitle: 'Trusted Supplier' },
+    { id: 8, year: 2020, event: 'Expanded services to include specialized courses in robotics and AI.', eventDate: '2020-05-30T00:00:00Z', title: 'Course Expansion', subtitle: 'Innovative Learning Paths' },
+    { id: 9, year: 2022, event: 'Introduced a scholarship program for underprivileged students.', eventDate: '2022-01-15T00:00:00Z', title: 'Scholarship Program', subtitle: 'Giving Back to the Community' },
+    { id: 10, year: 2025, event: 'Celebrated 22 years of service in robotics education and community involvement.', eventDate: '2025-12-01T00:00:00Z', title: 'Anniversary Celebration', subtitle: 'Milestone Achievements' },
+];
+
 const AboutUsScreen = ({ navigation }) => {
-    const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchTimelineData = () => {
-            setLoading(true);
-            const historyData = getHistoryCompany(sampleData); // Fetch history data from sampleData
-            setEvents(historyData);
-            setLoading(false);
-        };
+  // Sample timeline events data remains the same
 
-        fetchTimelineData();
-    }, []);
-
-    // Sample timeline events data
-    const sampleData = [
-        { id: 1, year: 2003, event: 'Founding of the Robotics Educational Center in Ethiopia.', eventDate: '2003-01-01T00:00:00Z', title: 'Founding the Center', subtitle: 'A New Era in Robotics Education' },
-        { id: 2, year: 2005, event: 'Launched the first series of robotics training programs for schools.', eventDate: '2005-06-15T00:00:00Z', title: 'First Training Programs', subtitle: 'Empowering Young Minds' },
-        { id: 3, year: 2007, event: 'First robotics competition held in Ethiopia, organized by the center.', eventDate: '2007-09-10T00:00:00Z', title: 'Inaugural Competition', subtitle: 'A Competitive Spirit' },
-        { id: 4, year: 2010, event: 'Introduced online shopping platform for robotics kits and educational materials.', eventDate: '2010-04-01T00:00:00Z', title: 'Launch of Online Store', subtitle: 'Convenience in Robotics' },
-        { id: 5, year: 2012, event: 'Conducted community workshops to promote STEM education.', eventDate: '2012-11-20T00:00:00Z', title: 'Community Workshops', subtitle: 'Engaging the Community' },
-        { id: 6, year: 2015, event: 'Opened a physical store in Addis Ababa for robotics supplies.', eventDate: '2015-07-05T00:00:00Z', title: 'Physical Store Opening', subtitle: 'Accessibility to Robotics Kits' },
-        { id: 7, year: 2018, event: 'Became the leading supplier of robotics components in Ethiopia.', eventDate: '2018-10-12T00:00:00Z', title: 'Market Leadership', subtitle: 'Trusted Supplier' },
-        { id: 8, year: 2020, event: 'Expanded services to include specialized courses in robotics and AI.', eventDate: '2020-05-30T00:00:00Z', title: 'Course Expansion', subtitle: 'Innovative Learning Paths' },
-        { id: 9, year: 2022, event: 'Introduced a scholarship program for underprivileged students.', eventDate: '2022-01-15T00:00:00Z', title: 'Scholarship Program', subtitle: 'Giving Back to the Community' },
-        { id: 10, year: 2025, event: 'Celebrated 22 years of service in robotics education and community involvement.', eventDate: '2025-12-01T00:00:00Z', title: 'Anniversary Celebration', subtitle: 'Milestone Achievements' },
-    ];
-
-    const getHistoryCompany = (data) => {
-        return data; // Currently returns the sample data
+  useEffect(() => {
+    const fetchTimelineData = () => {
+      setLoading(true);
+      setEvents(sampleData);
+      setLoading(false);
     };
 
-    return (
-        <ScrollView style={styles.container}>
-            <Header></Header>
-            <Menu navigation={navigation}></Menu>
-            <View style={{ padding: 10, paddingHorizontal: 200 }}>
-                <Text style={styles.title}>About Us</Text>
-                <Text style={styles.description}>
-                    Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
-                    Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
-                </Text>
-                <Text style={styles.bgTitle}>Background of the Company</Text>
-                <Text style={styles.description}>
-                    Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia, offering comprehensive training and resources to foster technological advancement.
-                </Text>
-                <Text style={styles.historyTitle}>History of the Company</Text>
-                <View style={styles.timelineItem}>
-                    {loading ? (
-                        <ActivityIndicator size="large" color="#0000ff" />
-                    ) : (
-                        <FlatList
-                            data={events} // Use the fetched events
-                            style={{ overflow: 'visible' }}
-                            renderItem={({ item, index }) => (
-                                <TimelineCard1
-                                    item={item}
-                                    index={index}
-                                />
-                            )}
-                            keyExtractor={(item) => item.id.toString()}
-                            contentContainerStyle={styles.flatList}
-                        />
-                    )}
+    fetchTimelineData();
+  }, []);
+
+  return (
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <Header />
+      <Menu navigation={navigation} />
+
+      <View style={styles.contentWrapper}>
+        <Text style={styles.title}>About Us</Text>
+        <Text style={styles.description}>
+          Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in robotics education.
+          Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
+        </Text>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>Background of the Company</Text>
+          <Text style={styles.description}>
+            Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia,
+            offering comprehensive training and resources to foster technological advancement.
+          </Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>History of the Company</Text>
+          <View style={styles.timelineContainer}>
+            <View style={styles.timelineLine} />
+            {loading ? (
+              <ActivityIndicator size="large" color="#4A90E2" style={{ marginVertical: 20 }} />
+            ) : (
+              events.map((item, index) => (
+                <View key={item.id} style={styles.timelineItem}>
+                  <View style={styles.timelineDot} />
+                  <TimelineCard1 item={item} index={index} />
                 </View>
-            </View>
-        </ScrollView>
-    );
+              ))
+            )}
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        height: '40rem',
-        backgroundColor: '#FBF1E6', // Sky Blue
-    },
-    title: {
-        fontSize: 28, // Increased font size
-        fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
-        color: '#333', // Darker color for better readability
-    },
-    description: {
-        fontSize: 18, // Slightly larger font
-        marginBottom: 20,
-        textAlign: 'center',
-        color: '#555', // Adjusted color for description
-    },
-    bgTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginTop: 20,
-        marginBottom: 10,
-        textAlign: 'center',
-        color: '#333',
-    },
-    historyTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginTop: 20,
-        marginBottom: 10,
-        textAlign: 'center',
-        color: '#333',
-    },
-    timelineItem: {
-        marginVertical: 10,
-        paddingBottom: 20,
-    },
-    flatList: {
-        paddingBottom: 20, // Additional padding for bottom
-    },
+  container: {
+    height: '40rem',
+    backgroundColor: '#FFFFFF',
+  },
+  contentWrapper: {
+    padding: 25,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#2C3E50',
+    textAlign: 'center',
+    fontFamily: 'Electrolize_400Regular',
+    marginBottom: 25,
+    letterSpacing: 0.5,
+  },
+  description: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'center',
+    marginBottom: 20,
+    lineHeight: 24,
+  },
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#2C3E50',
+    marginBottom: 15,
+    paddingLeft: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#4A90E2',
+  },
+  timelineContainer: {
+    marginTop: 10,
+    position: 'relative',
+  },
+  timelineLine: {
+    position: 'absolute',
+    left: 35,
+    top: 0,
+    bottom: 0,
+    width: 2,
+    backgroundColor: '#4A90E2',
+  },
+  timelineItem: {
+    paddingLeft: 50,
+    marginBottom: 25,
+    position: 'relative',
+  },
+  timelineDot: {
+    position: 'absolute',
+    left: 27,
+    top: 24,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: '#4A90E2',
+    zIndex: 0,
+    borderWidth: 3,
+    borderColor: 'white',
+  },
 });
+
 export default AboutUsScreen;
+
+// import React, { useEffect, useState } from 'react';
+// import { View, FlatList, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+// import { Text } from 'react-native-paper';
+// import TimelineCard1 from '../components/TimelineCard1';
+// import Header from '../components/Header';
+// import Menu from '../components/Menu';
+
+// const AboutUsScreen = ({ navigation }) => {
+//     const [events, setEvents] = useState([]);
+//     const [loading, setLoading] = useState(true);
+
+//     useEffect(() => {
+//         const fetchTimelineData = () => {
+//             setLoading(true);
+//             const historyData = getHistoryCompany(sampleData); // Fetch history data from sampleData
+//             setEvents(historyData);
+//             setLoading(false);
+//         };
+
+//         fetchTimelineData();
+//     }, []);
+
+//     // Sample timeline events data
+
+//     const getHistoryCompany = (data) => {
+//         return data; // Currently returns the sample data
+//     };
+
+//     return (
+//         <ScrollView style={styles.container}>
+//             <Header></Header>
+//             <Menu navigation={navigation}></Menu>
+//             <View style={{ padding: 10, paddingHorizontal: 200 }}>
+//                 <Text style={styles.title}>About Us</Text>
+//                 <Text style={styles.description}>
+//                     Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
+//                     Our mission is to empower the youth of Ethiopia by providing access to advanced educational resources and hands-on training in robotics and technology.
+//                 </Text>
+//                 <Text style={styles.bgTitle}>Background of the Company</Text>
+//                 <Text style={styles.description}>
+//                     Founded in 2003, we have established ourselves as a leader in robotics education in Ethiopia, offering comprehensive training and resources to foster technological advancement.
+//                 </Text>
+//                 <Text style={styles.historyTitle}>History of the Company</Text>
+//                 <View style={styles.timelineItem}>
+//                     {loading ? (
+//                         <ActivityIndicator size="large" color="#0000ff" />
+//                     ) : (
+//                         <FlatList
+//                             data={events} // Use the fetched events
+//                             style={{ overflow: 'visible' }}
+//                             renderItem={({ item, index }) => (
+//                                 <TimelineCard1
+//                                     item={item}
+//                                     index={index}
+//                                 />
+//                             )}
+//                             keyExtractor={(item) => item.id.toString()}
+//                             contentContainerStyle={styles.flatList}
+//                         />
+//                     )}
+//                 </View>
+//             </View>
+//         </ScrollView>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     container: {
+//         height: '40rem',
+//         backgroundColor: '#FBF1E6', // Sky Blue
+//     },
+//     title: {
+//         fontSize: 28, // Increased font size
+//         fontWeight: 'bold',
+//         marginBottom: 20,
+//         textAlign: 'center',
+//         color: '#333', // Darker color for better readability
+//     },
+//     description: {
+//         fontSize: 18, // Slightly larger font
+//         marginBottom: 20,
+//         textAlign: 'center',
+//         color: '#555', // Adjusted color for description
+//     },
+//     bgTitle: {
+//         fontSize: 24,
+//         fontWeight: 'bold',
+//         marginTop: 20,
+//         marginBottom: 10,
+//         textAlign: 'center',
+//         color: '#333',
+//     },
+//     historyTitle: {
+//         fontSize: 24,
+//         fontWeight: 'bold',
+//         marginTop: 20,
+//         marginBottom: 10,
+//         textAlign: 'center',
+//         color: '#333',
+//     },
+//     timelineItem: {
+//         marginVertical: 10,
+//         paddingBottom: 20,
+//     },
+//     flatList: {
+//         paddingBottom: 20, // Additional padding for bottom
+//     },
+// });
+// export default AboutUsScreen;
 /*// AboutUsPage.js
     const response = [
                     {

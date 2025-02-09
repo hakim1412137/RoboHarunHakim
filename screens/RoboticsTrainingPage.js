@@ -14,7 +14,9 @@ const RoboticsTrainingPage = ({ navigation }) => {
             <Header />
             <Menu navigation={navigation} />
             
-            <ScrollView style={styles.scrollContainer}>
+            <ScrollView 
+                style={styles.scrollContainer}
+                showsVerticalScrollIndicator={false}>
                 <ImageBackground 
                     source={{ uri: 'https://images.unsplash.com/photo-1601134467661-3d775b999c8b' }}
                     style={styles.heroSection}

@@ -85,6 +85,7 @@ const HomePage = ({ navigation }) => {
     return (
         <ScrollView
             style={styles.container}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: imageHeight * 0.2 }} // Adjust content size dynamically
         >
             {/* Hero Section */}
@@ -144,7 +145,7 @@ const HomePage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '40rem',
         backgroundColor: '#FFF5E6',
     },
     hero: {
