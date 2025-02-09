@@ -3,7 +3,8 @@ import { View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView, Toucha
 import { getAllPosts } from '../utils/api'; // Ensure this path is correct
 import PostCard from '../components/PostCard';
 import Header from "../components/Header";
-import Menu from "../components/Menu"; // Your component that renders individual posts
+import Menu from "../components/Menu";
+import {parse} from "@babel/core"; // Your component that renders individual posts
 
 const PostListScreen = ({ navigation }) => {
     const [posts, setPosts] = useState([]);
@@ -13,8 +14,9 @@ const PostListScreen = ({ navigation }) => {
         const fetchPosts = async () => {
             setLoading(true);
             try {
-                const response = await getAllPosts(); // Fetch all posts
+                const response = await getAllPosts(0, 10); // Fetch all posts
                 console.log("Fetched Posts Data: ", response.data); // Log to check fetched data
+
                 setPosts(response.data); // Update state with fetched data
             } catch (error) {
                 console.error('Error fetching posts:', error);

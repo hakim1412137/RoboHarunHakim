@@ -76,7 +76,7 @@ const AboutUsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     height: '40rem',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FBF1E6',
   },
   contentWrapper: {
     padding: 25,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   card: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#FBF1E6',
     borderRadius: 12,
     padding: 20,
     marginBottom: 25,

@@ -40,18 +40,18 @@ const ClientScreen = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Header></Header>
             <Menu navigation={navigation}></Menu>
-            <View style={{ padding: 20, paddingHorizontal: 200 }}>
+            <ScrollView style={{ padding: 20, paddingHorizontal: 200, height: '40rem' }} showsVerticalScrollIndicator={false}>
                 <Text style={styles.title}>Our Clients</Text>
                 <FlatList
                     data={clients}
                     keyExtractor={(item) => item.id.toString()} // Key extractor function
                     renderItem={renderItem} // Render item using the defined function
                 />
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Alert } from 'react-native';
+import {View, Text, FlatList, StyleSheet, ActivityIndicator, Alert, ScrollView} from 'react-native';
 import {getAllCareers} from "../utils/api";
 import CareersPage from "./CareersPage";
 import Menu from "../components/Menu";
@@ -37,7 +37,7 @@ const CareersScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Header />
             <Menu navigation={navigation} />
-            <View style={{ padding: 16, paddingHorizontal: 100 }}>
+            <ScrollView style={{ padding: 16, paddingHorizontal: 100, height: '40rem' }} showsVerticalScrollIndicator={false}>
                 <Text style={styles.header}>Career Opportunities</Text>
                 <Text style={{ textAlign: 'center', marginVertical: 10, fontSize: 14 }}>
                     Welcome to the Robotics Educational Center, dedicated to nurturing innovation and creativity in the field of robotics education.
@@ -57,7 +57,7 @@ const CareersScreen = ({ navigation }) => {
                         keyExtractor={item => item.id.toString()}
                     />
                 )}
-            </View>
+            </ScrollView>
       </View>
     );
 };

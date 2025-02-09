@@ -81,6 +81,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="competitions" component={CompetitionsScreen}  options={{ headerShown: false }} />
                                 <Stack.Screen name="events" component={EventListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="contactUs" component={ContactUsScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen
                                     name="products"
                                     component={ProductScreen}
@@ -115,7 +116,6 @@ const Stack = createStackNavigator();
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
                                 <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
-                                <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="postDetail" component={PostDetailScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
                                 <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />

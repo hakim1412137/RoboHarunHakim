@@ -65,6 +65,13 @@ const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 // Payment API calls
 const initializePayment = (paymentData) => api.post('/payments/initialize', paymentData);
 const verifyPayment = (txRef) => api.get(`/payments/verify/${txRef}`);
+// http://localhost:8083/api/posts?page =0&size=10
+const getAllPosts = (page, size) => api.get(`/posts?page=${page}&size=${size}`);
+const createPost = (post) => api.post(`/posts`, post);
+const getPostById = (postId) => api.get(`/posts/${postId}`);
+const getPostsByUserId = (userId) => api.get(`/posts/user/${userId}`);
+const getCommentsByPostId = (postId) => api.get(`/comments/post/${postId}`);
+const postComment = (postId, comment) => api.post(`/posts/${postId}/comments`, comment);
 
 /*const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
 const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);*/
@@ -131,13 +138,6 @@ const updateOrderStatus = (orderId, status) => api.put(`/orders/${orderId}`, { s
 // Feedback CRUD operations
 const getFeedbackByCourseId = (courseId) => api.get(`/feedback/course/${courseId}`);
 const submitFeedback = (feedbackData) => api.post('/feedback', feedbackData);
-
-const getAllPosts = () => api.get(`/posts`);
-const createPost = (post) => api.post(`/posts`, post);
-const getPostById = (postId) => api.get(`/posts/${postId}`);
-const getPostsByUserId = (userId) => api.get(`/posts/user/${userId}`);
-const getCommentsByPostId = (postId) => api.get(`/comments/post/${postId}`);
-const postComment = (postId, comment) => api.post(`/posts/${postId}/comments`, comment);
 
 // Community management
 /*const getAllCommunityPosts = () => api.get(`/community-posts`);
