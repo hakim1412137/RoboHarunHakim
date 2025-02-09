@@ -97,10 +97,17 @@ const deleteProduct = (productId) => api.delete(`/products/${productId}`);
 const getProductDetails = (productId) => api.get(`/products/${productId}`);
 
 // Service management
+const getSupports = () => api.get('/supports');
+const createSupport = (supportData) => api.post('/supports',supportData);
+const updateSupport = (supportId, supportData) => api.put(`/supports/${supportId}`, supportData);
+const deleteSupport = (supportId) => api.delete(`/supports/${supportId}`);
+
+// Service management
 const getServices = () => api.get('/services');
 const createService = (serviceData) => api.post('/services', serviceData);
 const updateService = (serviceId, serviceData) => api.put(`/services/${serviceId}`, serviceData);
 const deleteService = (serviceId) => api.delete(`/services/${serviceId}`);
+
 
 // Course management
 const getAllCourses = () => api.get('/courses');
@@ -198,6 +205,7 @@ export {
     createClient,getClientById, getAllClients, deleteClient,
     getUserDetails,
     // updateUserDetails,
+    getSupports,createSupport,updateSupport,deleteSupport,
     getAllCompetitions, getCompetitionById, registerForCompetition, createCompetition, updateCompetition, deleteCompetition,
     getAllVexRobotics, createVexRobotics, deleteVexRoboticsById, vexRoboticsById,
     getProducts, createProduct, updateProduct, deleteProduct, getProductDetails,
