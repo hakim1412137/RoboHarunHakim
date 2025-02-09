@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
 });
 
 export default ProductsScreen;
+
 /*import React, { useEffect, useState, useContext } from 'react';
 import {
     View,
