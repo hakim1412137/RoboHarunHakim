@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import { getAllClients } from "../utils/api"; // Ensure this path points to your API calls
@@ -30,7 +31,7 @@ const ClientScreen = ({ navigation }) => {
         return (
             <ClientCard
                 client={item} // Pass client data to your ClientCard component
-                onPress={() => navigation.navigate('ClientDetail', { id: item.id })} // Navigate to detail screen
+                onPress={() => navigation.navigate('clientDetail', { id: item.id })} // Navigate to detail screen
             />
         );
     };
@@ -68,3 +69,5 @@ const styles = StyleSheet.create({
 });
 
 export default ClientScreen;
+
+

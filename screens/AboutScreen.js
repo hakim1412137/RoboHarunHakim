@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
 
 export default AboutUsScreen;
 
+
 // import React, { useEffect, useState } from 'react';
 // import { View, FlatList, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 // import { Text } from 'react-native-paper';

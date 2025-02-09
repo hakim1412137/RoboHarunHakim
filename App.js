@@ -58,6 +58,7 @@ import ProductDetailScreen from "./screens/ProductDetailScreen";
 import ProductList from "./screens/ProductList";
 import PaymentScreen from "./screens/PaymentScreen";
 import ShoppingCart from "./screens/ShoppingCart";
+import ClientDetail from "./screens/ClientDetail";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -102,6 +103,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="careers" component={CareersScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ourTeam" component={TeamScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="ourClients" component={ClientScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="clientDetail" component={ClientDetail} options={{ headerShown: false }} />
 
                                 {/*Menu for services*/}
                                 <Stack.Screen name="serviceScreen" component={ServicesScreen} options={{ headerShown: false }} />

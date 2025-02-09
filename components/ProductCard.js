@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     buttonText: { color: '#4CAF50', fontSize: 16, fontWeight: 'bold', fontFamily: 'Electrolize_400Regular' }
 });
 
-export default ProductCard;*/
+*/
 /*
 
 //ProductCard: Display individual product details and buttons for edit/delete.

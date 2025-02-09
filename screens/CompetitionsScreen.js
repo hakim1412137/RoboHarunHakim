@@ -252,7 +252,7 @@ const CompetitionsScreen = ({ navigation }) => {
 };
 
 
-    colors.background = '#FBF1E6';     // Main background color for the app
+colors.background = '#FBF1E6';     // Main background color for the app
 colors.lightBackground =  '#FFFFFF';   // Light background color for sections, cards, etc.
 colors.dark = '#333333';  // Dark color for text or backgrounds
 const styles = StyleSheet.create({

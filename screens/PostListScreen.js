@@ -15,7 +15,7 @@ const PostListScreen = ({ navigation }) => {
             setLoading(true);
             try {
                 const response = await getAllPosts(0, 10); // Fetch all posts
-                console.log("Fetched Posts Data: ", response.data); // Log to check fetched data
+                // console.log("Fetched Posts Data: ", response.data); // Log to check fetched data
 
                 setPosts(response.data); // Update state with fetched data
             } catch (error) {
