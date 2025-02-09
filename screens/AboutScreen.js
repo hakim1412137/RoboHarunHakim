@@ -22,8 +22,6 @@ const AboutUsScreen = ({ navigation }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Sample timeline events data remains the same
-
   useEffect(() => {
     const fetchTimelineData = () => {
       setLoading(true);
