@@ -7,7 +7,7 @@ import MenuButtonWithPopup from './MenuButtonWithPopup';
 
 let MenuRoutes = [{ text: 'Products', route: 'products' }, 
                   { text: 'Courses', route: 'courses' }, 
-                  { text: 'VexRobotics', route: 'vexRobotics' },
+                  { text: 'Vex Robotics', route: 'vexRobotics' },
                   { text: 'Competitions', route: 'competitions' }, 
                   { text: 'Events', route: 'events' },
                   { text: 'Posts', route: 'postList' },

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const CompetitionCard = ({ competition, onEdit, onDelete, onRegister,onSearch }) => {
+const CompetitionCard = ({ competition, onEdit, onDelete, onSearch, onViewDetails }) => {
     return (
         <View style={styles.card}>
             <Text style={styles.id}>ID: {competition.id}</Text> {/* Displaying the ID */}
@@ -14,7 +14,8 @@ const CompetitionCard = ({ competition, onEdit, onDelete, onRegister,onSearch })
                 {/*<Button title="search" onPress={onSearch} />*/}
                 <Button title="Edit" onPress={onEdit} />
                 <Button title="Delete" onPress={onDelete} color="red" />
-                <Button title="Register" onPress={onRegister} color="green" />
+                {/*<Button title="Register" onPress={onRegister} color="green" />*/}
+                <Button title="View Details" onPress={onViewDetails} color="red" />
             </View>
         </View>
     );

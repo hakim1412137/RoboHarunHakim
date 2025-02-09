@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, Button, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import Loader from '../components/Loader';
-import { getCompetitionById } from '../utils/api';
+import {enrollInCourse, getCompetitionById, registerForCompetition} from '../utils/api';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {UserContext} from "../context/UserContext";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-const CompetitionDetailsScreen = ({ route }) => {
+const CompetitionDetailsScreen = ({ navigation, route }) => {
+    // const { user } = useContext(UserContext);
     const { competitionId } = route.params;
+
     const [competition, setCompetition] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCompetition = async () => {
             try {
-                const data = await getCompetitionById(competitionId);
-                console.log(data); // Check the structure of the fetched data
-                setCompetition(data);
+                const response = await getCompetitionById(competitionId);
+                console.log(response); // Check the structure of the fetched data
+                setCompetition(response.data);
             } catch (error) {
                 console.error(error);
                 Alert.alert('Error', 'Failed to fetch competition details');
@@ -24,6 +29,23 @@ const CompetitionDetailsScreen = ({ route }) => {
 
         fetchCompetition();
     }, [competitionId]);
+
+    const handleRegistration = async () => {
+        try {
+            const userData = await AsyncStorage.getItem('user');
+            const { id: userId } = JSON.parse(userData);
+
+            console.log(userId, competitionId)
+
+            const { data } = await registerForCompetition(userId, competitionId);
+
+            Alert.alert("Success", "registerForCompetition successful!");
+            navigation.goBack();
+        } catch (error) {
+            console.error('Enrollment error:', error);
+            Alert.alert("Error", error.response?.data?.message || "registerForCompetition failed");
+        }
+    };
 
     if (loading) return <Loader />;
 
@@ -39,8 +61,17 @@ const CompetitionDetailsScreen = ({ route }) => {
                     <Text style={styles.price}>
                         Price: {competition.price ? `$${competition.price}` : 'Call For Price'}
                     </Text>
-                </>
-            ) : (
+
+                <TouchableOpacity
+                    style={styles.enrollButton}
+                    onPress={handleRegistration}
+                >
+                    <Text style={styles.enrollButtonText}>
+                        <Icon name="assignment" size={18} color="white" /> Enroll Now
+                    </Text>
+                </TouchableOpacity>        </>)
+
+                : (
                 <Text>No competition details available.</Text> // Ensure this is wrapped in Text
             )}
         </View>

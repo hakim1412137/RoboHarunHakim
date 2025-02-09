@@ -120,7 +120,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
                                 <Stack.Screen name="VexRobotDetail" component={VexRoboticsDetail} />
                                 <Stack.Screen name="teamDetail" component={TeamDetail} />
-                                <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
+                                <Stack.Screen name="competitionDetails" component={CompetitionDetailsScreen} />
 
                                 {/*Auth*/}
                                 <Stack.Screen name="login" component={LoginScreen} />

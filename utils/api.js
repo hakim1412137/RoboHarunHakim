@@ -50,6 +50,8 @@ const getUserDetails = (username) => api.get(`/auth/username/${username}`);
 
 // const enrollInCourse = (userId, courseId) => api.post(`/enrollments/enroll?userId=${userId}&courseId=${courseId}`);
  const enrollInCourse = (userId, courseId) => api.post('/enrollments/enroll',{userId, courseId});
+// const registerForCompetition = (competitionId) => api.post(`/competitions/${competitionId}/register`);
+ const registerForCompetition = (userId, competitionId) => api.post('registrations/register',{ userId, competitionId });
 
 // Auth operations
 const login = (loginData) => api.post('/auth/login', loginData);
@@ -70,7 +72,6 @@ const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`,
 // Competition management
 const getAllCompetitions = () => api.get(`/competitions`);
 const getCompetitionById = (competitionId) => api.get(`/competitions/${competitionId}`);
-const registerForCompetition = (competitionId) => api.post(`/competitions/${competitionId}/register`);
 const createCompetition = (competitionData) => api.post('/competitions', competitionData);
 const updateCompetition = (competitionId, competitionData) => api.put(`/competitions/${competitionId}`, competitionData);
 const deleteCompetition = (competitionId) => api.delete(`/competitions/${competitionId}`);

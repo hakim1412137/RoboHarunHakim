@@ -12,6 +12,8 @@ import SearchCompetition from "../components/SearchCompetition";
 import SearchComponent from "../components/CompetitionCard"; // Ensure these API methods exist
 import Header from '../components/Header';
 import Menu from '../components/Menu';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStoragec from "@react-native-async-storage/async-storage/src";
 
 const CompetitionsScreen = ({ navigation }) => {
     const [competitions, setCompetitions] = useState([]);
@@ -71,6 +73,10 @@ const CompetitionsScreen = ({ navigation }) => {
         setCompetitions([competition]); // Replace the competition list with the found competition
     };
 
+    const onViewDetails = (competitionId) => {
+        navigation.navigate("competitionDetails", { competitionId })
+    }
+
     const handleSubmission = async () => {
         const competitionData = {
             name,
@@ -114,16 +120,6 @@ const CompetitionsScreen = ({ navigation }) => {
         setDescription(competition.description);
         setPrice(competition.price ? competition.price.toString() : '');
         setDueDate(competition.dueDate); // Ensure use proper field
-    };
-
-    const handleRegister = async (competitionId) => {
-        try {
-            await registerForCompetition(competitionId);
-            Alert.alert('Success', 'You have registered for the competition!');
-        } catch (error) {
-            console.error(error);
-            Alert.alert('Error', 'Error registering for competition!');
-        }
     };
 
     const clearForm = () => {
@@ -195,7 +191,8 @@ const CompetitionsScreen = ({ navigation }) => {
                                 competition={item}
                                 onEdit={() => handleEdit(item)}
                                 onDelete={() => handleDelete(item.id)}
-                                onRegister={() => handleRegister(item.id)} // Register for the competition
+                                onViewDetails={() => onViewDetails(item.id)}
+                                // onRegister={() => handleRegistration(item.id)} // Register for the competition
                                 // onRegister={() => navigation.navigate('CompetitionDetails', { competitionId: item.id })} // Replace or implement a registration function
                             />
                         )}
