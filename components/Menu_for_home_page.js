@@ -23,6 +23,7 @@ let popupMenus = [
                                     ]
                    },
                    { text: 'Services', subMenu: [
+                                        { text: "Services", route: "serviceScreen" },
                                         { text: "Supports", route: "supportScreen" },
                                         { text: "Robotics Training", route: "roboticsTraining" },
                                         { text: "Website Development", route: "websiteDevelopment" },

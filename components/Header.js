@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        alignItems: 'center',
         gap: 5
     },
     contactText: {

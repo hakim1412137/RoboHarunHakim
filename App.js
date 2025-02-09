@@ -104,7 +104,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="ourClients" component={ClientScreen} options={{ headerShown: false }} />
 
                                 {/*Menu for services*/}
-                                <Stack.Screen name="servicesScreen" component={ServicesScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="serviceScreen" component={ServicesScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />
