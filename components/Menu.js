@@ -27,7 +27,6 @@ let popupMenus = [
                                         { text: "Robotics Training", route: "roboticsTraining" },
                                         { text: "Website Development", route: "websiteDevelopment" },
                                         { text: "Android Development", route: "androidDevelopment" },
-                                        { text: "Robotics Training", route: "roboticsTraining" },
                                     ]
                    },
                   ];
