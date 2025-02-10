@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Button, StyleSheet } from 'react-native';
+import {View, FlatList, Button, StyleSheet, ScrollView} from 'react-native';
 import SupportCard from '../components/SupportCard'; // Create a SupportCard component for display
 import {createSupport, deleteSupport, getSupports, updateSupport} from '../utils/api';
 import Loader from '../components/Loader';
@@ -42,7 +42,7 @@ const SupportScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header></Header>
             <Menu navigation={navigation}></Menu>
             <View style={{ padding: 20, paddingHorizontal: 200 }}>
@@ -79,13 +79,14 @@ const SupportScreen = ({ navigation }) => {
                 />
             </View>
 
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
         backgroundColor: '#FBF1E6'
     },
 });

@@ -132,6 +132,10 @@ const createResource = (resourceData) => api.post('/resources', resourceData);
 const updateResource = (resourceId, resourceData) => api.put(`/resources/${resourceId}`, resourceData);
 const deleteResource = (resourceId) => api.delete(`/resources/${resourceId}`);
 
+// Resource management
+const getJoinUs = () => api.get('/joinUs');
+const createJoinUs = (JoinUsData) => api.post('/joinUs', JoinUsData);
+
 // Partnership management
 const getPartnerships = () => api.get('/partnerships');
 const createPartnership = (partnershipData) => api.post('/partnerships', partnershipData);
@@ -196,7 +200,8 @@ const deleteTraining =  (trainingId) => api.delete(`robotics-trainings/${trainin
 // Exporting all the methods for usage
 export {
     login,signup,
-    // refreshToken,
+    // refreshTokeni,
+    getJoinUs,createJoinUs,
     forgotPassword,resetPassword,
     initializePayment, verifyPayment,
     getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,

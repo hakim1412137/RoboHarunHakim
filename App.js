@@ -59,6 +59,7 @@ import ProductList from "./screens/ProductList";
 import PaymentScreen from "./screens/PaymentScreen";
 import ShoppingCart from "./screens/ShoppingCart";
 import ClientDetail from "./screens/ClientDetail";
+import JoinUsScreen from "./screens/JoinUsScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -110,6 +111,8 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />
+                                <Stack.Screen name="trainingLists" component={RoboticsTrainingList} options={{ headerShown: false }} />
+
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
 
@@ -135,6 +138,8 @@ const Stack = createStackNavigator();
 
                                 <Stack.Screen name="Partners" component={PartnerScreen} />
                                 <Stack.Screen name="Support" component={SupportScreen} />
+
+                                <Stack.Screen name="joinUs" component={JoinUsScreen} />
                                 {/*
                                 <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Cart' }} />
                                 <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ title: 'Order Confirmation' }}/>

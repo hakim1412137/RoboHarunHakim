@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Button, StyleSheet, Text, Alert, TouchableOpacity } from 'react-native';
+import {View, FlatList, Button, StyleSheet, Text, Alert, TouchableOpacity, ScrollView} from 'react-native';
 import {createService, deleteService, getServices, updateService} from '../utils/api';
 import Loader from '../components/Loader';
 import ModalForm from '../components/ModalForm';
@@ -58,7 +58,7 @@ const ServicesScreen = ({navigation} ) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
             <Header></Header>
             <Menu navigation={navigation}></Menu>
             <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
@@ -97,13 +97,14 @@ const ServicesScreen = ({navigation} ) => {
                 initialData={editData}
                 onSubmit={handleAddOrUpdate}
             />
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
         padding: 16,
         backgroundColor: '#f9f9f9',
     },

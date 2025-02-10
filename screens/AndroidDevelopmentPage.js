@@ -9,7 +9,7 @@ import Menu from '../components/Menu';
 
 const AndroidDevelopmentPage = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
             <Header />
             <Menu navigation={navigation} />
 
@@ -64,7 +64,8 @@ const AndroidDevelopmentPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
         backgroundColor: '#F4F6F9',
     },
     content: {

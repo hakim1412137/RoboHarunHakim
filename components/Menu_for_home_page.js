@@ -20,10 +20,11 @@ let popupMenus = [
                                         { text: "Careers", route: "careers" },
                                         { text: "Our Team", route: "ourTeam" },
                                         { text: "Our Clients", route: "ourClients" },
+                                        { text: "Join Us", route: "joinUs" },
                                     ]
                    },
                    { text: 'Services', subMenu: [
-                                        { text: "Services", route: "serviceScreen" },
+                                        { text: "Main Services", route: "serviceScreen" },
                                         { text: "Supports", route: "supportScreen" },
                                         { text: "Robotics Training", route: "roboticsTraining" },
                                         { text: "Website Development", route: "websiteDevelopment" },

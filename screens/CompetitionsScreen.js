@@ -257,7 +257,9 @@ colors.lightBackground =  '#FFFFFF';   // Light background color for sections, c
 colors.dark = '#333333';  // Dark color for text or backgrounds
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
+
         backgroundColor: colors.background,
     },
     content: {

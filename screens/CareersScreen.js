@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
+import {
+    View,
+    Text,
+    FlatList,
+    StyleSheet,
+    ActivityIndicator,
+    Alert,
+    TouchableOpacity,
+    ScrollView,
+    Linking
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllCareers } from "../utils/api";
 import Menu from "../components/Menu";
@@ -33,7 +43,8 @@ const CareersScreen = ({ navigation }) => {
             <Text style={styles.description}>{item.description}</Text>
             <TouchableOpacity
                 style={styles.applyButton}
-                onPress={() => Linking.openURL(item.application_link)}
+                // onPress={() => Linking.openURL(item.application_link)}
+                onPress={() => navigation.navigate('joinUs')}
             >
                 <Text style={styles.buttonText}>Apply Now</Text>
                 <Ionicons name="arrow-forward-circle" size={20} color="white" />
@@ -42,7 +53,7 @@ const CareersScreen = ({ navigation }) => {
     );
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
 
@@ -81,13 +92,14 @@ const CareersScreen = ({ navigation }) => {
                     <ActivityIndicator size="large" color="#3B82F6" />
                 </View>
             )}
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
         backgroundColor: '#F8FAFC',
     },
     headerContainer: {
