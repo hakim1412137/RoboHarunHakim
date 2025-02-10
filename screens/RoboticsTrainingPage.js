@@ -68,23 +68,24 @@ const RoboticsTrainingPage = ({ navigation }) => {
                 style={styles.scrollContainer}
                 showsVerticalScrollIndicator={false}
             >
-                <ImageBackground
-                    source={{ uri: 'https://images.unsplash.com/photo-1601134467661-3d775b999c8b' }}
-                    style={styles.heroSection}
-                    imageStyle={styles.heroImage}
-                >
-                    <LinearGradient
-                        colors={['rgba(0, 168, 107, 0.8)', 'rgba(0, 201, 120, 0.8)']}
-                        style={styles.heroGradient}
-                    >
-                        <Text style={styles.heroTitle}>Master Robotics Engineering</Text>
-                        <Text style={styles.heroSubtitle}>Hands-on training with industry experts</Text>
-                    </LinearGradient>
-                </ImageBackground>
+
 
                 <Text style={styles.sectionTitle}>Program Highlights</Text>
 
                 <View style={styles.featuresGrid}>
+                    <ImageBackground
+                        source={require('../assets/images/91995.jpg')} // Adjust path as needed
+                        style={styles.heroSection}
+                        imageStyle={styles.heroImage}
+                    >
+                        <LinearGradient
+                            colors={['rgba(0, 168, 107, 0.8)', 'rgba(0, 201, 120, 0.8)']}
+                            style={styles.heroGradient}
+                        >
+                            <Text style={styles.heroTitle}>Master Robotics Engineering</Text>
+                            <Text style={styles.heroSubtitle}>Hands-on training with industry experts</Text>
+                        </LinearGradient>
+                    </ImageBackground>
                     {[
                         { icon: 'hardware-chip', title: 'Modern Equipment', text: 'Access to latest robotics kits and tools' },
                         { icon: 'people', title: 'Expert Instructors', text: 'Learn from certified professionals' },
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         paddingBottom: 80,
+        backgroundColor: '#FAF3E0',
     },
     heroSection: {
         height: 300,
@@ -178,6 +180,7 @@ const styles = StyleSheet.create({
     },
     content: {
         paddingHorizontal: 20,
+        backgroundColor: '#FAF3E0',
     },
     sectionTitle: {
         fontSize: 24,

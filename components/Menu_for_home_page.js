@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import MenuForAboutUs from "./MenuForAboutUs";
 import MenuForServices from "./MenuForServices";
-import MenuButtons from '../screens/MenuButtons';
+import MenuButtons from './MenuButtons';
 import MenuButtonWithPopup from './MenuButtonWithPopup';
 
 let MenuRoutes = [{ text: 'Products', route: 'products' }, 
@@ -10,7 +10,7 @@ let MenuRoutes = [{ text: 'Products', route: 'products' },
                   { text: 'Vex Robotics', route: 'vexRobotics' },
                   { text: 'Competitions', route: 'competitions' }, 
                   { text: 'Events', route: 'events' },
-                  { text: 'Posts', route: 'postList' },
+                  { text: 'Posts', route: 'posts' },
                   { text: 'Contact Us', route: 'contactUs' },
                 ];
 
@@ -24,7 +24,7 @@ let popupMenus = [
                                     ]
                    },
                    { text: 'Services', subMenu: [
-                                        { text: "Main Services", route: "serviceScreen" },
+                                        { text: "Services", route: "services1" },
                                         { text: "Supports", route: "supportScreen" },
                                         { text: "Robotics Training", route: "roboticsTraining" },
                                         { text: "Website Development", route: "websiteDevelopment" },

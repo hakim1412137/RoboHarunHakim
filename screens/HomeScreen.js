@@ -1,110 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Animated, Button, Easing,ImageBackground  } from 'react-native';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Menu from '../components/Menu_for_home_page';
-import AboutScreen from "./AboutScreen"; // About Us page
-import SignUpScreen from './SignUpScreen';
-import ProductScreen from "./ProductScreen";
 import HomePage from "./HomePage";
-import CourseDetailsScreen from "./CourseDetailsScreen";
-import CoursesScreen from "./CoursesScreen";
-import ProductDetailScreen from "./ProductDetailScreen";
-import EditProductScreen from "./EditProductScreen";
-import CompetitionsScreen from "./CompetitionsScreen";
-import CompetitionDetailsScreen from "./CompetitionDetailsScreen";
-import EventDetailsScreen from "./EventDetailsScreen";
-import EventListScreen from "./EventListScreen";
-import AndroidDevelopmentPage from "./AndroidDevelopmentPage";
-import JoinUsScreen from "./JoinUsScreen";
-import ServicesScreen from "./ServicesScreen";
-import SupportScreen from "./SupportScreen";
-import WebsiteDevelopmentPage from "./WebsiteDevelopmentPage";
-import AddVexRobotics from "./AddVexRobotics";
-import VexRoboticsDetail from "./VexRoboticsDetail";
-import VexRoboticsList from "./VexRoboticsList";
-import LoginScreen from "./LoginScreen";
-import CareersScreen from "./CareersScreen";
-import ClientScreen from "./ClientScreen";
-import TeamScreen from "./TeamScreen";
-import RoboticsTrainingList from "./RoboticsTrainingList";
-import TrainingDetail from "./TrainingDetail";
-import PostListScreen from "./PostListScreen";
-import PostDetailScreen from "./PostDetailScreen";
-
-
 const HomeScreen = ({ navigation }) => {
     // const [currentPage, setCurrentPage] = useState('homepage');
     const [expanded, setExpanded] = useState(false);
     const [position, setPosition] = useState({ x: 100, y: 100 });
 
-    // const renderContent = () => {
-    //     switch (currentPage) {
-    //         case 'homepage':
-    //             return <HomePage navigation={navigation} />;
-    //         case 'aboutUs':
-    //             return <AboutScreen />;
-    //         case 'careers':
-    //             return <CareersScreen />;
-    //         case 'ourTeam':
-    //             return <TeamScreen />;
-    //         case 'ourClients':
-    //             return <ClientScreen />;
-    //         case 'roboticsTraining':
-    //             return <RoboticsTrainingList />;
-    //         case 'trainingDetails':
-    //             return <TrainingDetail />;
-    //         case 'postList':
-    //             return <PostListScreen />;
-    //         case 'postDetail':
-    //             return <PostDetailScreen />;
-    //         case 'AndroidDevelopmentPage':
-    //             return <AndroidDevelopmentPage />;
-    //         case 'WebsiteDevelopmentPage':
-    //             return <WebsiteDevelopmentPage />;
-    //         case 'ServicesScreen':
-    //             return <ServicesScreen />;
-    //         case 'SupportScreen':
-    //             return <SupportScreen />;
-    //         case 'JoinUsScreen':
-    //             return <JoinUsScreen />;
-    //         case 'signin':
-    //             return <LoginScreen />;
-    //         case 'signup':
-    //             return <SignUpScreen />;
-    //         case 'Products':
-    //             return <ProductScreen />;
-    //         case 'ProductDetails':
-    //             return <ProductDetailScreen />;
-    //           case 'Courses':
-    //              return <CoursesScreen />;
-    //           case 'CourseDetails1':
-    //              return <CourseDetailsScreen />;
-    //           case 'EditProduct':
-    //                return <EditProductScreen />;
-    //           case 'CompetitionDetails':
-    //           return <CompetitionDetailsScreen />;
-    //           case 'Competitions':
-    //           return <CompetitionsScreen />;
-    //           case 'EventDetails':
-    //           return <EventDetailsScreen />;
-    //           case 'Events':
-    //           return <EventListScreen />;
-    //         case 'AddVexRobot':
-    //             return <AddVexRobotics />;
-    //         case 'VexRobotDetail':
-    //             return <VexRoboticsDetail />;
-    //         case 'VexRobotics':
-    //             return <VexRoboticsList />;
-    //
-    //
-    //         default:
-    //             return <Text style={styles.title}>Welcome to the Educational Robotics Center!</Text>;
-    //     }
-    // };
-
     return (
-
         <View style={styles.container}>
             <Header navigation={navigation} />
             {/*{renderContent()}*/}
@@ -179,7 +82,70 @@ export default HomeScreen;
    justifyContent: 'center',
         alignItems: 'center',
  */
-
+// const renderContent = () => {
+//     switch (currentPage) {
+//         case 'homepage':
+//             return <HomePage navigation={navigation} />;
+//         case 'aboutUs':
+//             return <AboutScreen />;
+//         case 'careers':
+//             return <CareersScreen />;
+//         case 'ourTeam':
+//             return <TeamScreen />;
+//         case 'ourClients':
+//             return <ClientScreen />;
+//         case 'roboticsTraining':
+//             return <RoboticsTrainingList />;
+//         case 'trainingDetails':
+//             return <TrainingDetail />;
+//         case 'postList':
+//             return <PostListScreen />;
+//         case 'postDetail':
+//             return <PostDetailScreen />;
+//         case 'AndroidDevelopmentPage':
+//             return <AndroidDevelopmentPage />;
+//         case 'WebsiteDevelopmentPage':
+//             return <WebsiteDevelopmentPage />;
+//         case 'ServicesScreen':
+//             return <ServicesScreen />;
+//         case 'SupportScreen':
+//             return <SupportScreen />;
+//         case 'JoinUsScreen':
+//             return <JoinUsScreen />;
+//         case 'signin':
+//             return <LoginScreen />;
+//         case 'signup':
+//             return <SignUpScreen />;
+//         case 'Products':
+//             return <ProductScreen />;
+//         case 'ProductDetails':
+//             return <ProductDetailScreen />;
+//           case 'Courses':
+//              return <CoursesScreen />;
+//           case 'CourseDetails1':
+//              return <CourseDetailsScreen />;
+//           case 'EditProduct':
+//                return <EditProductScreen />;
+//           case 'CompetitionDetails':
+//           return <CompetitionDetailsScreen />;
+//           case 'Competitions':
+//           return <CompetitionsScreen />;
+//           case 'EventDetails':
+//           return <EventDetailsScreen />;
+//           case 'Events':
+//           return <EventListScreen />;
+//         case 'AddVexRobot':
+//             return <AddVexRobotics />;
+//         case 'VexRobotDetail':
+//             return <VexRoboticsDetail />;
+//         case 'VexRobotics':
+//             return <VexRoboticsList />;
+//
+//
+//         default:
+//             return <Text style={styles.title}>Welcome to the Educational Robotics Center!</Text>;
+//     }
+// };
 
 /*
 import React, { useRef } from 'react';

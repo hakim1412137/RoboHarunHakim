@@ -5,7 +5,7 @@ import MenuForServices from '../components/MenuForServices'; // Adjust the impor
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const ServicesPage = ({ setCurrentPage }) => {
+const ServicesPage22 = ({ setCurrentPage }) => {
     return (
         <View style={styles.container}>
             <Header />
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ServicesPage;
+export default ServicesPage22;

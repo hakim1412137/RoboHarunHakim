@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 
-const  MenuForAboutUs = ({ navigation, children, subMenu, textColor, expanded, setExpanded, index }) => {
+const  MenuButtonWithPopup = ({ navigation, children, subMenu, textColor, expanded, setExpanded, index }) => {
     const [hovered, setHovered] = useState(false);
 
     function handleMenuClick() {
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
-export default MenuForAboutUs;
+export default MenuButtonWithPopup;

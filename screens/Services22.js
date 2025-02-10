@@ -1,7 +1,7 @@
 import { View, Button } from "react-native-web"
 import { Text } from "react-native-elements"
 
-export default function Services() {
+export default function Services22() {
   return (
     <View style={{ width: '100%', height: '100%', padding: 100, alignItems: 'center', backgroundColor: '#ffebbf' }}>
       <Text style={{ fontSize: 30, fontWeight: 800 }}>Welcome to the Robotic Educational and Shopping Center!</Text>

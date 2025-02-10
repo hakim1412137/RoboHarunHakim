@@ -34,7 +34,7 @@ import {UserProvider} from "./context/UserContext";
 import ourTeamPage from "./screens/OurTeamPage";
 import ourClientsPage from "./screens/OurClientsPage";
 import RoboticsTrainingPage from "./screens/RoboticsTrainingPage";
-import ServicesScreen from "./screens/ServicesScreen";
+import ServiceScreen from "./screens/ServiceScreen";
 import WebsiteDevelopmentPage from "./screens/WebsiteDevelopmentPage";
 import AndroidDevelopmentPage from "./screens/AndroidDevelopmentPage";
 import ContactUsScreen from "./screens/ContactUsScreen";
@@ -60,6 +60,7 @@ import PaymentScreen from "./screens/PaymentScreen";
 import ShoppingCart from "./screens/ShoppingCart";
 import ClientDetail from "./screens/ClientDetail";
 import JoinUsScreen from "./screens/JoinUsScreen";
+import PostsScreen from "./screens/PostsScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
@@ -84,6 +85,8 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="events" component={EventListScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="contactUs" component={ContactUsScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="postList" component={PostListScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="posts" component={PostsScreen} options={{ headerShown: false }} />
+
                                 <Stack.Screen
                                     name="products"
                                     component={ProductScreen}
@@ -107,7 +110,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="clientDetail" component={ClientDetail} options={{ headerShown: false }} />
 
                                 {/*Menu for services*/}
-                                <Stack.Screen name="serviceScreen" component={ServicesScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="services1" component={ServiceScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="supportScreen" component={SupportScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="roboticsTraining" component={RoboticsTrainingPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="trainingDetails" component={TrainingDetail} options={{ headerShown: false }} />

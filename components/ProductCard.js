@@ -28,7 +28,9 @@ const ProductCard = ({ product, onAddToCart, onPress, onEdit, onDelete }) => {
                 <View>
                     <Text style={styles.name}>{product.name}</Text>
                     <Text style={styles.description}>{product.description}</Text>
-                    <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+                    {/*<Text style={styles.price}>${product.price.toFixed(2)}</Text>*/}
+                    <Text style={styles.price}>{product.price.toFixed(2)}</Text>
+
                 </View>
 
                 {/* Add to Cart and View Details Buttons */}
