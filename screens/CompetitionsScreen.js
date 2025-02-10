@@ -24,6 +24,8 @@ import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 const CompetitionsScreen = ({ navigation }) => {
     const [competitions, setCompetitions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filteredCompetitions, setFilteredCompetitions] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -32,6 +34,18 @@ const CompetitionsScreen = ({ navigation }) => {
     });
     const [editingId, setEditingId] = useState(null);
     const [searchId, setSearchId] = useState('');
+    // Update the search handler
+    const handleSearch = (query) => {
+        setSearchQuery(query);
+        const formattedQuery = query.toLowerCase();
+
+        const filtered = competitions.filter(competition => {
+            return competition.name.toLowerCase().includes(formattedQuery) ||
+                competition.description.toLowerCase().includes(formattedQuery);
+        });
+
+        setFilteredCompetitions(filtered);
+    };
 
     useEffect(() => {
         fetchCompetitions();
@@ -40,8 +54,10 @@ const CompetitionsScreen = ({ navigation }) => {
     const fetchCompetitions = async () => {
         setLoading(true);
         try {
-            const response = await getAllCompetitions();
-            setCompetitions(response.data);
+            const { data } = await getAllCompetitions();
+            setCompetitions(data);
+            setFilteredCompetitions(data);
+
         } catch (error) {
             console.error(error);
             Alert.alert("Error", "Failed to fetch competitions");
@@ -114,7 +130,35 @@ const CompetitionsScreen = ({ navigation }) => {
             <Menu navigation={navigation} />
 
             <ScrollView contentContainerStyle={styles.content}>
-                {/* Form Section */}
+                <View style={styles.searchContainer}>
+                    <View style={styles.searchInputContainer}>
+                        <Ionicons
+                            name="search"
+                            size={22}
+                            color="#6200ee"
+                            style={styles.searchIcon}
+                        />
+                        <TextInput
+                            placeholder="Search competitions..."
+                            placeholderTextColor="#888"
+                            value={searchQuery}
+                            onChangeText={handleSearch}
+                            style={styles.searchInput}
+                            clearButtonMode="while-editing"
+                        />
+                        {searchQuery.length > 0 && (
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setSearchQuery('');
+                                    setFilteredCompetitions(competitions);
+                                }}
+                                style={styles.clearButton}
+                            >
+                                <Ionicons name="close-circle" size={20} color="#888" />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </View>
                 <View style={styles.formCard}>
                     <Text style={styles.formTitle}>
                         {editingId ? 'Edit Competition' : 'Create New Competition'}
@@ -173,7 +217,7 @@ const CompetitionsScreen = ({ navigation }) => {
                     <ActivityIndicator size="large" color="#6200ee" style={styles.loader} />
                 ) : (
                     <FlatList
-                        data={competitions}
+                        data={filteredCompetitions}
                         renderItem={({ item }) => (
                             <View style={styles.competitionCard}>
                                 <View style={styles.cardHeader}>
@@ -210,6 +254,12 @@ const CompetitionsScreen = ({ navigation }) => {
                             </View>
                         )}
                         keyExtractor={(item) => item.id.toString()}
+                        ListEmptyComponent={
+                            <View style={styles.emptyState}>
+                                <Ionicons name="trophy-outline" size={60} color="#ccc" />
+                                <Text style={styles.emptyStateText}>No competitions found</Text>
+                            </View>
+                        }
                     />
                 )}
             </ScrollView>
@@ -313,6 +363,45 @@ const styles = StyleSheet.create({
     },
     loader: {
         marginVertical: 40,
+    },searchContainer: {
+        marginBottom: 20,
+        paddingHorizontal: 10,
+    },
+    searchInputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 25,
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+    },
+    searchIcon: {
+        marginRight: 10,
+    },
+    searchInput: {
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+        paddingVertical: 5,
+    },
+    clearButton: {
+        padding: 5,
+        marginLeft: 10,
+    },
+    emptyState: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 40,
+    },
+    emptyStateText: {
+        color: '#888',
+        fontSize: 16,
+        marginTop: 10,
     },
 });
 

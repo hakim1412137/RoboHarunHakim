@@ -1,9 +1,8 @@
-// PostsScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { getAllPosts, createPost, postComment, getCommentsByPostId } from '../utils/api';
+import { getAllPosts, createPost, getCommentsByPostId } from '../utils/api';
 
 const PostsScreen = ({ navigation }) => {
     const [posts, setPosts] = useState([]);
@@ -23,6 +22,8 @@ const PostsScreen = ({ navigation }) => {
                 })
             );
             setPosts(prev => page === 1 ? postsWithComments : [...prev, ...postsWithComments]);
+        } catch (error) {
+            Alert.alert("Error", "Failed to load posts");
         } finally {
             setLoading(false);
         }
@@ -30,33 +31,26 @@ const PostsScreen = ({ navigation }) => {
 
     // Create new post
     const handleCreatePost = async () => {
-        if (!newPost.title || !newPost.content) return;
+        if (!newPost.title || !newPost.content) {
+            Alert.alert("Error", "Please fill in both title and content");
+            return;
+        }
 
         try {
             const response = await createPost(newPost);
             const commentsRes = await getCommentsByPostId(response.data.id);
             setPosts(prev => [{ ...response.data, comments: commentsRes.data }, ...prev]);
             setNewPost({ title: '', content: '' });
+            Alert.alert("Success", "Post created successfully!");
         } catch (error) {
-            console.error(error);
+            Alert.alert("Error", "Failed to create post");
         }
     };
 
-    // Add comment to post
-    const handleAddComment = async (postId, content) => {
-        if (!content.trim()) return;
-
-        try {
-            const response = await postComment(postId, { content });
-            setPosts(prev => prev.map(post =>
-                post.id === postId
-                    ? { ...post, comments: [response.data, ...post.comments] }
-                    : post
-            ));
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', fetchPosts);
+        return unsubscribe;
+    }, [navigation]);
 
     useEffect(() => {
         fetchPosts();
@@ -70,7 +64,7 @@ const PostsScreen = ({ navigation }) => {
             <Text style={styles.postTitle}>{item.title}</Text>
             <Text style={styles.postContent}>{item.content}</Text>
             <Text style={styles.commentsCount}>
-                {item.comments.length} comments
+                {item.comments?.length || 0} comments
             </Text>
         </TouchableOpacity>
     );
