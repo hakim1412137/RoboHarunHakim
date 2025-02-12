@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
      // color: '#2C3E50',
-
     color: 'white', // Text color
     textAlign: 'center',
     fontFamily: 'Electrolize_400Regular',
@@ -134,7 +133,8 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#2C3E50',
+    // color: '#2C3E50',
+    color: 'white', // Text color
     marginBottom: 15,
     paddingLeft: 12,
     borderLeftWidth: 4,

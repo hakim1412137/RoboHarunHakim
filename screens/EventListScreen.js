@@ -5,6 +5,7 @@ import TimelineCard from '../components/TimelineCard';
 import { getEvents } from "../utils/api";
 import Menu from '../components/Menu';
 import Header from '../components/Header';
+import {ImageBackground} from "expo-image";
 
 const AboutScreen = ({ navigation }) => {
     const [events, setEvents] = useState([]);
@@ -32,7 +33,11 @@ const AboutScreen = ({ navigation }) => {
         <ScrollView style={styles.container}>
             <Header></Header>
             <Menu navigation={navigation}></Menu>
-
+            <ImageBackground
+                source={require('../assets/images/29033.jpg')} // Replace with your image path
+                style={styles.background} // Apply full screen styles
+                // resizeMode="cover" // Cover the entire background
+            >
             <View style={{ padding: 20, paddingHorizontal: 200 }}>
                 <Text style={styles.title}>Robotics WorkShop- Timeline of Key Events</Text>
                 <Text style={styles.description}>Robotics Application strives to make a better Africa via AI technology and innovation.</Text>
@@ -55,6 +60,8 @@ const AboutScreen = ({ navigation }) => {
                     )}
                 </View>
             </View>
+            </ImageBackground>
+
         </ScrollView>
     );
 }
@@ -69,11 +76,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
+        color: 'white', // Text color
+    },
+    background: {
+        flex: 1, // Allow ImageBackground to cover the full screen
+        // height: '20rem',
+
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
     },
     description: {
         fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
+        color: 'white', // Text color
     },
     timelineItem: {
         marginVertical: 10,
