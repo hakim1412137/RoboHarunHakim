@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 
-const JoinUsScreen = () => {
+const JoinUsScreen = ( navigation ) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -28,6 +28,7 @@ const JoinUsScreen = () => {
 
         fetchJoinRequests();
     }, []);
+    const jooinUsData = { name, email, message };
 
     const handleSubmit = async () => {
         if (!name || !email || !message) {
@@ -36,7 +37,7 @@ const JoinUsScreen = () => {
         }
 
         try {
-            await createJoinUs(name, email, message);
+            await createJoinUs(jooinUsData);
             Alert.alert("Success", "Your application has been submitted.");
             setName('');
             setEmail('');

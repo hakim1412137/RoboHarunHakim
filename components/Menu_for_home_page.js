@@ -72,14 +72,18 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 0,
       left: 0,
-      width: '100%'
+      width: '100%',
+
+
+
     },
     menuContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         paddingInline: 20,
-        gap: 20
+        gap: 20,
+        // backgroundColor: 'white',
     },
     menuItem: {
         fontSize: 22,

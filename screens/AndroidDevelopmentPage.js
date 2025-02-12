@@ -33,7 +33,8 @@ const AndroidDevelopmentPage = ({ navigation }) => {
                 {/* Image Section */}
                 <View style={styles.imageContainer}>
                     <Image
-                        source={{ uri: 'https://img.freepik.com/premium-vector/app-development-with-outline-element-yellow_90099-291.jpg?w=1380' }}
+                        // source={{ uri: 'https://img.freepik.com/premium-vector/app-development-with-outline-element-yellow_90099-291.jpg?w=1380' }}
+                        source={require('../assets/images/app-development.jpg')} // Replace with your image path
                         style={styles.image}
                         resizeMode="cover"
                     />

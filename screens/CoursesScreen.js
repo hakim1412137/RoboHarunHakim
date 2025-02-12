@@ -64,11 +64,11 @@ const CoursesScreen = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false} >
             <Header />
             <Menu navigation={navigation} />
             
-            <View contentContainerStyle={styles.scrollContainer}>
+            <View contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false} >
                 <LinearGradient
                     colors={['#FFFFFF', '#FBF1E6']}
                     style={styles.gradientHeader}
@@ -116,13 +116,14 @@ const CoursesScreen = ({ navigation }) => {
                     />
                 )}
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        height: '40rem',
         backgroundColor: '#FFFFFF',
     },
     scrollContainer: {

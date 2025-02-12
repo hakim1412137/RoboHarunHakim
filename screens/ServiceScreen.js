@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Animate
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { createService, deleteService, getServices, updateService } from '../utils/api';
 import Loader from '../components/Loader';
-import ModalForm from '../components/ModalForm';
+import ModalFormService from '../components/ModalFormService';
 import ServiceCard from '../components/ServiceCard';
 import Header from "../components/Header";
 import Menu from "../components/Menu";
@@ -113,7 +113,7 @@ const ServiceScreen = ({ navigation }) => {
                 )}
             </ScrollView>
 
-            <ModalForm
+            <ModalFormService
                 visible={modalVisible}
                 onClose={() => {
                     setModalVisible(false);

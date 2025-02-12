@@ -142,7 +142,7 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="Partners" component={PartnerScreen} />
                                 <Stack.Screen name="Support" component={SupportScreen} />
 
-                                <Stack.Screen name="joinUs" component={JoinUsScreen} />
+                                <Stack.Screen name="joinUs" component={JoinUsScreen} options={{ headerShown: false }} />
                                 {/*
                                 <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Cart' }} />
                                 <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ title: 'Order Confirmation' }}/>
