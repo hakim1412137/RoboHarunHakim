@@ -4,6 +4,7 @@ import { Text } from 'react-native-paper';
 import TimelineCard1 from '../components/TimelineCard1';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
+import {ImageBackground} from "expo-image";
 
 const sampleData = [
     { id: 1, year: 2003, event: 'Founding of the Robotics Educational Center in Ethiopia.', eventDate: '2003-01-01T00:00:00Z', title: 'Founding the Center', subtitle: 'A New Era in Robotics Education' },
@@ -36,7 +37,11 @@ const AboutUsScreen = ({ navigation }) => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Header />
       <Menu navigation={navigation} />
-
+      <ImageBackground
+          source={require('../assets/images/91995.jpg')} // Replace with your image path
+          style={styles.background} // Apply full screen styles
+          resizeMode="cover" // Cover the entire background
+      >
       <View style={styles.contentWrapper}>
         <Text style={styles.title}>About Us</Text>
         <Text style={styles.description}>
@@ -69,6 +74,7 @@ const AboutUsScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 };
@@ -76,7 +82,22 @@ const AboutUsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     height: '40rem',
-    backgroundColor: '#FBF1E6',
+  },
+  background: {
+    flex: 1, // Allow ImageBackground to cover the full screen
+    // height: '20rem',
+
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
+  },
+  content: {
+    padding: 20, // Add padding around the content
+  },
+  overlay: {
+   backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Transparent overlay for better text readability
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center', // Center the text
   },
   contentWrapper: {
     padding: 25,
@@ -84,7 +105,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: '#2C3E50',
+     // color: '#2C3E50',
+
+    color: 'white', // Text color
     textAlign: 'center',
     fontFamily: 'Electrolize_400Regular',
     marginBottom: 25,
@@ -92,13 +115,13 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: '#555',
+    color: 'white',
     textAlign: 'center',
     marginBottom: 20,
     lineHeight: 24,
   },
   card: {
-    backgroundColor: '#FBF1E6',
+    backgroundColor: '#003366',
     borderRadius: 12,
     padding: 20,
     marginBottom: 25,

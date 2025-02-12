@@ -6,11 +6,11 @@ import Menu from '../components/Menu';
 
 const WebsiteDevelopmentPage = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}  showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
 
-            <ScrollView
+            <View
                 contentContainerStyle={styles.content} 
                 showsVerticalScrollIndicator={false}
             >
@@ -61,8 +61,8 @@ const WebsiteDevelopmentPage = ({ navigation }) => {
                     Our dedicated team is here to help you achieve your goals by creating robust, scalable,
                     and efficient applications.
                 </Text>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 };
 

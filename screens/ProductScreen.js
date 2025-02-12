@@ -158,7 +158,8 @@ const ProductsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+         // flex: 1,
+        height: '40rem',
         backgroundColor: '#F8F9FA',
     },
     loadingContainer: {

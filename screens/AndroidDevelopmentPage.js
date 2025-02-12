@@ -9,11 +9,11 @@ import Menu from '../components/Menu';
 
 const AndroidDevelopmentPage = ({ navigation }) => {
     return (
-        <View style={styles.container} >
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
 
-            <ScrollView 
+            <View
                 contentContainerStyle={styles.content} 
                 showsVerticalScrollIndicator={false}
             >
@@ -57,8 +57,8 @@ const AndroidDevelopmentPage = ({ navigation }) => {
                 <Text style={styles.footerText}>
                     Our dedicated team is committed to providing a seamless and engaging mobile experience for your users.
                 </Text>
-            </ScrollView>
-        </View>
+            </View >
+        </ScrollView>
     );
 };
 

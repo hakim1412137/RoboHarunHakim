@@ -67,11 +67,12 @@ const initializePayment = (paymentData) => api.post('/payments/initialize', paym
 const verifyPayment = (txRef) => api.get(`/payments/verify/${txRef}`);
 // http://localhost:8083/api/posts?page =0&size=10
 const getAllPosts = (page, size) => api.get(`/posts?page=${page}&size=${size}`);
-const createPost = (post) => api.post(`/posts`, post);
 const getPostById = (postId) => api.get(`/posts/${postId}`);
-const getPostsByUserId = (userId) => api.get(`/posts/user/${userId}`);
-const getCommentsByPostId = (postId) => api.get(`/comments/post/${postId}`);
+// const getCommentsByPostId = (postId) => api.get(`/comments/post/${postId}`);
+const getCommentsByPostId = (postId) => api.get(`/posts/${postId}/comments`);
+const createPost = (post) => api.post(`/posts`, post);
 const postComment = (postId, comment) => api.post(`/posts/${postId}/comments`, comment);
+const getPostsByUserId = (userId) => api.get(`/posts/user/${userId}`);
 
 /*const initiatePayment = (paymentData) => api.post(`/payments/initiate-payment`, paymentData);
 const verifyPayment = (verificationData) => api.post(`/payments/verify-payment`, verificationData);*/

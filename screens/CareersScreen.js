@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { getAllCareers } from "../utils/api";
 import Menu from "../components/Menu";
 import Header from "../components/Header";
+import {ImageBackground} from "expo-image";
 
 const CareersScreen = ({ navigation }) => {
     const [careers, setCareers] = useState([]);
@@ -56,7 +57,11 @@ const CareersScreen = ({ navigation }) => {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
-
+            <ImageBackground
+                source={require('../assets/images/10511849.jpg')} // Replace with your image path
+                style={styles.background} // Apply full screen styles
+                resizeMode="cover" // Cover the entire background
+            >
             <FlatList
                 ListHeaderComponent={
                     <View style={styles.headerContainer}>
@@ -92,6 +97,8 @@ const CareersScreen = ({ navigation }) => {
                     <ActivityIndicator size="large" color="#3B82F6" />
                 </View>
             )}
+            </ImageBackground>
+
         </ScrollView>
     );
 };
@@ -113,6 +120,22 @@ const styles = StyleSheet.create({
         color: '#1F2937',
         textAlign: 'center',
         marginBottom: 15,
+    },
+    background: {
+        flex: 1, // Allow ImageBackground to cover the full screen
+        // height: '20rem',
+
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+    },
+    content: {
+        padding: 20, // Add padding around the content
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Transparent overlay for better text readability
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center', // Center the text
     },
     aboutSection: {
         marginBottom: 25,

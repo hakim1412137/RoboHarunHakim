@@ -8,7 +8,7 @@ import {
     TextInput,
     ActivityIndicator,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity, Dimensions
 } from 'react-native';
 import {
     createCompetition,
@@ -20,6 +20,7 @@ import {
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import { Ionicons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import {ImageBackground} from "expo-image";
 
 const CompetitionsScreen = ({ navigation }) => {
     const [competitions, setCompetitions] = useState([]);
@@ -125,11 +126,18 @@ const CompetitionsScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+
+        <ScrollView style={styles.container}>
             <Header />
             <Menu navigation={navigation} />
+            <ImageBackground
+                source={require('../assets/images/111849.jpg')} // Replace with your image path
+                style={styles.background} // Apply full screen styles
+                resizeMode="cover" // Cover the entire background
+            >
 
             <ScrollView contentContainerStyle={styles.content}>
+
                 <View style={styles.searchContainer}>
                     <View style={styles.searchInputContainer}>
                         <Ionicons
@@ -263,19 +271,24 @@ const CompetitionsScreen = ({ navigation }) => {
                     />
                 )}
             </ScrollView>
-        </View>
+            </ImageBackground>
+        </ScrollView>
     );
 };
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        height: '40rem',
+         // flex: 0.5,
+      height: '40rem',
+       // width: width * 0.5, // Half of screen height
 
-        backgroundColor: '#FBF1E6',
+        backgroundColor: '#444444',
     },
     content: {
-        padding: 16,
+      height: '40rem',
+       width: width * 0.5, // Half of screen height
+
     },
     formCard: {
         backgroundColor: 'white',
