@@ -99,6 +99,8 @@ const PostsScreen = ({ navigation }) => {
             const commentData = {
                 content: commentContent,
                 author: "currentUser" // Get this from your auth context
+                // author: user.username // or user.name depending on your user object
+
             };
 
             const response = await postComment(postId, commentData);

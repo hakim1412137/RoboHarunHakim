@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     background: {
         flex: 1, // Allow ImageBackground to cover the full screen
         // height: '20rem',
-
         justifyContent: 'center', // Center content vertically
         alignItems: 'center', // Center content horizontally
     },

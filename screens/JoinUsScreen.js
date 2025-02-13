@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, FlatList, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Alert,
+    FlatList,
+    TouchableOpacity,
+    ScrollView,
+    KeyboardAvoidingView,
+    Platform,
+    Dimensions
+} from 'react-native';
 import { createJoinUs, getJoinUs } from '../utils/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Header from "../components/Header";
 import Menu from "../components/Menu";
+import {ImageBackground} from "expo-image";
 
 const JoinUsScreen = ( navigation ) => {
     const [name, setName] = useState('');
@@ -54,7 +67,13 @@ const JoinUsScreen = ( navigation ) => {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
-        {/*<ScrollView contentContainerStyle={styles.scrollContent}>*/}
+            <ImageBackground
+                source={require('../assets/images/33279.jpg')} // Replace with your image path
+                style={styles.background} // Apply full screen styles
+                // resizeMode="cover" // Cover the entire background
+            >
+
+            {/*<ScrollView contentContainerStyle={styles.scrollContent}>*/}
                 <View style={styles.formContainer}>
                     <Text style={styles.headerTitle}>Join Our Team</Text>
                     <Text style={styles.headerSubtitle}>Be part of something amazing!</Text>
@@ -108,15 +127,26 @@ const JoinUsScreen = ( navigation ) => {
                         />
                     </View>
                 )}
-            </ScrollView>
+            </ImageBackground>
+
+        </ScrollView>
     );
 };
-
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
         height: '40rem',
         backgroundColor: '#f8f9fa',
+    },
+    background: {
+        flex: 1, // Allow ImageBackground to cover the full screen
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+        // width: width * 0.5, // Half of screen height
+        // height: height * 0.5, // Half of screen height
+
     },
     headerTitle: {
         fontSize: 28,
@@ -136,6 +166,8 @@ const styles = StyleSheet.create({
     },
     formContainer: {
         padding: 20,
+        width: width * 0.5, // Half of screen height
+
     },
     input: {
         height: 50,
@@ -175,6 +207,7 @@ const styles = StyleSheet.create({
     requestsContainer: {
         paddingHorizontal: 20,
         marginTop: 20,
+        width: width * 0.5, // Half of screen height
     },
     sectionTitle: {
         fontSize: 22,

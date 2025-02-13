@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1, // Allow ImageBackground to cover the full screen
     // height: '20rem',
-
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
   },
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
     padding: 20, // Add padding around the content
   },
   overlay: {
-   backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Transparent overlay for better text readability
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Transparent overlay for better text readability
     padding: 10,
     borderRadius: 5,
     alignItems: 'center', // Center the text
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-     // color: '#2C3E50',
+    // color: '#2C3E50',
     color: 'white', // Text color
     textAlign: 'center',
     fontFamily: 'Electrolize_400Regular',

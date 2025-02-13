@@ -282,7 +282,6 @@ const styles = StyleSheet.create({
          // flex: 0.5,
       height: '40rem',
        // width: width * 0.5, // Half of screen height
-
         backgroundColor: '#444444',
     },
     content: {
