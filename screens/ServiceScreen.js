@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Animated } from 'react-native';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Animated, Image} from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { createService, deleteService, getServices, updateService } from '../utils/api';
 import Loader from '../components/Loader';
@@ -71,7 +71,13 @@ const ServiceScreen = ({ navigation }) => {
         <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
             <Header />
             <Menu navigation={navigation} />
-
+            <View style={styles.imageContainer}>
+                <Image
+                    source={require('../assets/images/stem.jpg')}
+                    style={styles.image}
+                    resizeMode="cover"
+                />
+            </View>
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Our Services</Text>
@@ -169,6 +175,10 @@ const styles = StyleSheet.create({
     listContent: {
         gap: 15,
     },
+   /* image: {
+        width: '100%',
+        height: '100%',
+    },*/
     emptyContainer: {
         flex: 1,
         justifyContent: 'center',

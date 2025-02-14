@@ -8,6 +8,538 @@ import {
     FlatList,
     TouchableOpacity,
     ScrollView,
+    Image,
+    Dimensions
+} from 'react-native';
+import { createJoinUs, getJoinUs } from '../utils/api';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Header from "../components/Header";
+import Menu from "../components/Menu";
+
+const JoinUsScreen = ({ navigation }) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [joinRequests, setJoinRequests] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchJoinRequests = async () => {
+            setLoading(true);
+            try {
+                const response = await getJoinUs();
+                setJoinRequests(response.data || []);
+            } catch (error) {
+                console.error('Error fetching join requests:', error);
+                Alert.alert("Error", "Unable to load join requests.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchJoinRequests();
+    }, []);
+
+    const handleSubmit = async () => {
+        if (!name || !email || !message) {
+            Alert.alert("Validation Error", "Please fill in all fields.");
+            return;
+        }
+
+        try {
+            await createJoinUs({ name, email, message });
+            Alert.alert("Success", "Your application has been submitted.");
+            setName('');
+            setEmail('');
+            setMessage('');
+            const response = await getJoinUs();
+            setJoinRequests(response.data || []);
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Error", "There was an issue submitting your application.");
+        }
+    };
+
+    return (
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <Header />
+            <Menu navigation={navigation} />
+
+            <View style={styles.mainContainer}>
+                {/* Top - Form and Recent Applications */}
+                <View style={styles.topContainer}>
+                    <View style={styles.formContainer}>
+                        <Text style={styles.headerTitle}>Join Our Team</Text>
+                        <Text style={styles.headerSubtitle}>Be part of something amazing!</Text>
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Your Name"
+                            placeholderTextColor="#999"
+                            value={name}
+                            onChangeText={setName}
+                        />
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Your Email"
+                            placeholderTextColor="#999"
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType="email-address"
+                        />
+
+                        <TextInput
+                            style={[styles.input, styles.messageInput]}
+                            placeholder="Your Message"
+                            placeholderTextColor="#999"
+                            value={message}
+                            multiline
+                            numberOfLines={4}
+                            onChangeText={setMessage}
+                        />
+
+                        <TouchableOpacity
+                            style={styles.submitButton}
+                            onPress={handleSubmit}
+                        >
+                            <Text style={styles.submitButtonText}>
+                                <Icon name="send" size={18} color="white" /> Submit
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Recent Applications Section */}
+                    <View style={styles.requestsContainer}>
+                        {loading ? (
+                            <Text style={styles.loadingText}>Loading requests...</Text>
+                        ) : (
+                            <>
+                                <Text style={styles.sectionTitle}>Recent Applications</Text>
+                                <FlatList
+                                    data={joinRequests.slice(0, 3)} // Display only the latest 3 records
+                                    keyExtractor={(item) => item.id.toString()}
+                                    renderItem={({ item }) => (
+                                        <View style={styles.requestItem}>
+                                            <Text style={styles.requestName}>{item.name}</Text>
+                                            <Text style={styles.requestEmail}>{item.email}</Text>
+                                            <Text style={styles.requestMessage}>{item.message}</Text>
+                                        </View>
+                                    )}
+                                    scrollEnabled={false}
+                                />
+                            </>
+                        )}
+                    </View>
+                </View>
+
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require('../assets/images/33279.jpg')}
+                        style={styles.image}
+                        resizeMode="contain" // Ensure the whole image fits within the container
+                    />
+                </View>
+            </View>
+        </ScrollView>
+    );
+};
+
+const { width } = Dimensions.get('window');
+const styles = StyleSheet.create({
+
+container: {
+    height: '40rem',
+        backgroundColor: '#f8f9fa',
+},
+mainContainer: {
+    flexDirection: 'column', // Stack elements vertically
+        padding: 20,
+        minHeight: 500,
+        marginTop: 20,
+},
+topContainer: {
+    flexDirection: 'row', // Align form and requests side by side
+        justifyContent: 'space-between',
+        flex: 1,
+        marginBottom: 15, // Space between top and image
+},
+formContainer: {
+    flex: 0.5, // Take half the width
+        marginRight: 10,
+},
+requestsContainer: {
+    flex: 0.5, // Take half the width
+        marginLeft: 10,
+        paddingVertical: 15,
+        backgroundColor: 'white',
+        borderRadius: 12,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+},
+imageContainer: {
+    height: '40rem',
+        borderRadius: 12,
+        overflow: 'hidden',
+        marginTop: 15,
+},
+image: {
+    width: '100%',
+        height: '100%',
+},
+headerTitle: {
+    fontSize: 28,
+        fontWeight: '800',
+        color: '#2d3436',
+        marginBottom: 10,
+},
+headerSubtitle: {
+    fontSize: 16,
+        color: '#666',
+        marginBottom: 25,
+},
+input: {
+    height: 50,
+        borderColor: '#ddd',
+        borderWidth: 1,
+        borderRadius: 12,
+        marginBottom: 15,
+        paddingHorizontal: 15,
+        backgroundColor: 'white',
+        fontSize: 16,
+},
+messageInput: {
+    height: 120,
+        textAlignVertical: 'top',
+},
+submitButton: {
+    backgroundColor: '#00A86B',
+        borderRadius: 12,
+        paddingVertical: 15,
+        alignItems: 'center',
+        marginTop: 10,
+},
+submitButtonText: {
+    color: 'white',
+        fontSize: 18,
+        fontWeight: '600',
+},
+sectionTitle: {
+    fontSize: 22,
+        fontWeight: '700',
+        color: '#2d3436',
+        marginBottom: 15,
+},
+requestItem: {
+    backgroundColor: 'white',
+        borderRadius: 12,
+        padding: 15,
+        marginBottom: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+},
+requestName: {
+    fontSize: 16,
+        fontWeight: '600',
+        color: '#2d3436',
+},
+requestEmail: {
+    fontSize: 14,
+        color: '#666',
+        marginTop: 5,
+},
+requestMessage: {
+    fontSize: 14,
+        color: '#555',
+        marginTop: 10,
+},
+loadingText: {
+    marginTop: 20,
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#666',
+},
+});
+
+export default JoinUsScreen;
+
+/*import React, { useEffect, useState } from 'react';
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Alert,
+    FlatList,
+    TouchableOpacity,
+    ScrollView,
+    Image,
+    Dimensions
+} from 'react-native';
+import { createJoinUs, getJoinUs } from '../utils/api';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Header from "../components/Header";
+import Menu from "../components/Menu";
+
+const JoinUsScreen = ({ navigation }) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [joinRequests, setJoinRequests] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchJoinRequests = async () => {
+            setLoading(true);
+            try {
+                const response = await getJoinUs();
+                setJoinRequests(response.data || []);
+            } catch (error) {
+                console.error('Error fetching join requests:', error);
+                Alert.alert("Error", "Unable to load join requests.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchJoinRequests();
+    }, []);
+
+    const handleSubmit = async () => {
+        if (!name || !email || !message) {
+            Alert.alert("Validation Error", "Please fill in all fields.");
+            return;
+        }
+
+        try {
+            await createJoinUs({ name, email, message });
+            Alert.alert("Success", "Your application has been submitted.");
+            setName('');
+            setEmail('');
+            setMessage('');
+            const response = await getJoinUs();
+            setJoinRequests(response.data || []);
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Error", "There was an issue submitting your application.");
+        }
+    };
+
+    return (
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <Header />
+            <Menu navigation={navigation} />
+
+            <View style={styles.mainContainer}>
+                {/!* Left Side - Form *!/}
+                <View style={styles.formContainer}>
+                    <Text style={styles.headerTitle}>Join Our Team</Text>
+                    <Text style={styles.headerSubtitle}>Be part of something amazing!</Text>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Your Name"
+                        placeholderTextColor="#999"
+                        value={name}
+                        onChangeText={setName}
+                    />
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Your Email"
+                        placeholderTextColor="#999"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                    />
+
+                    <TextInput
+                        style={[styles.input, styles.messageInput]}
+                        placeholder="Your Message"
+                        placeholderTextColor="#999"
+                        value={message}
+                        multiline
+                        numberOfLines={4}
+                        onChangeText={setMessage}
+                    />
+
+                    <TouchableOpacity
+                        style={styles.submitButton}
+                        onPress={handleSubmit}
+                    >
+                        <Text style={styles.submitButtonText}>
+                            <Icon name="send" size={18} color="white" /> Submit
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
+                {/!* Right Side - Image *!/}
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require('../assets/images/33279.jpg')}
+                        style={styles.image}
+                        resizeMode="cover"
+                    />
+                </View>
+            </View>
+
+            {/!* Recent Applications Section *!/}
+            {loading ? (
+                <Text style={styles.loadingText}>Loading requests...</Text>
+            ) : (
+                <View style={styles.requestsContainer}>
+                    <Text style={styles.sectionTitle}>Recent Applications</Text>
+                    <FlatList
+                        data={joinRequests}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.requestItem}>
+                                <Text style={styles.requestName}>{item.name}</Text>
+                                <Text style={styles.requestEmail}>{item.email}</Text>
+                                <Text style={styles.requestMessage}>{item.message}</Text>
+                            </View>
+                        )}
+                        scrollEnabled={false}
+                    />
+                </View>
+            )}
+        </ScrollView>
+    );
+};
+
+const { width } = Dimensions.get('window');
+const styles = StyleSheet.create({
+    container: {
+        // flex: 1,
+        height: '40rem',
+        backgroundColor: '#f8f9fa',
+    },
+    mainContainer: {
+        flexDirection: 'row',
+        padding: 20,
+        minHeight: 500,
+        marginTop: 20,
+    },
+    formContainer: {
+        flex: 1,
+        marginRight: 15,
+    },
+    imageContainer: {
+        flex: 1,
+        marginLeft: 15,
+        borderRadius: 12,
+        overflow: 'hidden',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 2,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+    headerTitle: {
+        fontSize: 28,
+        fontWeight: '800',
+        color: '#2d3436',
+        marginBottom: 10,
+    },
+    headerSubtitle: {
+        fontSize: 16,
+        color: '#666',
+        marginBottom: 25,
+    },
+    input: {
+        height: 50,
+        borderColor: '#ddd',
+        borderWidth: 1,
+        borderRadius: 12,
+        marginBottom: 15,
+        paddingHorizontal: 15,
+        backgroundColor: 'white',
+        fontSize: 16,
+    },
+    messageInput: {
+        height: 120,
+        textAlignVertical: 'top',
+    },
+    submitButton: {
+        backgroundColor: '#00A86B',
+        borderRadius: 12,
+        paddingVertical: 15,
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    submitButtonText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: '600',
+    },
+    requestsContainer: {
+        paddingHorizontal: 20,
+        marginTop: 30,
+        marginBottom: 50,
+    },
+    sectionTitle: {
+        fontSize: 22,
+        fontWeight: '700',
+        color: '#2d3436',
+        marginBottom: 15,
+    },
+    requestItem: {
+        backgroundColor: 'white',
+        borderRadius: 12,
+        padding: 15,
+        marginBottom: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    requestName: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#2d3436',
+    },
+    requestEmail: {
+        fontSize: 14,
+        color: '#666',
+        marginTop: 5,
+    },
+    requestMessage: {
+        fontSize: 14,
+        color: '#555',
+        marginTop: 10,
+    },
+    loadingText: {
+        marginTop: 20,
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#666',
+    },
+});
+
+export default JoinUsScreen;*/
+
+/*
+import React, { useEffect, useState } from 'react';
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Alert,
+    FlatList,
+    TouchableOpacity,
+    ScrollView,
     KeyboardAvoidingView,
     Platform,
     Dimensions
@@ -18,7 +550,7 @@ import Header from "../components/Header";
 import Menu from "../components/Menu";
 import {ImageBackground} from "expo-image";
 
-const JoinUsScreen = ( navigation ) => {
+const JoinUsScreen = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -73,8 +605,8 @@ const JoinUsScreen = ( navigation ) => {
                 // resizeMode="cover" // Cover the entire background
             >
 
-            {/*<ScrollView contentContainerStyle={styles.scrollContent}>*/}
-                <View style={styles.formContainer}>
+            {/!*<ScrollView contentContainerStyle={styles.scrollContent}>*!/}
+                <View style={styles.formContainer} showsVerticalScrollIndicator={false} >
                     <Text style={styles.headerTitle}>Join Our Team</Text>
                     <Text style={styles.headerSubtitle}>Be part of something amazing!</Text>
                     <TextInput
@@ -221,9 +753,9 @@ const styles = StyleSheet.create({
         padding: 15,
         marginBottom: 10,
         shadowColor: '#000',
-/*
+/!*
         shadowOffset: { width: 0, height: 2 },
-*/
+*!/
         shadowOpacity: 0.1,
         shadowRadius: 4,
         elevation: 3,
@@ -252,6 +784,7 @@ const styles = StyleSheet.create({
 });
 
 export default JoinUsScreen;
+*/
 
 /*import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, FlatList } from 'react-native';

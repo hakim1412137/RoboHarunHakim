@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     enrollButton: {
-        backgroundColor: '#27ae60',
+        backgroundColor: '#6C63FF',
         borderRadius: 8,
         padding: 16,
         marginTop: 25,
