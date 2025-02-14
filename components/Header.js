@@ -90,6 +90,7 @@ const Header = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     header: {
+        width: '100%',
         backgroundColor: '#4CAF50',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },

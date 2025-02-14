@@ -58,7 +58,7 @@ const CareersScreen = ({ navigation }) => {
             <Header />
             <Menu navigation={navigation} />
             <ImageBackground
-                source={require('../assets/images/10511849.jpg')} // Replace with your image path
+                source={require('../assets/images/robotWoodWork.jpg')} // Replace with your image path
                 style={styles.background} // Apply full screen styles
                 resizeMode="cover" // Cover the entire background
             >
@@ -113,11 +113,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 20,
         paddingBottom: 10,
+
     },
     header: {
         fontSize: 28,
         fontWeight: '800',
         color: '#1F2937',
+        backgroundColor:'blue',
         textAlign: 'center',
         marginBottom: 15,
     },
@@ -139,13 +141,17 @@ const styles = StyleSheet.create({
     },
     aboutSection: {
         marginBottom: 25,
+
     },
     aboutText: {
         fontSize: 16,
-        color: '#4B5563',
+        // color: '#1F2937',
+        color: 'white',
         lineHeight: 24,
         textAlign: 'center',
         marginBottom: 20,
+        backgroundColor:'blue',
+
     },
     highlightBox: {
         backgroundColor: '#EFF6FF',

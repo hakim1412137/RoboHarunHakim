@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Menu from "../components/Menu";
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import {ImageBackground} from "expo-image";
 
 const { width } = Dimensions.get('window');
 
@@ -53,6 +54,11 @@ const CoursesScreen = ({ navigation }) => {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Header />
             <Menu navigation={navigation} />
+            <ImageBackground
+                source={require('../assets/images/courseimg.jpg')} // Replace with your image path
+                style={styles.background} // Apply full screen styles
+                resizeMode="cover" // Cover the entire background
+            >
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -105,6 +111,7 @@ const CoursesScreen = ({ navigation }) => {
                     />
                 </View>
             </View>
+            </ImageBackground>
         </ScrollView>
     );
 };
@@ -122,13 +129,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    image: {
+    background: {
+        height: '40rem',
+        // height: '20rem',
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+    },
+
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Transparent overlay for better text readability
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center', // Center the text
+    },
+/*    image: {
         width: '100%',
         height: '100%', // Ensure the image covers the container
         // resizeMode: 'cover',
-    },
+    },*/
 courseContainer: {
-    flex: 1, // Take the remaining space
+    height: '40rem',
         paddingBottom: 40,
 },
 gradientHeader: {

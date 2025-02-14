@@ -8,6 +8,7 @@ import ServiceCard from '../components/ServiceCard';
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import ConfirmationModal from '../components/ConfirmationModal';
+import {height} from "../utils/dimensions";
 
 const ServiceScreen = ({ navigation }) => {
     const [services, setServices] = useState([]);
@@ -175,10 +176,25 @@ const styles = StyleSheet.create({
     listContent: {
         gap: 15,
     },
-   /* image: {
+    imageContainer: {
+        height: height * 0.25, // Set the height to 25% of the screen height
+        width: '100%',
+        position: 'relative', // Position for overlay
+        overflow: 'hidden', // Ensure image does not overflow
+        borderRadius: 12, // Optional: add border radius for rounded corners
+    },
+  /*  image: {
         width: '100%',
         height: '100%',
     },*/
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Black overlay with 50% opacity
+    },
     emptyContainer: {
         flex: 1,
         justifyContent: 'center',

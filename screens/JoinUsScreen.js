@@ -108,6 +108,7 @@ const JoinUsScreen = ({ navigation }) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
+                    {/*const sortedRequests = joinRequests.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));*/}
 
                     {/* Recent Applications Section */}
                     <View style={styles.requestsContainer}>
@@ -116,6 +117,7 @@ const JoinUsScreen = ({ navigation }) => {
                         ) : (
                             <>
                                 <Text style={styles.sectionTitle}>Recent Applications</Text>
+
                                 <FlatList
                                     data={joinRequests.slice(0, 3)} // Display only the latest 3 records
                                     keyExtractor={(item) => item.id.toString()}

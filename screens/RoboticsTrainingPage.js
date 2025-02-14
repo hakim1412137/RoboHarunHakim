@@ -202,17 +202,22 @@ const styles = StyleSheet.create({
     },
     content: {
         paddingHorizontal: 20,
-        backgroundColor: '#FAF3E0',
+        // backgroundColor: '#FAF3E0',
     },
     sectionTitle: {
         fontSize: 24,
         fontWeight: '700',
-        color: '#2D3436',
+        // color: '#2D3436',
+        color: '#FAF3E0',
         marginVertical: 25,
         textAlign: 'center',
+        width: width * 0.5, // 50% of screen width
+
     },
     trainingsList: {
         paddingBottom: 20,
+        width: width * 0.5, // 50% of screen width
+
     },
     trainingCard: {
         borderRadius: 15,
