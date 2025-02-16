@@ -29,6 +29,14 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+// Add response interceptor
+api.interceptors.response.use(response => {
+    console.log('Response:', JSON.stringify(response.data, null, 2));
+    return response;
+}, error => {
+    console.error('Response Error:', error.response);
+    return Promise.reject(error);
+});
 
 // Axios response interceptor for handling token expiration or unauthorized access
 api.interceptors.response.use(
@@ -63,8 +71,8 @@ const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 
 
 // Payment API calls
-const initializePayment = (paymentData) => api.post('/payments/initialize', paymentData);
-const verifyPayment = (txRef) => api.get(`/payments/verify/${txRef}`);
+const initializePayment1 = (paymentData) => api.post('/payments/initialize', paymentData);
+const verifyPayment1 = (txRef) => api.get(`/payments/verify/${txRef}`);
 // http://localhost:8083/api/posts?page =0&size=10
 const getAllPosts = (page, size) => api.get(`/posts?page=${page}&size=${size}`);
 const getPostById = (postId) => api.get(`/posts/${postId}`);
@@ -205,7 +213,7 @@ export {
     // refreshTokeni,
     getJoinUs,createJoinUs,
     forgotPassword,resetPassword,
-    initializePayment, verifyPayment,
+    initializePayment1, verifyPayment1,
     getTrainingsById, createTraining, updateTraining, deleteTraining,getAllTrainings,
     createTeam, getTeamById, getAllTeams, deleteTeam,
     createCareer,getCareerById,getAllCareers,deleteCareer,
@@ -228,7 +236,14 @@ export {
     createMeetingRequest, getAllMeetingRequests,getMeetingRequestById,deleteMeetingRequest
     // , logoutUser
 };
+/*
+// Add request interceptor
+api.interceptors.request.use(request => {
+    console.log('Starting Request', JSON.stringify(request, null, 2));
+    return request;
+});
 
+ */
 // User operations
 // const getUserDetails = (username) => api.post('/auth/username', { username });
 // const getUserDetails = (username) => api.get(`/auth/username/${username}`);

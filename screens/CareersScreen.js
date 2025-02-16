@@ -118,15 +118,13 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 28,
         fontWeight: '800',
-        color: '#1F2937',
-        backgroundColor:'blue',
+        color: '#FFFFFF',
         textAlign: 'center',
         marginBottom: 15,
     },
     background: {
         flex: 1, // Allow ImageBackground to cover the full screen
         // height: '20rem',
-
         justifyContent: 'center', // Center content vertically
         alignItems: 'center', // Center content horizontally
     },
@@ -150,7 +148,6 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         textAlign: 'center',
         marginBottom: 20,
-        backgroundColor:'blue',
 
     },
     highlightBox: {
@@ -224,6 +221,7 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         paddingBottom: 40,
+        width: '100%',
     },
 });
 

@@ -1,4 +1,11 @@
-// App.js
+import {
+    View,
+
+    TextInput,
+    Button,
+    StyleSheet,
+    ActivityIndicator  // Add this import
+} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,7 +28,7 @@ import SupportScreen from "./screens/SupportScreen";
 import ResourceDetailsScreen from "./screens/ResourceDetailsScreen";
 import CareersScreen from "./screens/CareersScreen";
 import PartnerScreen from "./screens/PartnerScreen";
-import {Text} from "react-native";
+import {Linking, Text} from "react-native";
 import ProductDetail from "./screens/ProductDetailScreen";
 import {CartProvider} from "./context/CartContext";
 import EditProductScreen from "./screens/EditProductScreen";
@@ -61,14 +68,38 @@ import ShoppingCart from "./screens/ShoppingCart";
 import ClientDetail from "./screens/ClientDetail";
 import JoinUsScreen from "./screens/JoinUsScreen";
 import PostsScreen from "./screens/PostsScreen";
+import PaymentWebViewScreen from "./screens/PaymentWebViewScreen";
+import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
+import PaymentFailureScreen from "./screens/PaymentFailureScreen";
+import PaymentVerificationScreen from "./screens/PaymentVerificationScreen";
+import PaymentResultScreen from "./screens/PaymentResultScreen";
 
 const Stack = createStackNavigator();
   const App = () => {
-        let [fontsLoaded] = useFonts({
+      // Handle deep links
+  /*    useEffect(() => {
+          const handleDeepLink = ({ url }) => {
+              if (url.includes('roboharunhakim://payment-result')) {
+                  const parsedUrl = new URL(url);
+                  const txRef = parsedUrl.searchParams.get('tx_ref');
+                  navigation.navigate('PaymentVerification', { txRef });
+              }
+          };
+          const subscription = Linking.addEventListener('url', handleDeepLink);
+
+          return () => {
+              subscription.remove();  // New way to remove listener
+          };
+      }, []);*/
+     /*     Linking.addEventListener('url', handleDeepLink);
+          return () => Linking.removeEventListener('url', handleDeepLink);
+      }, []);*/
+
+      let [fontsLoaded] = useFonts({
             Electrolize_400Regular, // Load the font
         });
 
-        return (
+      return (
             <AuthProvider>
                 <UserProvider>
                     <CartProvider>
@@ -118,9 +149,17 @@ const Stack = createStackNavigator();
 
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
+                                <Stack.Screen name="PaymentResult" component={PaymentResultScreen} />
 
                                 {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
-
+                                <Stack.Screen name="PaymentWebView" component={PaymentWebViewScreen}  options={{ headerShown: false }} />
+                                <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} />
+                                <Stack.Screen name="PaymentFailure" component={PaymentFailureScreen} />
+                                <Stack.Screen
+                                    name="PaymentVerification"
+                                    component={PaymentVerificationScreen}
+                                    options={{ headerShown: false }}
+                                />
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
                                 <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
