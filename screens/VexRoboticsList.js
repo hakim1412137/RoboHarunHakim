@@ -1,5 +1,5 @@
 // src/components/VexRoboticsList.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
     View,
     Text,
@@ -9,19 +9,51 @@ import {
     Dimensions,
     ImageBackground,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Animated
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { getAllVexRobotics } from "../utils/api";
 import Header from '../components/Header';
 import Menu from '../components/Menu';
+import { transform } from '@babel/core';
 
 const { width } = Dimensions.get('window');
 
 const VexRoboticsList = ({ navigation }) => {
     const [platforms, setPlatforms] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const imageScale = useRef(new Animated.Value(1)).current;
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const mainTitleTranslate = fadeAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [60, 0], // Inline calculation
+    });
+
+    const subTitleTranslate= fadeAnim.interpolate({
+        inputRange: [0.5, 1],
+        outputRange: [60, 0], // Inline calculation
+    });
+
+    // Fade in animation on mount.
+    useEffect(() => {
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+            easing: Animated.easing
+        }).start();
+
+        Animated.timing(imageScale, {
+            toValue: 1.2,
+            duration: 10000,
+            useNativeDriver: true,
+        }).start();
+    }, [fadeAnim]);
+
 
     useEffect(() => {
         const loadPlatforms = async () => {
@@ -44,19 +76,19 @@ const VexRoboticsList = ({ navigation }) => {
             style={styles.cardContainer}
         >
             <ImageBackground
-                source={require('../assets/images/VexRobo.jpg')} // Hero image
+                source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg3KmUaiPo-9NtYpckCYxA29Iw_EBFG7B_Aw&s'}} // Hero image
                 style={styles.cardImage}
                 imageStyle={styles.cardImageInner}
             >
                 <LinearGradient
-                    colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0.8)']}
+                    colors={['rgba(0,0,0,0.0)', 'rgba(0,0,0,0.8)']}
                     style={styles.cardOverlay}
                 >
-                    <Text style={styles.cardTitle}>{item.platformName}</Text>
-                    <View style={styles.cardInfo}>
-                        <MaterialIcons name="precision-manufacturing" size={20} color="#00C978" />
-                        <Text style={styles.cardText}>{item.targetAudience}</Text>
-                    </View>
+                        <Text style={styles.cardTitle}>{item.platformName}</Text>
+                        <View style={styles.cardInfo}>
+                            <MaterialIcons name="precision-manufacturing" size={20} color="#00C978" />
+                            <Text style={styles.cardText}>{item.targetAudience}</Text>
+                        </View>
                 </LinearGradient>
             </ImageBackground>
         </TouchableOpacity>
@@ -76,16 +108,31 @@ const VexRoboticsList = ({ navigation }) => {
             <Header />
             <Menu navigation={navigation} />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <LinearGradient
-                    colors={['#00A86B', '#00C978']}
-                    style={styles.heroSection}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                >
-                    <Text style={styles.heroTitle}>VEX Robotics Platforms</Text>
-                    <Text style={styles.heroSubtitle}>Innovative Solutions for STEM Education</Text>
-                </LinearGradient>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ height: '40rem' }}>
+                <View style={styles.heroSection}>
+                    <LinearGradient
+                        colors={['#00A86B', 'transparent']}
+                        style={{ position: 'absolute', width: '100%', height: '100%', top: 0, bottom: 0, zIndex: -1 }}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                    >
+    
+                    </LinearGradient>
+
+                    <Animated.Image 
+                        source={{ uri: 'https://img.freepik.com/premium-photo/engineer-human-worker-with-robotic-artificial-intelligence-with-ai-technology-automation-factory-industry-join-together-wide-banner_43300-4635.jpg?w=1060' }}
+                        style={{ transform: [{ scale: imageScale }], position: 'absolute', width: '100%', height: '100%', top: 0, bottom: 0, zIndex: -2 }} 
+                    />
+
+                    <Animated.View style={[{ opacity: fadeAnim }]}>
+                        <Animated.View style={{ transform: [{ translateY: mainTitleTranslate }] }}>
+                            <Text style={styles.heroTitle}>VEX Robotics Platforms</Text>
+                        </Animated.View>
+                        <Animated.View style={{ transform: [{ translateY: subTitleTranslate }] }}>
+                            <Text style={styles.heroSubtitle}>Innovative Solutions for STEM Education</Text>
+                        </Animated.View>
+                    </Animated.View>
+                </View>
 
                 <View style={styles.gridContainer}>
                     <FlatList
@@ -103,7 +150,7 @@ const VexRoboticsList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
+        height: '100vh',
         backgroundColor: '#F4F6F9',
     },
     loadingContainer: {
@@ -118,13 +165,18 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     heroSection: {
-        padding: 24,
-        paddingVertical: 40,
+        height: '25rem',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden'
     },
     heroTitle: {
-        fontSize: 32,
+        fontSize: 50,
         fontWeight: '800',
         color: 'white',
+        fontFamily: 'Electrolize_400Regular',
         textAlign: 'center',
         marginBottom: 8,
         textShadowColor: 'rgba(0,0,0,0.15)',
@@ -133,6 +185,7 @@ const styles = StyleSheet.create({
     },
     heroSubtitle: {
         fontSize: 18,
+        fontFamily: 'Electrolize_400Regular',
         color: 'rgba(255,255,255,0.9)',
         textAlign: 'center',
         fontWeight: '500',
