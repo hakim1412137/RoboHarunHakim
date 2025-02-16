@@ -48,7 +48,7 @@ const VexRoboticsList = ({ navigation }) => {
         }).start();
 
         Animated.timing(imageScale, {
-            toValue: 1.1,
+            toValue: 1.2,
             duration: 20000,
             useNativeDriver: true,
         }).start();
@@ -95,10 +95,15 @@ const VexRoboticsList = ({ navigation }) => {
 
     if (loading) {
         return (
+            <>
+            <Header />
+            <Menu navigation={navigation} />
+
             <LinearGradient colors={['#FFFFFF', '#F4F6F9']} style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color="#00C978" />
                 <Text style={styles.loadingText}>Loading Robotics Platforms...</Text>
             </LinearGradient>
+            </>
         );
     }
 
