@@ -48,8 +48,8 @@ const VexRoboticsList = ({ navigation }) => {
         }).start();
 
         Animated.timing(imageScale, {
-            toValue: 1.2,
-            duration: 10000,
+            toValue: 1.1,
+            duration: 20000,
             useNativeDriver: true,
         }).start();
     }, [fadeAnim]);
@@ -76,12 +76,11 @@ const VexRoboticsList = ({ navigation }) => {
             style={styles.cardContainer}
         >
             <ImageBackground
-                source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg3KmUaiPo-9NtYpckCYxA29Iw_EBFG7B_Aw&s'}} // Hero image
                 style={styles.cardImage}
                 imageStyle={styles.cardImageInner}
             >
                 <LinearGradient
-                    colors={['rgba(0,0,0,0.0)', 'rgba(0,0,0,0.8)']}
+                    colors={['rgba(0,0,0,0.5)', 'rgba(0,0,0,0.8)']}
                     style={styles.cardOverlay}
                 >
                         <Text style={styles.cardTitle}>{item.platformName}</Text>
@@ -111,7 +110,7 @@ const VexRoboticsList = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false} style={{ height: '40rem' }}>
                 <View style={styles.heroSection}>
                     <LinearGradient
-                        colors={['#00A86B', 'transparent']}
+                        colors={['white', 'transparent', 'white']}
                         style={{ position: 'absolute', width: '100%', height: '100%', top: 0, bottom: 0, zIndex: -1 }}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
@@ -120,7 +119,7 @@ const VexRoboticsList = ({ navigation }) => {
                     </LinearGradient>
 
                     <Animated.Image 
-                        source={{ uri: 'https://img.freepik.com/premium-photo/engineer-human-worker-with-robotic-artificial-intelligence-with-ai-technology-automation-factory-industry-join-together-wide-banner_43300-4635.jpg?w=1060' }}
+                        source={{ uri: 'https://img.freepik.com/premium-photo/quothigh-school-students-energized-tech-labquot_1324785-78582.jpg?w=1060' }}
                         style={{ transform: [{ scale: imageScale }], position: 'absolute', width: '100%', height: '100%', top: 0, bottom: 0, zIndex: -2 }} 
                     />
 
