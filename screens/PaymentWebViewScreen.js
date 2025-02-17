@@ -1,3 +1,111 @@
+import React, { useEffect } from 'react';
+import {WebView, Platform, View, Text, Linking, ActivityIndicator} from 'react-native';
+
+const PaymentWebViewScreen = ({ route, navigation }) => {
+    const { checkoutUrl, txRef } = route.params;
+
+    const handleNavigation = (navState) => {
+        if (navState.url.includes('http://localhost:8081/payment-result')) {
+            const url = new URL(navState.url);
+            const txRef = url.searchParams.get('tx_ref');
+            navigation.navigate('PaymentVerification', { txRef });
+        }
+    };
+
+    if (Platform.OS === 'web') {
+        useEffect(() => {
+            const windowFeatures = 'width=600,height=800';
+            const paymentWindow = window.open(checkoutUrl, '_blank', windowFeatures);
+
+            const checkWindowClosed = setInterval(() => {
+                if (paymentWindow.closed) {
+                    navigation.navigate('PaymentVerification', { txRef });
+                    clearInterval(checkWindowClosed);
+                }
+            }, 1000);
+
+            return () => clearInterval(checkWindowClosed);
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Payment processing in new window...</Text>
+            </View>
+        );
+    }
+
+    return (
+        <WebView
+            source={{ uri: checkoutUrl }}
+            onNavigationStateChange={handleNavigation}
+            startInLoadingState={true}
+            renderLoading={() => (
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <ActivityIndicator size="large" />
+                </View>
+            )}
+        />
+    );
+};
+
+export default PaymentWebViewScreen;
+/*import React, { useEffect } from 'react';
+import { Platform, View, Text, Linking } from 'react-native';
+import { WebView } from 'react-native-webview';
+
+const PaymentWebViewScreen = ({ route, navigation }) => {
+    const { checkoutUrl, txRef } = route.params;
+
+    // Web platform handling
+    if (Platform.OS === 'web') {
+        useEffect(() => {
+            const paymentWindow = window.open(checkoutUrl, '_blank');
+
+            const handleMessage = (event) => {
+                if (event.data?.txRef) {
+                    navigation.navigate('PaymentVerification', { txRef: event.data.txRef });
+                }
+            };
+
+            const checkWindowClosed = setInterval(() => {
+                if (paymentWindow.closed) {
+                    navigation.navigate('PaymentVerification', { txRef });
+                    clearInterval(checkWindowClosed);
+                }
+            }, 1000);
+
+            window.addEventListener('message', handleMessage);
+
+            return () => {
+                window.removeEventListener('message', handleMessage);
+                clearInterval(checkWindowClosed);
+            };
+        }, []);
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Payment processing in progress...</Text>
+                <Text>Please complete the payment in the new window</Text>
+            </View>
+        );
+    }
+
+    // Mobile handling
+    return (
+        <WebView
+            source={{ uri: checkoutUrl }}
+            onNavigationStateChange={(navState) => {
+                if (navState.url.includes('roboharunhakim://payment-result')) {
+                    const url = new URL(navState.url);
+                    const txRef = url.searchParams.get('tx_ref');
+                    navigation.navigate('PaymentVerification', { txRef });
+                }
+            }}
+        />
+    );
+};
+
+export default PaymentWebViewScreen;*/
 /*import React from 'react';
 import { Platform, Linking, View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
@@ -55,63 +163,7 @@ const PaymentWebViewScreen = ({ route, navigation }) => {
 };
 
 export default PaymentWebViewScreen;*/
-import React, { useEffect } from 'react';
-import { Platform, View, Text, Linking } from 'react-native';
-import { WebView } from 'react-native-webview';
 
-const PaymentWebViewScreen = ({ route, navigation }) => {
-    const { checkoutUrl, txRef } = route.params;
-
-    // Web platform handling
-    if (Platform.OS === 'web') {
-        useEffect(() => {
-            const paymentWindow = window.open(checkoutUrl, '_blank');
-
-            const handleMessage = (event) => {
-                if (event.data?.txRef) {
-                    navigation.navigate('PaymentVerification', { txRef: event.data.txRef });
-                }
-            };
-
-            const checkWindowClosed = setInterval(() => {
-                if (paymentWindow.closed) {
-                    navigation.navigate('PaymentVerification', { txRef });
-                    clearInterval(checkWindowClosed);
-                }
-            }, 1000);
-
-            window.addEventListener('message', handleMessage);
-
-            return () => {
-                window.removeEventListener('message', handleMessage);
-                clearInterval(checkWindowClosed);
-            };
-        }, []);
-
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Payment processing in progress...</Text>
-                <Text>Please complete the payment in the new window</Text>
-            </View>
-        );
-    }
-
-    // Mobile handling
-    return (
-        <WebView
-            source={{ uri: checkoutUrl }}
-            onNavigationStateChange={(navState) => {
-                if (navState.url.includes('roboharunhakim://payment-result')) {
-                    const url = new URL(navState.url);
-                    const txRef = url.searchParams.get('tx_ref');
-                    navigation.navigate('PaymentVerification', { txRef });
-                }
-            }}
-        />
-    );
-};
-
-export default PaymentWebViewScreen;
 /*import React, { useEffect } from 'react';
 import { Platform, View, Text, Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
