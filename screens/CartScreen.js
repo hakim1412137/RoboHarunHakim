@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import {View, Text, Button, FlatList, StyleSheet, Alert} from 'react-native';
 import { CartContext } from '../context/CartContext';
 
-const CartScreen = ({ navigation }) => {
+const CartScreen =  ({ navigation }) => {
  /*   const { cart } = useContext(CartContext);*/
   const { cart, removeItem, clearCart } = useContext(CartContext);
 
@@ -11,14 +11,14 @@ const CartScreen = ({ navigation }) => {
         return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     };
 
-  /*  const handleCheckout = () => {
+/*    const handleCheckout = () => {
         navigation.navigate('OrderConfirmation'); // Navigate to OrderConfirmationScreen
     };*/
     const handleCheckout = () => {
-        if (cart.length === 0) {
+     if (cart.length === 0) {
             Alert.alert('Error', 'Your cart is empty.');
-            return;
-        }
+           return;
+     }
         navigation.navigate('Payment');
     };
 

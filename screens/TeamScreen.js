@@ -125,7 +125,7 @@ const TeamScreen = ({ navigation }) => {
                         <View style={styles.valuesContainer}>
                             <BlurView intensity={30} style={styles.blurContainer}>
                                 <View style={styles.statItem}>
-                                    <Text style={styles.statNumber}>100+</Text>
+                                    <Text style={styles.statNumber}>20+</Text>
                                     <Text style={styles.statLabel}>Years Experience</Text>
                                 </View>
                                 <View style={styles.statItem}>
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
         height: '40rem',
         backgroundColor: '#FFFFFF',
     },
+
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
