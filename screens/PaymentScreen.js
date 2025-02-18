@@ -12,31 +12,7 @@ const PaymentScreen = ({ navigation }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     // Handle deep linking for payment result
-/*    useEffect(() => {
-        const handleDeepLink = ({ url }) => {
-          if (url.includes('http://localhost:8081/payment-result')) {
-                    const txRef = new URL(url).searchParams.get('tx_ref');
-                navigation.navigate('PaymentVerification', { txRef });
-            }
-        };
 
-        const subscription = Linking.addEventListener('url', handleDeepLink);
-        return () => subscription.remove();
-    }, []);*/
-
-
-   /* useEffect(() => {
-        const handleMessage = (event) => {
-            if (event.data?.txRef) {
-                navigation.navigate('PaymentVerification', { txRef: event.data.txRef });
-            }
-        };
-
-        window.addEventListener('message', handleMessage);
-
-        return () => window.removeEventListener('message', handleMessage);
-    }, []);
-*/
     const validateInputs = () => {
         const errors = [];
         const amountNumber = parseFloat(amount);
@@ -71,8 +47,15 @@ const PaymentScreen = ({ navigation }) => {
                 email: email.trim(),
                 phoneNumber: phone.replace(/^0/, '+251') // Convert to international format
             });
-
-            navigation.navigate('PaymentWebView', {
+            if (response.data.status === 'success') {
+                navigation.navigate('PaymentWebView', {
+                    checkoutUrl: response.data.data.checkoutUrl,
+                    txRef: response.data.data.txRef // Now properly received
+                });
+            } else {
+                throw new Error(response.data.message || 'Payment failed');
+            }
+       /*     navigation.navigate('PaymentWebView', {
                 checkoutUrl: response.data.checkoutUrl,
                 txRef: response.data.txRef
             });
@@ -81,7 +64,7 @@ const PaymentScreen = ({ navigation }) => {
             }
             return response;
 
-
+*/
         } catch (error) {
             setError(error.response?.data?.message || 'Payment initialization failed');
         } finally {
@@ -173,13 +156,41 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default PaymentScreen;
 /*  if (response.data?.checkoutUrl) {
            // Open the checkout URL in the default browser
            await WebBrowser.openBrowserAsync(response.data.checkoutUrl);
        } else {
            throw new Error('No checkout URL received');
        }*/
-export default PaymentScreen;
+/*    useEffect(() => {
+        const handleDeepLink = ({ url }) => {
+          if (url.includes('http://localhost:8081/payment-result')) {
+                    const txRef = new URL(url).searchParams.get('tx_ref');
+                navigation.navigate('PaymentVerification', { txRef });
+            }
+        };
+
+        const subscription = Linking.addEventListener('url', handleDeepLink);
+        return () => subscription.remove();
+    }, []);*/
+
+
+/* useEffect(() => {
+     const handleMessage = (event) => {
+         if (event.data?.txRef) {
+             navigation.navigate('PaymentVerification', { txRef: event.data.txRef });
+         }
+     };
+
+     window.addEventListener('message', handleMessage);
+
+     return () => window.removeEventListener('message', handleMessage);
+ }, []);
+*/
+
+
 /*
 import React, {useEffect, useState} from 'react';
 import { View, Text, TextInput, Button, ActivityIndicator, StyleSheet } from 'react-native';

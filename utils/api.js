@@ -13,9 +13,13 @@ const api = axios.create({
 // Axios request interceptor for setting Authorization headers
 api.interceptors.request.use(
     async (request) => {
+        // const excludedPattern = /^\/(auth\/(login|signup)|_blank)\/?$/;
+
         // Check if the request URL does not match the login or signup endpoints
-        if (!/\/auth\/(login|signup)$/.test(request.url)) {
-            const token = await AsyncStorage.getItem('token'); // Retrieve the token from AsyncStorage
+         if (!/\/auth\/(login|signup)$/.test(request.url)) {
+        //     if (!excludedPattern.test(request.url)) {
+
+                const token = await AsyncStorage.getItem('token'); // Retrieve the token from AsyncStorage
            // const userId = await AsyncStorage.getItem('userId'); // Retrieve the logged-in user's ID
 
             if (token) {

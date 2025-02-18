@@ -1,3 +1,141 @@
+import React, {useEffect, useState} from 'react';
+import {View, Text, ActivityIndicator, StyleSheet, Linking, Platform, Button} from 'react-native'; // Added Platform import
+import { WebView } from 'react-native-webview';
+
+const PaymentWebViewScreen = ({ route, navigation }) => {
+    const { checkoutUrl, txRef } = route.params;
+    const [showFallback, setShowFallback] = useState(false);
+    // Universal handling
+    useEffect(() => {
+        const openPayment = async () => {
+            if (Platform.OS === 'web') {
+                const win = window.open(checkoutUrl, '_blank');
+
+                if (!win) {
+                    setShowFallback(true);
+                    return;
+                }
+
+                const checkClosed = setInterval(() => {
+                    try {
+                        if (win.closed) {
+                            clearInterval(checkClosed);
+                            navigation.navigate('PaymentVerification', { txRef });
+                        }
+                    } catch (e) {
+                        clearInterval(checkClosed);
+                        navigation.navigate('PaymentVerification', { txRef });
+                    }
+                }, 1000);
+            } else {
+                await Linking.openURL(checkoutUrl);
+            }
+        };
+
+        openPayment();
+    }, [checkoutUrl, txRef]);
+
+    if (showFallback) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.text}>Allow popups to continue</Text>
+                <Button
+                    title="Open Payment Manually"
+                    onPress={() => window.open(checkoutUrl, '_blank')}
+                />
+            </View>
+        );
+    }
+
+    return (
+        <View style={styles.container}>
+            <ActivityIndicator size="large" />
+            <Text style={styles.text}>Redirecting to payment gateway...</Text>
+        </View>
+    );
+};
+/*    useEffect(() => {
+        // Handle mobile platforms
+        if (Platform.OS !== 'web') {
+            const openPaymentPage = async () => {
+                const supported = await Linking.canOpenURL(checkoutUrl);
+                if (supported) {
+                    Linking.openURL(checkoutUrl).catch((err) =>
+                        console.error('Error opening URL:', err)
+                    );
+                } else {
+                    console.error("Can't open URL:", checkoutUrl);
+                }
+            };
+            openPaymentPage();
+        }
+    }, [checkoutUrl]);
+
+    // Web-specific handling
+    if (Platform.OS === 'web') {
+        useEffect(() => {
+            // Open in new tab for web
+            const paymentWindow = window.open(checkoutUrl, '_blank');
+
+            // Check if window was blocked
+            if (!paymentWindow || paymentWindow.closed) {
+                console.error('Popup was blocked. Please allow popups.');
+                navigation.goBack();
+            }
+        }, [checkoutUrl]);
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.message}>
+                    Redirecting to payment gateway...
+                    {'\n\n'}
+                    <Text style={styles.smallText}>
+                        If not redirected automatically, {' '}
+                        <Text
+                            style={styles.link}
+                            onPress={() => window.open(checkoutUrl, '_blank')}
+                        >
+                            click here
+                        </Text>
+                    </Text>
+                </Text>
+            </View>
+        );
+    }
+
+    // Mobile view while opening browser
+    return (
+        <View style={styles.container}>
+            <Text style={styles.message}>Opening payment page...</Text>
+            <ActivityIndicator size="large" color="#4A90E2" />
+        </View>
+    );
+};*/
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    message: {
+        fontSize: 20,
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+    smallText: {
+        fontSize: 14,
+        color: '#666',
+    },
+    link: {
+        color: '#4A90E2',
+        textDecorationLine: 'underline',
+    },
+});
+
+export default PaymentWebViewScreen;
+/*
 import React, { useEffect } from 'react';
 import {WebView, Platform, View, Text, Linking, ActivityIndicator} from 'react-native';
 
@@ -48,7 +186,7 @@ const PaymentWebViewScreen = ({ route, navigation }) => {
     );
 };
 
-export default PaymentWebViewScreen;
+export default PaymentWebViewScreen;*/
 /*import React, { useEffect } from 'react';
 import { Platform, View, Text, Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
