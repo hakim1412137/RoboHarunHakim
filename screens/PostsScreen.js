@@ -235,9 +235,7 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         height: '40rem',
-
         backgroundColor: '#F8FAFC',
-        padding: 16,
     },
     createButton: {
         borderRadius: 8,

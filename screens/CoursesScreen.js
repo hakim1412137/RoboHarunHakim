@@ -118,7 +118,7 @@ const CoursesScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
+        flex: 1,
         backgroundColor: '#FFFFFF',
     },
     content: {
