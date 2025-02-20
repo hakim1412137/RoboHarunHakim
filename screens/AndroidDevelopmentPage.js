@@ -116,13 +116,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#F9FBFE',
     },
     content: {
-        padding: 20,
         paddingBottom: 40,
     },
     headerGradient: {
         paddingVertical: 35,
         paddingHorizontal: 25,
-        borderRadius: 20,
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
         marginBottom: 25,
         shadowColor: '#0066CC',
         shadowOffset: { width: 0, height: 8 },

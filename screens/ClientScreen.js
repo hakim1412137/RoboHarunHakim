@@ -50,7 +50,7 @@ const ClientScreen = ({ navigation }) => {
                 <View style={styles.cardContent}>
                     <Text style={styles.clientName}>{item.company}</Text>
                     <View style={styles.industryTag}>
-                        <Text style={styles.industryText}>{item.industry || 'Technology'}</Text>
+                        <Text style={styles.industryText}>{item.name || 'Technology'}</Text>
                     </View>
 
                     <View style={styles.statsContainer}>
@@ -85,7 +85,7 @@ const ClientScreen = ({ navigation }) => {
                 resizeMode="cover"
             >
                 <LinearGradient
-                    colors={['rgba(0,168,107,0.85)', 'rgba(0,201,120,0.85)']}
+                    colors={['rgba(0,0,0,0.85)', 'rgba(0,0,0,0.85)']}
                     style={styles.gradientOverlay}
                 >
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -130,7 +130,7 @@ const ClientScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
+        height: '100vh',
         backgroundColor: '#FFFFFF',
     },
     loadingContainer: {
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     },
     gradientOverlay: {
         flex: 1,
-        paddingTop: 40,
     },
     content: {
         padding: 20,
@@ -173,11 +172,13 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     grid: {
-        justifyContent: 'space-between',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 10
     },
     cardContainer: {
         width: (width - 50) / 2,
-        marginBottom: 20,
         borderRadius: 20,
     },
     card: {

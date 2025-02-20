@@ -155,7 +155,7 @@ const TeamScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
+        height: '95vh',
         backgroundColor: '#FFFFFF',
     },
 

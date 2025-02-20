@@ -148,7 +148,7 @@ const RoboticsTrainingPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     background: {
-        height: '40rem',
+        height: '100vh',
         width: '100%',
     },
     overlay: {
@@ -168,9 +168,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.8)', // Semi-transparent overlay
     },*/
     container: {
-        height: '40rem',
-        paddingHorizontal: 20,
-        paddingBottom: 80,
+        height: '100vh',
     },
     scrollContainer: {
         paddingBottom: 80,

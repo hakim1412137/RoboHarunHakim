@@ -198,35 +198,37 @@ const PostsScreen = ({ navigation }) => {
             <Header />
             <Menu navigation={navigation} />
 
-            <TouchableOpacity
-                style={styles.createButton}
-                onPress={() => setModalVisible(true)}
-            >
-                <LinearGradient
-                    colors={['#6C63FF', '#4A47FF']}
-                    style={styles.gradient}
+            <View style={{ paddingHorizontal: 200, height: '100vh' }}>
+                <TouchableOpacity
+                    style={styles.createButton}
+                    onPress={() => setModalVisible(true)}
                 >
-                    <Text style={styles.buttonText}>Create New Post</Text>
-                    <Ionicons name="add-circle" size={24} color="white" />
-                </LinearGradient>
-            </TouchableOpacity>
+                    <LinearGradient
+                        colors={['#6C63FF', '#4A47FF']}
+                        style={styles.gradient}
+                    >
+                        <Text style={styles.buttonText}>Create New Post</Text>
+                        <Ionicons name="add-circle" size={24} color="white" />
+                    </LinearGradient>
+                </TouchableOpacity>
 
-            <PostFormModal
-                visible={modalVisible}
-                onClose={() => setModalVisible(false)}
-                onSubmit={handleCreatePost}
-            />
+                <PostFormModal
+                    visible={modalVisible}
+                    onClose={() => setModalVisible(false)}
+                    onSubmit={handleCreatePost}
+                />
 
-            <FlatList
-                data={posts}
-                keyExtractor={item => item.id.toString()}
-                renderItem={renderPost}
-                onEndReached={() => setPage(prev => prev + 1)}
-                onEndReachedThreshold={0.5}
-                ListFooterComponent={
-                    loading && <ActivityIndicator size="large" color="#6C63FF" />
-                }
-            />
+                <FlatList
+                    data={posts}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={renderPost}
+                    onEndReached={() => setPage(prev => prev + 1)}
+                    onEndReachedThreshold={0.5}
+                    ListFooterComponent={
+                        loading && <ActivityIndicator size="large" color="#6C63FF" />
+                    }
+                />
+            </View>
         </View>
     );
 };

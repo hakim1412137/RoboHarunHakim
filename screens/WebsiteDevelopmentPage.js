@@ -102,17 +102,16 @@ const WebsiteDevelopmentPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: '40rem',
+        height: '100vh',
         backgroundColor: '#F9FBFE',
     },
     content: {
-        padding: 20,
-        paddingBottom: 40,
     },
     headerGradient: {
         paddingVertical: 35,
         paddingHorizontal: 25,
-        borderRadius: 20,
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
         marginBottom: 25,
         shadowColor: '#018D6A',
         shadowOffset: { width: 0, height: 8 },

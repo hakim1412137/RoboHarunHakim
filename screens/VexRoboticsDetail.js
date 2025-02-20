@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     detailsContainer: {
-        width: width * 0.5,
+        width: width * 0.3,
         paddingTop: 100
     },
     header: {
