@@ -60,29 +60,3 @@ const styles = StyleSheet.create({
 });
 
 export default ShopScreen;
-
-/*import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-const ShopScreen = () => {
-    const navigation = useNavigation();
-
-    return (
-        <View style={styles.container}>
-            <Button title="View Products" onPress={() => navigation.navigate('Products')} />
-            <Button title="View Competitions" onPress={() => navigation.navigate('Competitions')} />
-            <Button title="My Cart" onPress={() => navigation.navigate('Cart')} />
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
-
-export default ShopScreen;*/

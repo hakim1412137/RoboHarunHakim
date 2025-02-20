@@ -74,26 +74,9 @@ import PaymentFailureScreen from "./screens/PaymentFailureScreen";
 import PaymentVerificationScreen from "./screens/PaymentVerificationScreen";
 import PaymentResultScreen from "./screens/PaymentResultScreen";
 
+
 const Stack = createStackNavigator();
   const App = () => {
-      // Handle deep links
-  /*    useEffect(() => {
-          const handleDeepLink = ({ url }) => {
-              if (url.includes('roboharunhakim://payment-result')) {
-                  const parsedUrl = new URL(url);
-                  const txRef = parsedUrl.searchParams.get('tx_ref');
-                  navigation.navigate('PaymentVerification', { txRef });
-              }
-          };
-          const subscription = Linking.addEventListener('url', handleDeepLink);
-
-          return () => {
-              subscription.remove();  // New way to remove listener
-          };
-      }, []);*/
-     /*     Linking.addEventListener('url', handleDeepLink);
-          return () => Linking.removeEventListener('url', handleDeepLink);
-      }, []);*/
 
       let [fontsLoaded] = useFonts({
             Electrolize_400Regular, // Load the font
@@ -122,9 +105,7 @@ const Stack = createStackNavigator();
                                     name="products"
                                     component={ProductScreen}
                                     options={{ headerShown: false }}
-                                    // options={({ navigation }) => ({
-                                        // headerTitle: () => <ShoppingCart navigation={navigation} />, // Place ShoppingCart here
-                                    // })}
+
                                 />
                                 <Stack.Screen name="ProductList" component={ProductList} />
                                 <Stack.Screen name="AddProduct" component={AddProductScreen} />
@@ -149,17 +130,13 @@ const Stack = createStackNavigator();
 
                                 <Stack.Screen name="websiteDevelopment" component={WebsiteDevelopmentPage} options={{ headerShown: false }} />
                                 <Stack.Screen name="androidDevelopment" component={AndroidDevelopmentPage} options={{ headerShown: false }} />
-                                <Stack.Screen name="PaymentResult" component={PaymentResultScreen} />
 
-                                {/* <Stack.Screen name="trainingDetails" component={TrainingDe} /> */}
+                                <Stack.Screen name="PaymentResult" component={PaymentResultScreen} options={{ headerShown: false }} />
                                 <Stack.Screen name="PaymentWebView" component={PaymentWebViewScreen}  options={{ headerShown: false }} />
-                                <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} />
-                                <Stack.Screen name="PaymentFailure" component={PaymentFailureScreen} />
-                                <Stack.Screen
-                                    name="PaymentVerification"
-                                    component={PaymentVerificationScreen}
-                                    options={{ headerShown: false }}
-                                />
+                                <Stack.Screen name="PaymentSuccess" component={PaymentSuccessScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="PaymentFailure" component={PaymentFailureScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="PaymentVerification" component={PaymentVerificationScreen} options={{ headerShown: false }}/>
+                                <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} options={{ title: 'Order Details' }}/>
                                 {/*Details*/}
                                 <Stack.Screen name="courseDetails" component={CourseDetailsScreen} />
                                 <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
@@ -181,13 +158,9 @@ const Stack = createStackNavigator();
                                 <Stack.Screen name="Partners" component={PartnerScreen} />
                                 <Stack.Screen name="Support" component={SupportScreen} />
 
+
                                 <Stack.Screen name="joinUs" component={JoinUsScreen} options={{ headerShown: false }} />
-                                {/*
-                                <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Cart' }} />
-                                <Stack.Screen name="OrderConfirmation" component={OrderConfirmationScreen} options={{ title: 'Order Confirmation' }}/>
-                                <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} options={{ title: 'Order Details' }}/>
-                                <Stack.Screen name="OrdersManagement" component={OrdersManagementScreen} options={{ title: 'Manage Orders' }}/>
-                                */}
+
                             </Stack.Navigator>
                         </NavigationContainer>
                     </CartProvider>
@@ -197,66 +170,3 @@ const Stack = createStackNavigator();
     };
 
 export default App;
-
-/*<Stack.Screen name="Login" component={LoginScreen} />
-<Stack.Screen
-    name="Home"
-    options={{ headerShown: false }}>
-    {(props) => (
-        <ProtectedRoute navigation={props.navigation}>
-            <HomeScreen />
-        </ProtectedRoute>
-    )}
-</Stack.Screen>*/
-
-/*const App = () => {
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="About" component={AboutScreen} />
-                <Stack.Screen name="Shop" component={ShopScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Signup" component={SignUpScreen} />
-                <Stack.Screen name="MyAccount" component={MyAccountScreen} />
-                <Stack.Screen name="Courses" component={CoursesScreen} />
-                <Stack.Screen name="CourseDetails" component={CourseDetailsScreen} />
-                <Stack.Screen name="Events" component={EventListScreen} />
-                <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
-                <Stack.Screen name="Resources" component={ResourcesListScreen} />
-                <Stack.Screen name="ResourceDetails" component={ResourceDetailsScreen} />
-                <Stack.Screen name="Products" component={ProductsScreen} />
-                <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
-                <Stack.Screen name="Cart" component={CartScreen} />
-                <Stack.Screen name="Competitions" component={CompetitionsScreen} />
-                <Stack.Screen name="CompetitionDetails" component={CompetitionDetailsScreen} />
-                <Stack.Screen name="Careers" component={CareersScreen} />
-                <Stack.Screen name="Partners" component={PartnerScreen} />
-                <Stack.Screen name="Support" component={SupportScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-};
-
-export default App;*/
-
-
-/*import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/
-

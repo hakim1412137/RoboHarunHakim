@@ -1,68 +1,30 @@
 // screens/PaymentFailureScreen.js
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 
 const PaymentFailureScreen = ({ navigation, route }) => {
-    const { error } = route.params;
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Payment Failed ❌</Text>
-            <Text style={styles.error}>{error}</Text>
-            <Button
-                title="Try Again"
-                onPress={() => navigation.goBack()}
-                color="#D32F2F"
-            />
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    title: {
-        fontSize: 24,
-        marginBottom: 20,
-    },
-    error: {
-        color: 'red',
-        marginBottom: 20,
-    },
-});
-
-export default PaymentFailureScreen;
-/*
-// screens/PaymentFailureScreen.js
-import React from 'react';
-import {View, Text, Button, StyleSheet, Linking} from 'react-native';
-
-const PaymentFailureScreen = ({ navigation, route }) => {
-    const { error, txRef } = route.params;
+    const { txRef, error } = route.params;
 
     return (
         <View style={styles.container}>
             <Text style={styles.icon}>❌</Text>
-            <Text style={styles.title}>Payment Failed</Text>
-            <Text style={styles.error}>{error}</Text>
-            <Text style={styles.detail}>Transaction ID: {txRef}</Text>
+            <Text style={styles.heading}>Payment Failed</Text>
+            <Text style={styles.errorMessage}>{error}</Text>
+            <Text style={styles.reference}>Reference: {txRef}</Text>
 
-            <View style={styles.buttonContainer}>
-                <Button
-                    title="Try Again"
-                    onPress={() => navigation.goBack()}
-                    color="#D32F2F"
-                />
-                <Button
-                    title="Contact Support"
-                    onPress={() => Linking.openURL('mailto:support@example.com')}
-                    color="#4A90E2"
-                />
-            </View>
+            <TouchableOpacity
+                style={styles.primaryButton}
+                onPress={() => navigation.goBack()}
+            >
+                <Text style={styles.buttonText}>Try Again</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.secondaryButton}
+                onPress={() => navigation.navigate('Support')}
+            >
+                <Text style={styles.secondaryButtonText}>Contact Support</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -73,84 +35,50 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: '600',
-        marginVertical: 20,
-        color: '#D32F2F',
-    },
-    error: {
-        color: '#B71C1C',
-        marginBottom: 20,
-        textAlign: 'center',
+        backgroundColor: '#fff',
     },
     icon: {
-        fontSize: 60,
+        fontSize: 80,
         marginBottom: 20,
     },
-    buttonContainer: {
-        gap: 15,
-        width: '100%',
-        marginTop: 30,
-    },
-});
-
-export default PaymentFailureScreen;*/
-// screens/PaymentFailureScreen.js
-/*import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { View, Text, Button, StyleSheet } from 'react-native';
-
-const PaymentFailureScreen = () => {
-    const { state } = useLocation();
-    const navigate = useNavigate();
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Payment Failed ❌</Text>
-            <Text style={styles.error}>{state?.error || 'Unknown error occurred'}</Text>
-            <Button
-                title="Try Again"
-                onPress={() => navigate('/payment')}
-                color="#D32F2F"
-            />
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    title: {
+    heading: {
         fontSize: 24,
-        marginBottom: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: '#2ecc71', // Green for success, red for failure
     },
-    error: {
-        color: 'red',
-        marginBottom: 20,
-    }
+    errorMessage: {
+        color: '#e74c3c',
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+    reference: {
+        color: '#7f8c8d',
+        marginBottom: 30,
+    },
+    primaryButton: {
+        backgroundColor: '#3498db',
+        padding: 15,
+        borderRadius: 8,
+        width: '100%',
+        marginBottom: 10,
+    },
+    secondaryButton: {
+        borderWidth: 1,
+        borderColor: '#3498db',
+        padding: 15,
+        borderRadius: 8,
+        width: '100%',
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    secondaryButtonText: {
+        color: '#3498db',
+        textAlign: 'center',
+    },
 });
 
-export default PaymentFailureScreen;*/
-/*
-import React, { useState } from 'react';
-
-import { View, Text, TextInput, Button, ActivityIndicator, StyleSheet } from 'react-native';
-
-const PaymentFailureScreen = ({ route }) => {
-    const { error } = route.params;
-
-    return (
-        <View style={styles.container}>
-            <Text style={styles.errorTitle}>Payment Failed</Text>
-            <Text style={styles.errorText}>{error}</Text>
-        </View>
-    );
-};
 export default PaymentFailureScreen;
-*/
